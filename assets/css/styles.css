@@ -17,7 +17,9 @@ header > button {
 }
 
 #title{
-  color: #04AA6D;
+  color: red;
+  text-align: center;
+  
 }
 
 
@@ -48,3 +50,4 @@ header > button {
   background-color: #04AA6D;
   color: white;
 }
+
