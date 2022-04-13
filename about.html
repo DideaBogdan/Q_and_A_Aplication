@@ -1,40 +1,201 @@
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Q&A-about</title>
-  <link rel="stylesheet" href="assets/css/navbar.css">
-  <link rel="stylesheet" href="assets/css/about.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-  
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A-about</title>
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  </head>
+
+  <style>
+    body{
+      background-image: url('images/bg1.jpg');
+    }
+  </style>
+
+  <header>
+      <div id="topnav">
+        <a href="home.html">Home</a>
+        <a href="#contact">Contact</a>
+        <a class="active" href="about.html">About</a>
+        <a style="float:right;" href="sign-up.html">Sign Up</a>
+        <a style="float:right;" href="login.html">Log In</a>
+      </div>
+  </header>
 
 
-<body>  
-  <div id="topnav">
-    <a href="home.html">Home</a>
-    <a href="#contact">Contact</a>
-    <a class="active" href="about.html">About</a>
-    <a style="float:right;" href="sign-up.html">Sign Up</a>
-    <a style="float:right;" href="login.html">Log In</a>
-</div>
-<br><br>
+  <body>
+    <header>
+        <h1>Documentatie QAW (Q&As on Web)</h1>
+    </header>
 
-  <div id="text">
-    <h1>Despre proiectul QAW (Q&As on Web)</h1>
-    <p>Aceasta aplicatie este destinata tuturor oamenilor care au anumite intrebari din 
-        diverse categorii.
-    </p>
-    <p>
-        Un prim aspect referitor la aplicatie este pagina principala care contine un meniu de 
-        navigare, ce ajuta in utilizarea aplicatie. Cu ajutorul acestui meniu se pot face principalele actiuni.
-    </p>
-  </div>
+    <section typeof="sa:AuthorsList">
+        <h3>Authors</h3>
+        <ul>
+            <li typeof="sa:ContributorRole" property="schema:author">
+                <span typeof="schema:Person" resource="">
+                  <meta property="schema:givenName" content="Bogdan">
+                  <meta property="schema:additionalName" content="Marius">
+                  <meta property="schema:familyName" content="Didea">
+                  <span property="schema:name">Didea Bogdan Marius</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                        <a href="mailto:bogdan.didea@info.uaic.ro" property="schema:email">bogdan.didea@info.uaic.ro</a>
+                    </li>
+                </ul>
+            </li>
+            <li typeof="sa:ContributorRole" property="schema:author">
+                <span typeof="schema:Person" resource="">
+                  <meta property="schema:givenName" content="Sebastian">
+                  <meta property="schema:additionalName" content="Petru">
+                  <meta property="schema:familyName" content="Drumia">
+                  <span property="schema:name">Drumia Sebastian Petru</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                      <a href="mailto:petru.sebastian@info.uaic.ro" property="schema:email">petru.sebastian@info.uaic.ro</a>
+                    </li>
+                </ul>
+            </li>
+            <li typeof="sa:ContributorRole" property="schema:author">
+                <span typeof="schema:Person" resource="">
+                  <meta property="schema:givenName" content="Cosmin">
+                  <meta property="schema:additionalName" content="Andrei">
+                  <meta property="schema:familyName" content="Ciobotaru">
+                  <span property="schema:name">Ciobotaru Cosmin-Andrei</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                      <a href="mailto:cosmin.ciobotaru@info.uaic.ro" property="schema:email">cosmin.ciobotaru@info.uaic.ro</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
 
-</div>
-  <script type="text/javascript" src="assets/js/scripts.js"></script>
+    <section typeof="sa:Description">
+        <h2>1. Description</h2>
+        QAW este o aplicatie de tipul forum online. Permite utilizatorului sa isi creeze cont, sa adreseze intrebari
+        din diverse categorii si sa raspunda la alte intrebari puse de alti utilizatori. De asemenea utilizatorii pot adresa intrebari sau raspunde la intrebari
+        in mod anonim. Acesta poate vedea intrebare si raspunsurile in pagina intreabrii. Pentru fiecare utilizator logat va fi disponibila o pagina de profil, in care 
+        se vor regasi toate bagde-urile sale (calificative acordate in functie de activitatea sa), cat si informatii despre acesta. Un utilizator care a raspuns la mai multe
+        intrebari, poate valida intreabri/raspunsuri.
+    </section>
+
+    <section typeof="sa:Introduction">
+        <h2>2. Introduction</h2>
+        Aplicatiile de tipul forum online sunt foarte des intalnite, in ziua de astazi, mai ales in contextul
+        trecerii in mediul online a majoritatii activitatilor. Oamenii au trecut
+        tot mai mult la interactiunea/informarea prin intermediul aplicatiilor/site-urilor in defavoarea mijloacelor clasice de interactiune sau informare( chiar si ajutare reciproca),
+        cum este cazul aplicatiei noastre. QAW preia majoritatea functiilor unui site tip forum online clasic, adaugand posibilitatea generarii de rapoarte referitoare la o arie geografica 
+        sau la o anumita categorie de intrebari, functionalitate ce permite imbunatatirea prin studiul acestor rapoarte. De asemenea, in pagina de pornire a
+        aplicatiei, orice utilizator poate vedea o lista a celor mai recente produse, lucru care poate sa il ajute pentru obtinerea de badge-uri sau obtinerea 
+        dreptului de a modifica intreabri/raspunsuri. De asemenea, aceasta functionalitate il poate ajuta pe utilizator in gasirea mai rapida a unui raspuns.
+    </section>
+
+    <section typeof="sa:Features">
+      <h2>3. Features</h2>
+     Principalele functionalitati ale acestui site sunt:
+     <ul>
+       <li>
+         LogIn/LogOut: prin care utilizatorul se conecteaza, respectiv deconecteaza de la contul propriu.
+       </li>
+       <li>
+         SignUp: prin care utilizatorul se inregistreaza si isi creeaza un cont.
+       </li>
+       <li>
+         NavBarul: faciliteaza interactiunea utilizatorului cu site-ul prin afisarea principalelor pagini ale site-ului.
+       </li>
+       <li>
+         Posibilitatea anonimatului atat cu privire la punerea de intrebari, cat si la raspunsuri.
+       </li>
+       <li>
+         Pentru utilizatorii activi (care raspund la mai multe intrebari) se ofera posibilitatea de a gestiona intrebarile/raspunsurile.
+       </li>
+       <li>
+        Achievements: oferirea de badge-uri utilizatorilor. 
+       </li>
+       <li>
+         Generarea automata a unor rapoarte: in functie de zona geografica sau categorii.
+       </li>
+
+     </ul>
+     
+  </section>
+
+    <section typeof="sa:Structure">
+        <h2>4. Structure</h2>
+        Structura aplicatiei este bazata pe modelul bine cunoscut, MVC(Model-view-controller), ce este un model
+        arhitectural. Succesul modelului se datoreaza izolarii logicii de bussines fata de considerentele interfetei cu
+        utilizatorul,
+        rezultand o aplicatie unde aspectul vizual sau/ si nivelele inferioare ale regulilor de bussines sunt mai usor
+        de modificat, fara a afecta alte nivele. 
+        O structurare in profunzime a aplicatiei sunt prezentate in sectiunile urmatoare.
+       
+    </section>
+
+    <section typeof="sa:appcomponents">
+        <h3>Componentele Aplicatiei</h3>
+        <ul>
+            <li property="schema: frontEnd">
+                <u>1. Front-End</u>
+                <br>
+                Aici ne referim la toata partea de client, html/css/javascript. In aceasta componenta se regasesc toate ce
+                tin de aspect si structura a paginilor,
+                dar si o parte de logica pentru diverse evenimente.
+                Aducem si trimitem date catre server constant deoarece in final site-ul are
+                scopul de prezenta raspunsurile la  intreabrile puse de utilizatori.
+                <br />
+                <br>
+            </li>
+
+            <li property="schema: Server">
+                <u>2. Server</u>
+                <br>
+          
+                <br />
+                <br>
+            </li>
+        </ul>
+    </section>
+
+
+    <h4>Sistem de gestionare a codului sursa</h4>
+    <h5>GitHub</h5>
+    Gestionarea codului sursa este facuta cu ajutorul git-ului, solutia git aleasa este GitHub.
+    In cazul de fata, git-ul este utilizat pentru a oferi acces la codul sursa. 
+
+
+    <section typeof="sa:ReferencesList">
+        <h4>Referinte</h4>
+        <ul>
+          <li property="schema:linkReferences" typeof="schema:References">
+            <a href="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html" property="schema:linkTW" target="_blank">Pagina Cursului</a>
+          </li>
+
+          <li property="schema:linkReferences" typeof="schema:References">
+            <a href="https://www.w3schools.com/" property="schema:linkTW" target="_blank">W3School</a>
+          </li>
+
+          <li property="schema:linkReferences" typeof="schema:References">
+            <a href="https://developer.mozilla.org/en-US/" property="schema:linkTW" target="_blank">Mozilla Developer</a>
+          </li>
+        <li property="schema:linkReferences" typeof="schema:References">
+            <a href="https://stackoverflow.com" property="schema:linkTW" target="_blank">Stackoverflow</a>
+        </ul>
+    </section>
+
+    <button onclick="topFunction()" id="topBtn">Top</button>
+
+    <script type="text/javascript" src="assets/js/scripts.js"></script>
+
 </body>
+
 </html>
+
+

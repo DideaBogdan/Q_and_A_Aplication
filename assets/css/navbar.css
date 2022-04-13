@@ -3,7 +3,7 @@ h1{
  }
    
      
- header > ul {
+ header{
      list-style: none;
    }
      
@@ -43,7 +43,19 @@ h1{
    
    /* Add a color to the active/current link */
    #topnav a.active {
-     background-color: #00a2ff;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
      color: white;
    }
  
+   #topnav a.active1 {
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+     color: white;
+   }
+  
