@@ -1,2 +1,0 @@
-Pentru baza de date deschideti php my admin si creati o baza de date numita q&a_app si un tabel users.
-In stilul asta: (vezi pe grupul de mess)
