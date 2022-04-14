@@ -1,8 +1,244 @@
+<<<<<<< HEAD
 body{
     background-image: url(../../images/bg.jpg); 
     background-repeat: no-repeat;
     background-size: 100% 100%, cover;
+=======
+/*Shapes*/
+*,
+*:after{
+>>>>>>> origin/Cosmin
 }
+body{
+    background-color: #080710;
+}
+.background{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.background .shape{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -80px;
+    top: -80px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -30px;
+    bottom: -80px;
+}
+
+/*search bar style*/
+.search-box {
+    position: absolute;
+    left: 50%;
+    bottom: 93%;
+
+    transform: translate(-50%, -50%);
+    background: #666666;
+    height: 22px;
+    border-radius: 22px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.search-box:hover > .search-txt {
+    width: 300px;
+    padding: 0 6px;
+}
+.search-box:hover > .search-btn {
+    color: black;
+}
+.search-btn {
+    color: #eeeeee;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+}
+.search-btn > i {
+    font-size: 20px;
+}
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    font-weight: bold;
+}
+
+p{
+    color: black;
+    display: block;
+    margin: 500px;
+    border: white solid;
+}
+
+
+/* ---------------------Sectiunea de contact---------------------- */
+
+#contact-title{
+    display: block;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    text-align:center;
+    margin: auto;
+    padding: 0%;
+    border: 3px solid black;
+    border-bottom: transparent;
+    height: 10%;
+    width:85%;
+}
+
+#contact-title>h3{
+    margin-right: 130px;
+}
+
+
+#contact{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    column-gap: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: auto;
+    margin-bottom: -10;
+    padding: 0%;
+    border: 3px solid black;
+    border-top: transparent;
+    height: 25%;
+    width:85%;
+}
+
+.formular form{
+    display: grid;
+    grid-template-columns: 35% 50% 15%;
+    /* column-gap: 3%; */
+}
+
+#form-col1{
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+#form-col1>label{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    margin: auto;
+    margin-right: 15px;
+    margin-top:30px;
+}
+
+#form-col1>input, #form-col1>select{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: aliceblue;
+    margin:auto;
+    margin-left: 0;
+    margin-top: 20px;
+    padding-right: 80px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+
+label[for="subject"]{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    float:left;
+    margin-top: 17%;
+    margin-right: 6%;
+}
+
+textarea{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 17px;
+    background-color: aliceblue;
+    width: 80%;
+    height: 100%;
+    padding: 12px;
+    margin-top: 5%;
+    border: 1px solid rgb(101, 101, 101); /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box;
+    resize: none;
+}
+
+input[type="submit"]{
+     background-color: rgb(3, 38, 124);
+     font-size: 20px;
+     color: aliceblue;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     cursor: pointer;
+     padding: 20px 40px;
+     border: 4px groove rgb(3, 38, 124);
+     float: left;
+     margin-top: 45%;
+     margin-left: 5%;
+}
+
+input[type="submit"]:hover{
+    background-color: rgb(28, 123, 231);
+    border: 4px groove rgb(28, 123, 231);
+}
+
+
+
+.more-info{
+    display: block;
+}
+
+.more-info h3{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-right: 10%;
+    margin-bottom: 13%;
+}
+
+.more-info p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 19px;
+    margin: 20px;
+    border: transparent;
+}
+/* ---------------------Sectiunea de contact---------------------- */
+
+
+
+
+
 
 #title{
     color: black;
