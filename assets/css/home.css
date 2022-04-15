@@ -1,7 +1,94 @@
 body{
+<<<<<<< Updated upstream
     background-image: url(../../images/bg.jpg); 
     background-repeat: no-repeat;
     background-size: 100% 100%, cover;
+=======
+    background-color: #080710;
+    margin: 0;
+}
+.background{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    
+}
+.background .shape{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -80px;
+    top: -80px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -30px;
+    bottom: -80px;
+}
+
+
+/*search bar style*/
+.search-box {
+    position: absolute;
+    left: 50%;
+    bottom: 93%;
+
+    transform: translate(-50%, -50%);
+    background: #666666;
+    height: 22px;
+    border-radius: 22px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.search-box:hover > .search-txt {
+    width: 300px;
+    padding: 0 6px;
+}
+.search-box:hover > .search-btn {
+    color: black;
+}
+.search-btn {
+    color: #eeeeee;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+}
+.search-btn > i {
+    font-size: 20px;
+}
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    font-weight: bold;
+>>>>>>> Stashed changes
 }
 
 #title{
@@ -15,6 +102,11 @@ p{
     margin: 500px;
     border: white solid;
 }
+
+.footer{
+    position:absolute;
+    bottom:0;
+    }
 
 
 /* ---------------------Sectiunea de contact---------------------- */
@@ -151,3 +243,30 @@ input[type="submit"]:hover{
 }
 /* ---------------------Sectiunea de contact---------------------- */
 
+<<<<<<< Updated upstream
+=======
+
+#topBtn{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  }
+
+
+
+
+
+>>>>>>> Stashed changes
