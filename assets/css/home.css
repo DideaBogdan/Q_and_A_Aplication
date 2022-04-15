@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body{
 <<<<<<< Updated upstream
     background-image: url(../../images/bg.jpg); 
@@ -7,6 +8,15 @@ body{
     background-color: #080710;
     margin: 0;
 }
+=======
+/*Shapes*/
+*,
+*:after{
+}
+body{
+    background-color: #080710;
+}
+>>>>>>> Cosmin
 .background{
     width: 430px;
     height: 520px;
@@ -14,7 +24,10 @@ body{
     transform: translate(-50%,-50%);
     left: 50%;
     top: 50%;
+<<<<<<< HEAD
     
+=======
+>>>>>>> Cosmin
 }
 .background .shape{
     height: 200px;
@@ -40,7 +53,10 @@ body{
     bottom: -80px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Cosmin
 /*search bar style*/
 .search-box {
     position: absolute;
@@ -88,6 +104,7 @@ body{
     line-height: 40px;
     width: 0px;
     font-weight: bold;
+<<<<<<< HEAD
 >>>>>>> Stashed changes
 }
 
@@ -96,6 +113,10 @@ body{
     text-align: center;
   }
 
+=======
+}
+
+>>>>>>> Cosmin
 p{
     color: black;
     display: block;
@@ -103,11 +124,14 @@ p{
     border: white solid;
 }
 
+<<<<<<< HEAD
 .footer{
     position:absolute;
     bottom:0;
     }
 
+=======
+>>>>>>> Cosmin
 
 /* ---------------------Sectiunea de contact---------------------- */
 
@@ -141,7 +165,11 @@ p{
     padding: 0%;
     border: 3px solid black;
     border-top: transparent;
+<<<<<<< HEAD
     height: 25%;
+=======
+    height: 30%;
+>>>>>>> Cosmin
     width:85%;
 }
 
@@ -243,6 +271,7 @@ input[type="submit"]:hover{
 }
 /* ---------------------Sectiunea de contact---------------------- */
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 
@@ -264,6 +293,8 @@ input[type="submit"]:hover{
     padding: 15px;
     border-radius: 4px;
   }
+=======
+>>>>>>> Cosmin
 
 
 
