@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   padding-bottom: 100px;
-  background-image: url('/images/background-dark.jpg');
+  background-image: url('../../images/background-dark.jpg');
   background-repeat: repeat;
 }
 

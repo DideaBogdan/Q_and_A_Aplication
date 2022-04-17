@@ -1,6 +1,6 @@
 /*Shapes*/
 body{
-    background-image: url('/images/background-dark.jpg');
+    background-image: url('../../images/background-dark.jpg');
     max-width: 100%;
     overflow-x: hidden;
 }

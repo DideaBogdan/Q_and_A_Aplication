@@ -1,5 +1,5 @@
 body {
-background-image: url('/images/bg1.jpg');
+background-image: url('../../images/bg1.jpg');
 max-width: 100%;
 overflow-x: hidden;
 background-repeat: no-repeat;
