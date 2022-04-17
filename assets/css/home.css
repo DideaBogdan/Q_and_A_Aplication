@@ -124,6 +124,19 @@ body{
 
 /* ---------------------Titlul paginii---------------------- */
 
+#contact{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    column-gap: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: auto;
+    margin-bottom: -10;
+    padding: 0%;
+    border: 3px solid black;
+    border-top: transparent;
+    height: 30%;
+    width:85%;
+}
 
 /* ---------------------Aranjare continut pagina------------- */
 .main-page{
