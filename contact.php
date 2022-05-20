@@ -36,14 +36,25 @@
         </div>';
       }
   ?>
+  <header>
+    <!--Nav bar-->
+    <div id="topnav">
+      <a href="home.html">Home</a>
+      <a class="active" href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+      <a style="float:right;" href="sign-up.html">Sign Up</a>
+      <a style="float:right;" href="login.html">Log In</a>
 
-
+    </div>
+  </header>
 <section>
     <div id="contact-title"><h3>Contact</h3></div>
     <div id="contact">
       <div class="formular">
         <form onsubmit="sendEmail(); reset(); return false;">
-  
+        <form id="form" method="POST" action="https://script.google.com/macros/s/AKfycbxt7GT3aGm1mIY-0PjFFUSWSOMGi7Rax2yxixBxTgHRc3mDTHMj1hOiTnpacI33jKeKng/exec">
+        <form>
+        <form>
           <div id="form-col1">
           <label>Nume: </label>
           <input type="text" id="name" name="name" placeholder="Introduceti numele" required>
@@ -124,6 +135,7 @@
 </div>
   <script type="text/javascript" src="assets/js/scripts.js"></script>
   <script> src="https://smtpjs.com/v3/smtp.js" </script>
+<script  src="https://smtpjs.com/v3/smtp.js"> </script>
   <script>
     function sendEmail(){
       Email.send({
@@ -143,5 +155,6 @@
           );
     }
   </script>
+  <script type="text/javascript" src="assets/js/scripts.js"></script>
 </body>
 </html>
