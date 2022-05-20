@@ -101,26 +101,14 @@ body{
     display: block;
     margin-top: -100%;
 }
-/*.main-pannel{
+.main-pannel{
     display: block;
-    /* margin: auto; 
-    background-color: #710f57;
-    background-image: url(https://images.unsplash.com/photo-1524351543168-8e38787614e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);
-    background-size: 100%;
-    box-shadow: 5px 5px 25px 10px rgba(219, 235, 245, 0.8);
-}*/
+    /* margin: auto; */
+}
 .right-pannel{
     display: block;
     margin-top: -50%;
 }
-/*.line{
-    margin-left: 30px;
-    margin-top: -300px;
-    height: 100%; 
-    border-left: 5px solid transparent;
-    filter: blur(2px); 
-    border-image: linear-gradient(#f09819, #ff512f, #f09819) 10 stretch;
-}*/
 /* ---------------------Aranjare continut pagina------------- */
 
 
