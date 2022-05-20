@@ -1,9 +1,40 @@
+/*Shapes*/
 body{
     background-image: url('../../images/background-dark.jpg');
     max-width: 100%;
     overflow-x: hidden;
-    margin: 0;
 }
+/* .background{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.background .shape{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -80px;
+    top: -80px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -30px;
+    bottom: -80px;
+} */
 
 /*search bar style*/
 .search-box {
@@ -89,6 +120,20 @@ body{
 
 /* ---------------------Titlul paginii---------------------- */
 
+/* #contact{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    column-gap: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: auto;
+    margin-bottom: -10;
+    padding: 0%;
+    border: 3px solid black;
+    border-top: transparent;
+    height: 30%;
+    width:85%;
+} */
+
 /* ---------------------Aranjare continut pagina------------- */
 .main-page{
     display: grid;
@@ -100,26 +145,26 @@ body{
     display: block;
     margin-top: -100%;
 }
-/*.main-pannel{
+.main-pannel{
     display: block;
-    /* margin: auto; 
+    /* margin: auto; */
     background-color: #710f57;
     background-image: url(https://images.unsplash.com/photo-1524351543168-8e38787614e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80);
     background-size: 100%;
     box-shadow: 5px 5px 25px 10px rgba(219, 235, 245, 0.8);
-}*/
+}
 .right-pannel{
     display: block;
     margin-top: -50%;
 }
-/*.line{
+.line{
     margin-left: 30px;
     margin-top: -300px;
     height: 100%; 
     border-left: 5px solid transparent;
     filter: blur(2px); 
     border-image: linear-gradient(#f09819, #ff512f, #f09819) 10 stretch;
-}*/
+}
 /* ---------------------Aranjare continut pagina------------- */
 
 
@@ -258,6 +303,7 @@ body{
 
 /* --------------------------RIGHT PANNEL--------------------------*/
 
+<<<<<<< HEAD
 .welcome{
     color: #f09819;
     font-size: 17px;
@@ -428,4 +474,7 @@ body{
 /* --------------------------MAIN PANNEL--------------------------*/
 
 }
+=======
+
+>>>>>>> parent of a24dc5b (created login system)
 
