@@ -4,6 +4,7 @@
   $session = new Session();
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +18,7 @@
     <script defer src="assets/js/login.js"></script>
     
 </head>
+
 <?php
     
     echo 
@@ -25,39 +27,21 @@
       <a href="contact.php">Contact</a>
       <a href="about.php">About</a>';
       if(!isset($_SESSION['user_id'])){
-        echo'
+        echo '
           <a style="float:right;" href="sign-up.php">Sign Up</a>
-          <a style="float:right;" class="active1" href="login.php">Log In</a>
+          <a style="float:right;" href="login.php">Log In</a>
         </div>';
       } else {
-        echo ' 
-          <a style="float:right;" href="profile.php">Profile</a>
+        echo '
+          <a style="float:right;"  class="active1" href="profile.php">Profile</a>
           <a style="float:right;" href="logout.php">Logout</a>
         </div>';
       }
   ?>
 
-<body>
-
-    <div class="background"> </div>
-    <form id="login" name="login">
-        <h3>Login Here</h3>
-
-        <span id="msg-login"></span>
-
-        <label for="username">Username or Email</label>
-        <input type="text" placeholder="Username or Email" id="username" name="username" required >
-        
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="password" required minlength="8">
-
-        <button id="button">Log In</button>
-        
-  
-    </form>
+<body>  
+    <?php
+      echo '<p>Hello ' . $_SESSION['user_id'];
+    ?>
 </body>
 </html>
-
-<?php
-   session_destroy();
-?>
