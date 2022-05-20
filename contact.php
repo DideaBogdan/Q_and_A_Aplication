@@ -38,11 +38,11 @@
   ?>
 
 
-<section>
+
     <div id="contact-title"><h3>Contact</h3></div>
     <div id="contact">
       <div class="formular">
-        <form onsubmit="sendEmail(); reset(); return false;">
+        <form id="form" method="POST" action="https://script.google.com/macros/s/AKfycbxt7GT3aGm1mIY-0PjFFUSWSOMGi7Rax2yxixBxTgHRc3mDTHMj1hOiTnpacI33jKeKng/exec">
   
           <div id="form-col1">
           <label>Nume: </label>
@@ -117,11 +117,30 @@
         <p><strong>Fax:</strong> +40 21 243 0578</p>
       </div>
     </div>
-</section>
-  
+
   
 
 </div>
+<script  src="https://smtpjs.com/v3/smtp.js"> </script>
+  <script>
+    function sendEmail(){
+      Email.send({
+      Host : "smtp.gmail.com",
+      Username : "qa.knowledge.bag@gmail.com",
+      Password : "TW2022QA", //DF6777516F92220606BED0D0BF62F832B09D
+      To : "qa.knowledge.bag@gmail.com",
+      From : document.getElementById("email").value,
+      Subject : "New contact:",
+      Body : "Name: " + document.getElementById("name").value
+      +"<br> Email: " + document.getElementById("email").value
+      +"<br> Telefon: " + document.getElementById("phone").value
+      +"<br> Mesaj: " + document.getElementById("subject").value
+      
+      }).then(
+          message => alert("Message succesfull!")
+          );
+    }
+  </script>
   <script type="text/javascript" src="assets/js/scripts.js"></script>
   <script> src="https://smtpjs.com/v3/smtp.js" </script>
   <script>

@@ -29,4 +29,3 @@ const removeActiveClassFromNavbar = () => {
     document.documentElement.scrollTop = 0;
   }
 
-

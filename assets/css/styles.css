@@ -77,7 +77,6 @@ div ul li a:hover {
   float: left;
   text-align: center;
   padding: auto;
-  color: green;
   background-color: white;
 }
 
@@ -90,7 +89,6 @@ div ul li a:hover {
   float: right;
   text-align: center;
   padding: auto;
-  color: green;
   background-color: white;
 }
 
@@ -114,7 +112,6 @@ div ul li a:hover {
   margin-top: 15%;
   border-radius: 10px;
   border: none;
-  background-color: green;
 }
 
 .form-signup form input {
