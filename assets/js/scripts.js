@@ -15,6 +15,7 @@ const removeActiveClassFromNavbar = () => {
 
 
 //UpButton
+/*
   var mybutton = document.getElementById("topBtn");
   window.onscroll = function() {scrollFunction()};
   function scrollFunction() {
@@ -28,5 +29,5 @@ const removeActiveClassFromNavbar = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
-
+*/
 

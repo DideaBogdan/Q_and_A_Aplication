@@ -1,3 +1,11 @@
+<?php
+  include_once '../Q_and_A_Aplication/api/models/Session.php';
+
+  $session = new Session();
+
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -10,27 +18,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Updock&display=swap" rel="stylesheet">
   <!--Search bar icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="../Q_and_A_Aplication/assets/js/createquestion.js"></script>
+    <script defer type="text/javascript" src="assets/js/scripts.js"></script>
+    
+
   </head>
- 
-  <header>
-    <!--Nav bar-->
-    <div id="topnav">
-      <a class="active" href="home.html">Home</a>
-      <a href="contact.html">Contact</a>
-      <a href="about.html">About</a>
-      <a style="float:right;" href="sign-up.html">Sign Up</a>
-      <a style="float:right;" href="login.html">Log In</a>
+  <!--Nav bar-->
+  <?php
+    
+    echo 
+    '<div id="topnav">
+      <a class="active" href="home.php">Home</a>
+      <a href="contact.php">Contact</a>
+      <a href="about.php">About</a>';
+      if(!isset($_SESSION['user_id'])){
+        echo'
+          <a style="float:right;" href="sign-up.php">Sign Up</a>
+          <a style="float:right;" href="login.php">Log In</a>
+        </div>';
+      } else {
+        echo ' 
+          <a style="float:right;" href="profile.php">Profile</a>
+          <a style="float:right;" href="logout.php">Logout</a>
+        </div>';
+      }
+  ?>
 
-    </div>
-  </header>
-
+  <!--this is used to get the @_SESSION variable -->
+  <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/>
 
   <body>  
-    <!-- <div class="background">
-      <div class="shape"></div>
-      <div class="shape"></div>
-    </div> -->
-
     <div class="search-box">
       <input type="text" name="name" class="search-txt" placeholder="Type to search" />
       <a class="search-btn" href="#">
@@ -38,12 +55,23 @@
       </a>
     </div>
 
+
+  <?php 
+    if(isset($_SESSION['user_id']))
+      echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>';
+  ?>
+
+    <button type="button" id="formbutton">Ask a question</button>
+    <form id="formquestion" name="formquestion">
+      <input type="text" placeholder="Type your question here..." id="question" name="question">
+      <button id="button">Submit</button>
+    </form>
+
     <div id="title">
       <h1>Knowledge Bag</h1>
       <p>Raspunsuri la toate intrebarile posibile</p>
     </div>
-
-  
+    
 
     <div class="main-page">
       <div class="left-pannel">
@@ -75,14 +103,17 @@
         </div>
       </div>
       <div class="line"></div>
-      <div class="main-pannel">
-        <div class="question-form">
-          <h3 class="question-title">
-            <p class="username">Username</p>
+      <div id="main-pannel">
+      <script type="text/javascript" src="assets/js/displayquestions.js"></script>
+        <!--
+        <div id="question-form">
+          <h3 id="question-title">
+            <p id="username"></p>
             <p>intreaba :</p>
           </h3>
-          <div class="question-box"><p>Un model pentru intrebare?</p></div>
+          <div id="question-box"><p></p></div>
         </div>
+    -->
       </div>
       <div class="line"></div>
       <div class="right-pannel">
@@ -95,6 +126,6 @@
         </div>
       </div>
     </div>     
-    <script type="text/javascript" src="assets/js/scripts.js"></script>
+   
   </body>
 </html>

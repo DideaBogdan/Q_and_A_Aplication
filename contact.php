@@ -1,3 +1,11 @@
+<?php
+  include_once '../Q_and_A_Aplication/api/models/Session.php';
+
+  $session = new Session();
+
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,34 +17,38 @@
   <link rel="stylesheet" href="assets/css/contact.css">
 </head>
 <body>  
-  <header>
-    <!--Nav bar-->
-    <div id="topnav">
-      <a href="home.html">Home</a>
-      <a class="active" href="contact.html">Contact</a>
-      <a href="about.html">About</a>
-      <a style="float:right;" href="sign-up.html">Sign Up</a>
-      <a style="float:right;" href="login.html">Log In</a>
-
-    </div>
-  </header>
+<?php
+    
+    echo 
+    '<div id="topnav">
+      <a href="home.php">Home</a>
+      <a class="active" href="contact.php">Contact</a>
+      <a href="about.php">About</a>';
+      if(!isset($_SESSION['user_id'])){
+        echo'
+          <a style="float:right;" href="sign-up.php">Sign Up</a>
+          <a style="float:right;" href="login.php">Log In</a>
+        </div>';
+      } else {
+        echo ' 
+          <a style="float:right;" href="profile.php">Profile</a>
+          <a style="float:right;" href="logout.php">Logout</a>
+        </div>';
+      }
+  ?>
 
 
 <section>
     <div id="contact-title"><h3>Contact</h3></div>
     <div id="contact">
       <div class="formular">
-        <form>
+        <form onsubmit="sendEmail(); reset(); return false;">
   
           <div id="form-col1">
-          <label for="fname">Nume: </label>
-          <input type="text" id="fname" name="firstname" placeholder="Introduceti numele">
-      
-          <label for="lname">Prenume: </label>
-          <input type="text" id="lname" name="lastname" placeholder="Introduceti prenumele">
-      
-          <label for="region">Judet: </label>
-          <select id="region" name="region">
+          <label>Nume: </label>
+          <input type="text" id="name" name="name" placeholder="Introduceti numele" required>
+          <!---!> <label for="region">Judet: </label>
+         <select id="region" name="region">
             <option value="Alba">Alba</option>
             <option value="Arad">Arad</option>
             <option value="Arges">Arges</option>
@@ -78,14 +90,18 @@
             <option value="Vaslui">Vaslui</option>
             <option value="Valcea">Valcea</option>
             <option value="Vrancea">Vrancea</option>
-          </select>
-          <label for="email">Email: </label>
-          <input type="email" id="email" name="email" placeholder="exemplu@gmail.com">
+          </select> 
+          <--->
+          <label>Email: </label>
+          <input type="email" id="email" name="email" placeholder="exemplu@gmail.com" required>
+          
+          <label >Telefon: </label>
+          <input type="text" id="phone" name="phone" placeholder="+40712309876" required>
         </div>
   
         <div id="form-col2">
           <label for="subject">Subiect: </label>
-          <textarea id="subject" name="subject" placeholder="informatii" style="height:200px"></textarea>
+          <textarea id="subject" name="subject" placeholder="Informatii" style="height:200px"></textarea>
         </div>
   
         <div id="form-col3">
@@ -107,5 +123,25 @@
 
 </div>
   <script type="text/javascript" src="assets/js/scripts.js"></script>
+  <script> src="https://smtpjs.com/v3/smtp.js" </script>
+  <script>
+    function sendEmail(){
+      Email.send({
+      Host : "smtp.gamil.com",
+      Username : "username",
+      Password : "password",
+      To : 'qa.knowledge.bag@gmail.com',
+      From : document.getElementById("email").value,
+      Subject : "New contact:",
+      Body : "Name: " + document.getElementById("name").value
+      +"<br> Email: " + document.getElementById("email").value
+      +"<br> Telefon: " + document.getElementById("phone").value
+      +"<br> Mesaj: " + document.getElementById("subject").value
+      
+      }).then(
+          message => alert(subject)
+          );
+    }
+  </script>
 </body>
 </html>
