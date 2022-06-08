@@ -47,6 +47,7 @@
   <!--this is used to get the @_SESSION variable -->
   <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/>
 
+    
   <body>  
     <div class="search-box">
       <input type="text" name="name" class="search-txt" placeholder="Type to search" />
