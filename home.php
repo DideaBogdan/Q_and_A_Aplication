@@ -61,16 +61,16 @@
       echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>';
   ?>
 
+    <div id="title">
+      <h1>Knowledge Bag</h1>
+      <p>Raspunsuri la toate intrebarile posibile</p>
+    </div>
+
     <button type="button" id="formbutton">Ask a question</button>
     <form id="formquestion" name="formquestion">
       <input type="text" placeholder="Type your question here..." id="question" name="question">
       <button id="button">Submit</button>
     </form>
-
-    <div id="title">
-      <h1>Knowledge Bag</h1>
-      <p>Raspunsuri la toate intrebarile posibile</p>
-    </div>
     
 
     <div class="main-page">
@@ -126,6 +126,7 @@
         </div>
       </div>
     </div>     
+    <button onclick="topFunction()" id="topBtn">Top</button>
    
   </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2022 at 12:59 PM
+-- Generation Time: Jun 08, 2022 at 07:20 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -26,7 +26,7 @@ DELIMITER $$
 -- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_question` (IN `p_text` VARCHAR(5000))   BEGIN 
-    INSERT into questions (text, user) VALUES (p_text, "");
+    INSERT into questions (text, user) VALUES (p_text, null);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_question` (IN `p_text` VARCHAR(5000), IN `p_username` VARCHAR(20))   BEGIN 
@@ -41,9 +41,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCH
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
-	SELECT q.id, q.text, u.username from questions q JOIN users u ON u.id = q.user
-    UNION
-    SELECT id, text, user from questions WHERE user IS NULL; 
+	SELECT q.id, q.text, u.username from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20))   BEGIN
@@ -78,30 +76,49 @@ CREATE TABLE `answers` (
 CREATE TABLE `questions` (
   `id` int(6) UNSIGNED NOT NULL,
   `text` varchar(5000) NOT NULL,
-  `user` int(6) UNSIGNED DEFAULT NULL
+  `user` int(6) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `text`, `user`) VALUES
-(1, 'intrebare de test', 1),
-(2, 'dasdgfgdf', 1),
-(3, 'hello this is my first', 2),
-(4, 'i hope this works', 1),
-(5, 'fdsfsdfs', 1),
-(6, 'adasdasdadas', 1),
-(7, 'i hope this works 2', 1),
-(8, 'i hope this works 2', 1),
-(9, 'i hope this works 3', 1),
-(10, 'i hope this works 4', 1),
-(11, 'i hope this works 5', 1),
-(12, 'i hope this works 5', 1),
-(13, 'i hope this works 6', 1),
-(14, 'i hope this works 7', 1),
-(15, 'test intrebare', 1),
-(16, 'intrebare pusa de anonim?', NULL);
+INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUES
+(1, 'intrebare de test', 1, '2022-06-04 21:00:00', '2022-06-04 21:00:00'),
+(2, 'dasdgfgdf', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(3, 'hello this is my first', 2, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(4, 'i hope this works', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(5, 'fdsfsdfs', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(6, 'adasdasdadas', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(7, 'i hope this works 2', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(8, 'i hope this works 2', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(9, 'i hope this works 3', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(10, 'i hope this works 4', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(11, 'i hope this works 5', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(12, 'i hope this works 5', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(13, 'i hope this works 6', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(14, 'i hope this works 7', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(15, 'test intrebare', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(16, 'intrebare pusa de anonim?', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(17, 'intrebare pusa de anonim --2', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(18, 'intrebare pusa de anonim-', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(19, 'de uitat pe q&a simplu', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(20, 'intrebare pusa de anonim-', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(21, 'este frumos afara?', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(22, 'qwerrtttytrr', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(23, 'intrebare pusa de anonim-', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(24, 'intrebare pusa de anonim-23', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(25, 'intrebare pusa de anonim-5555', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(26, 'intrebare pusa de anonim-1234', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(27, 'intrebare pusa de anonim-12345', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(28, 'intrebare pusa de anonim-1234567', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(29, 'intrebare pusa de anonim-11112', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(30, 'test-1', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(31, 'test-anonim', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(32, 'intrebare pusa de bogdan la 8:19PM', 1, '2022-06-08 17:19:10', '2022-06-08 17:19:10'),
+(33, 'intrebare pusa de anonim la 8:19PM', NULL, '2022-06-08 17:19:42', '2022-06-08 17:19:42');
 
 -- --------------------------------------------------------
 
@@ -185,7 +202,7 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`

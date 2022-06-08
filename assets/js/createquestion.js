@@ -1,5 +1,5 @@
 
-/*let button = document.getElementById('formbutton');
+let button = document.getElementById('formbutton');
 
 button.addEventListener('click', createform);
 
@@ -14,7 +14,7 @@ function createform(e){
         form.style.display = 'block';
       }
 }
-*/
+
 
 let form = document.getElementById('formquestion').addEventListener('submit', createquestion);
 const user_id = document.getElementById('session_var');
@@ -26,7 +26,6 @@ async function createquestion(e){
     let myQuestion = e.target;
     let formData = new FormData(myQuestion);
     let json = await convertToJSON(formData); 
-    console.log(json);
     let url = 'http://localhost/Q_and_A_Aplication/api/post/createquestion.php';
     let header = new Headers();
     header.append('Content-type', 'application/json');

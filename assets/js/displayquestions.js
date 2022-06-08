@@ -18,7 +18,7 @@ fetch(request)
     .then((data)=>{
         console.log('Response from server');
         //let variable = JSON.parse(data);
-        //console.log(data);
+        console.log(data);
         displayquestions(data);
     })
 .catch(console.warn);

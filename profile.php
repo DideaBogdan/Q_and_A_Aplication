@@ -42,6 +42,8 @@
     <?php
       if(isset($_SESSION['user_id']))
         echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>';
+
+        // badges - adaugare info - apar intrebarile si raspunsurile userului
     ?>
 </body>
 </html>

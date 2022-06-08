@@ -2,8 +2,8 @@
     class Question {
         private $conn;
 
-        public $id = '';
-        public $user_id = '';
+        public $id ;
+        public $user_id;
         public $text = '';
         //public $created_at = '';
 
@@ -13,7 +13,7 @@
         }
 
         public function createquestion(){
-            if($this->user_id = ''){
+            if(!isset($this->user_id)){
                 $stmt = $this->conn->prepare("CALL create_anonymous_question(:text)");
                 $stmt->bindParam(':text', $this->text, PDO::PARAM_STR);
             } else {
