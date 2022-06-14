@@ -72,7 +72,7 @@
       <button id="button">Submit</button>
     </form>
     
-
+<!--
     <div class="main-page">
       <div class="left-pannel">
         <div class="leaderboard">
@@ -103,6 +103,7 @@
         </div>
       </div>
       <div class="line"></div>
+    -->
       <div id="main-pannel">
       <script type="text/javascript" src="assets/js/displayquestions.js"></script>
         <!--
@@ -115,7 +116,7 @@
         </div>
     -->
       </div>
-      <div class="line"></div>
+   <!--   <div class="line"></div>
       <div class="right-pannel">
         <div class="statistics">
           <h3>Statistici</h3>
@@ -125,6 +126,7 @@
           <p>Intrebari fara raspuns: <span class="statistic-value">number</span></p>
         </div>
       </div>
+    -->
     </div>     
     <button onclick="topFunction()" id="topBtn">Top</button>
    

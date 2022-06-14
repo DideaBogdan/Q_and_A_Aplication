@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2022 at 07:20 PM
+-- Generation Time: Jun 13, 2022 at 10:18 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -25,8 +25,19 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_answer` (IN `p_text` VARCHAR(5000), IN `p_question` INT(20))   BEGIN
+	INSERT INTO answers (text, question) VALUES (p_text, p_question);
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_question` (IN `p_text` VARCHAR(5000))   BEGIN 
     INSERT into questions (text, user) VALUES (p_text, null);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_answer` (IN `p_text` VARCHAR(5000), IN `p_user` VARCHAR(50), IN `p_question` INT(50))   BEGIN
+DECLARE 
+var INT;
+SELECT id INTO var from users where username = p_user; 
+	INSERT INTO answers ( text, user, question) VALUES (p_text, var, p_question);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_question` (IN `p_text` VARCHAR(5000), IN `p_username` VARCHAR(20))   BEGIN 
@@ -42,6 +53,15 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
 	SELECT q.id, q.text, u.username from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question_answers` (IN `p_id` INT(20))   BEGIN
+    SELECT q.id, q.text, u.username,  q.updated_at, q.created_at from questions q LEFT OUTER JOIN users u ON u.id = q.user  WHERE q.id = p_id
+    UNION
+    SELECT a.id, a.text, u.username, a.updated_at, a.created_at FROM answers a LEFT OUTER JOIN users u ON a.user = u.id WHERE a.id IN (
+    SELECT a.id FROM answers a JOIN users u ON a.user = u.id WHERE question = p_id 
+    UNION
+    SELECT id FROM answers where user IS NULL ORDER BY updated_at desc) ;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20))   BEGIN
@@ -64,8 +84,25 @@ CREATE TABLE `answers` (
   `id` int(6) UNSIGNED NOT NULL,
   `text` varchar(300) NOT NULL,
   `question` int(6) UNSIGNED NOT NULL,
-  `user` int(6) UNSIGNED NOT NULL
+  `user` int(6) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_at`) VALUES
+(1, 'raspuns la prima intrebare', 1, 2, '2022-06-13 18:11:19', '2022-06-13 18:11:19'),
+(2, 'prim raspuns', 1, NULL, '2022-06-13 19:10:21', '2022-06-13 19:10:21'),
+(3, 'un al doilea raspuns', 1, 1, '2022-06-13 20:02:13', '2022-06-13 20:02:13'),
+(4, 'cred ca asta e un raspuns bun', 23, 0, '2022-06-13 20:04:44', '2022-06-13 20:04:44'),
+(5, 'cred ca asta e un raspuns bun', 23, 0, '2022-06-13 20:04:57', '2022-06-13 20:04:57'),
+(6, 'un al doilea raspuns', 1, 0, '2022-06-13 20:07:13', '2022-06-13 20:07:13'),
+(7, 'cred ca asta e un raspuns bun', 23, 1, '2022-06-13 20:15:19', '2022-06-13 20:15:19'),
+(8, 'dar asta e un raspuns si mai bun', 23, 1, '2022-06-13 20:15:49', '2022-06-13 20:15:49'),
+(9, 'a treia oara e cu noroc', 23, 1, '2022-06-13 20:16:08', '2022-06-13 20:16:08');
 
 -- --------------------------------------------------------
 
@@ -118,7 +155,12 @@ INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUE
 (30, 'test-1', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
 (31, 'test-anonim', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
 (32, 'intrebare pusa de bogdan la 8:19PM', 1, '2022-06-08 17:19:10', '2022-06-08 17:19:10'),
-(33, 'intrebare pusa de anonim la 8:19PM', NULL, '2022-06-08 17:19:42', '2022-06-08 17:19:42');
+(33, 'intrebare pusa de anonim la 8:19PM', NULL, '2022-06-08 17:19:42', '2022-06-08 17:19:42'),
+(34, 'ultima intrebare pusa sa vad daca inca merge', NULL, '2022-06-13 13:58:03', '2022-06-13 13:58:03'),
+(35, 'adasdadadads', NULL, '2022-06-13 16:43:25', '2022-06-13 16:43:25'),
+(36, 'i hope this works', NULL, '2022-06-13 16:44:07', '2022-06-13 16:44:07'),
+(37, 'i hope this works', NULL, '2022-06-13 16:53:47', '2022-06-13 16:53:47'),
+(38, 'intrebare pusa de anonim-', NULL, '2022-06-13 16:54:09', '2022-06-13 16:54:09');
 
 -- --------------------------------------------------------
 
@@ -196,13 +238,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `users`

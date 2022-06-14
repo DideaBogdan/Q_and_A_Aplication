@@ -4,13 +4,12 @@ mainPannel = document.getElementById('main-pannel');
 //username = document.createElement('p');//.setAttribute('id', 'username');
 //text = document.createElement('div');//.setAttribute('id', 'question-box');
 
-
+let permData;
 let url = 'http://localhost/Q_and_A_Aplication/api/post/displayquestions.php';
 let header = new Headers();
 header.append('Content-type', 'application/json');
 let request = new Request( url, {
     headers: header,
-    //body: json,
     method: 'GET',
 });
 fetch(request)
@@ -18,7 +17,7 @@ fetch(request)
     .then((data)=>{
         console.log('Response from server');
         //let variable = JSON.parse(data);
-        console.log(data);
+        permData = data;
         displayquestions(data);
     })
 .catch(console.warn);
@@ -26,14 +25,14 @@ fetch(request)
 
 function displayquestions(json){
     data = json;
-    
+    console.log(permData);
     data.forEach(element => {
         
 
         questionForm = document.createElement('div');
         questionTitle = document.createElement('h3');
         username = document.createElement('p');
-        text = document.createElement('div');
+        text = document.createElement('a');
 
         if(element.username == null){
             const user = document.createTextNode( "Anonymous asks:");
@@ -43,6 +42,9 @@ function displayquestions(json){
             username.appendChild(user);
         }
         const node = document.createTextNode(element.text);
+        //text.href = "detailed.php";
+        text.classList.add("questionText");
+        text.addEventListener('click', redirect);
         text.appendChild(node);
         questionTitle.appendChild(username);
 
@@ -57,4 +59,16 @@ function displayquestions(json){
         ///aici ar trebui un questionForm.appendChild() pentru butoanele de sub intrebare - like/dislike eventual - !!!important - butonul de raspunsuri
         /// butonul de raspunsuri va fi generat din script (de aici) si va afisa raspunsurile + un field de tip input pentru a raspunde si utilizatorul 
     });
+}
+
+function redirect(e){
+    e.preventDefault();
+    let id = 0;
+    permData.forEach(element => {
+        if(e.currentTarget.innerText.localeCompare(element.text) == 0 )
+            id = element.id;
+    });
+    console.log(id);
+    location.assign("http://localhost/Q_and_A_Aplication/detailed.php?id=" + id);
+    console.log(e.currentTarget.innerText);
 }

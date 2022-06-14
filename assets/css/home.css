@@ -290,3 +290,15 @@ body{
     display: block;
     margin-left: 25%;
 }
+
+
+.questionText{
+    color: inherit;
+    text-decoration: none;
+}
+
+.questionText:hover{
+    color: rgba(246, 245, 244, 0.3);
+    text-decoration: none;
+    cursor: pointer;
+}

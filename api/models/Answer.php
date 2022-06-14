@@ -1,10 +1,11 @@
 <?php
-    class Question {
+    class Answer {
         private $conn;
 
         public $id ='';
-        public $user_id ='';
+        public $question = "";
         public $text = '';
+        public $user = '';
         //public $created_at = '';
 
 
@@ -12,25 +13,27 @@
             $this->conn = $db;
         }
 
-        public function createquestion(){
-            if(!isset($this->user_id)){
-                $stmt = $this->conn->prepare("CALL create_anonymous_question(:text)");
+        public function createanswer(){
+            if(!isset($this->user)){
+                $stmt = $this->conn->prepare("CALL create_anonymous_answer(:text, :question)");
                 $stmt->bindParam(':text', $this->text, PDO::PARAM_STR);
+                $stmt->bindParam(':question', $this->question, PDO::PARAM_STR);
             } else {
-                $stmt = $this->conn->prepare("CALL create_question(:text, :user_id)");
+                $stmt = $this->conn->prepare("CALL create_answer(:text, :user, :question)");
                 $stmt->bindParam(':text', $this->text, PDO::PARAM_STR);
-                $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_STR);
+                $stmt->bindParam(':user', $this->user, PDO::PARAM_STR);
+                $stmt->bindParam(':question', $this->question, PDO::PARAM_STR);
             }
             if($stmt->execute()){
-                echo json_encode(array('message'=> 'Question created'));
+                echo json_encode(array('message'=> 'Answer created'));
                 return true;
             } else {
                 printf("ERROR: %s. \n", $stmt->error);
-                echo json_encode(array('message'=> 'Question Not Created'));
+                echo json_encode(array('message'=> 'Answer Not Created'));
                 return false;
             }
         }
-
+/*
         public function  displayquestions(){
             $stmt = $this->conn->prepare("CALL get_questions()");
 
@@ -48,4 +51,5 @@
             echo json_encode($result);
             
         }
+        */
     }
