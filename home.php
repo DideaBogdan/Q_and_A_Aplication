@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Updock&display=swap" rel="stylesheet">
   <!--Search bar icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script defer src="../Q_and_A_Aplication/assets/js/createquestion.js"></script>
+    
     <script defer type="text/javascript" src="assets/js/scripts.js"></script>
     
 
@@ -66,13 +66,9 @@
       <p>Raspunsuri la toate intrebarile posibile</p>
     </div>
 
-    <button type="button" id="formbutton">Ask a question</button>
-    <form id="formquestion" name="formquestion">
-      <input type="text" placeholder="Type your question here..." id="question" name="question">
-      <button id="button">Submit</button>
-    </form>
+   
     
-<!--
+
     <div class="main-page">
       <div class="left-pannel">
         <div class="leaderboard">
@@ -103,9 +99,15 @@
         </div>
       </div>
       <div class="line"></div>
-    -->
+  
       <div id="main-pannel">
-      <script type="text/javascript" src="assets/js/displayquestions.js"></script>
+        <button type="button" id="formbutton">Ask a question</button>
+        <form id="formquestion" name="formquestion">
+          <input type="text" placeholder="Type your question here..." id="question" name="question" role="textbox" maxlength="5000"/>
+          <button id="button">Submit</button>
+        </form>
+        <script src="../Q_and_A_Aplication/assets/js/createquestion.js"></script>
+        <script type="text/javascript" src="assets/js/displayquestions.js"></script>
         <!--
         <div id="question-form">
           <h3 id="question-title">
@@ -116,7 +118,7 @@
         </div>
     -->
       </div>
-   <!--   <div class="line"></div>
+     <div class="line"></div>
       <div class="right-pannel">
         <div class="statistics">
           <h3>Statistici</h3>
@@ -126,7 +128,7 @@
           <p>Intrebari fara raspuns: <span class="statistic-value">number</span></p>
         </div>
       </div>
-    -->
+ 
     </div>     
     <button onclick="topFunction()" id="topBtn">Top</button>
    

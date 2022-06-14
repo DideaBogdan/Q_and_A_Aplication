@@ -3,10 +3,14 @@ let permData;
 
 questionId = document.getElementById('question_id').value;
 let obj = {id : parseInt(questionId)};
-const json = JSON.stringify(obj);   
+const json = JSON.stringify(obj);
+let userInput = document.getElementById('user_answer');
 
-const user_username = document.getElementById('user_answer').value;
-
+let user_username;
+if(userInput != null){
+    user_username = userInput.value;
+}
+ 
 let url = 'http://localhost/Q_and_A_Aplication/api/post/displayquestion&answers.php';
 
 let header = new Headers();
@@ -36,6 +40,7 @@ function displayquestion_answers(json){
             questionForm = document.createElement('div');
             questionTitle = document.createElement('h3');
             username = document.createElement('p');
+
             text = document.createElement('a');
 
             if(element.username == null){
@@ -48,9 +53,10 @@ function displayquestion_answers(json){
             const node = document.createTextNode(element.text);
             text.appendChild(node);
             questionTitle.appendChild(username);
-
+   
             questionForm.appendChild(questionTitle);
             questionForm.appendChild(text);
+
         
             questionForm.setAttribute('id', 'question-form');
             text.setAttribute('id', 'question-box');
@@ -61,14 +67,17 @@ function displayquestion_answers(json){
     answerForm = document.createElement('form');
     answerForm.addEventListener('submit', createanswer);;
     answerForm.setAttribute('name', 'formanswer');
+    answerForm.setAttribute('id', 'formanswer');
 
     answerInput = document.createElement('input');
     answerInput.setAttribute('type', 'text');
     answerInput.setAttribute('placeholder', 'Type your answer here...');
     answerInput.setAttribute('name', 'answer');
+    answerInput.setAttribute('id', 'answer');
 
     answerButton = document.createElement('button');
     answerButton.appendChild(document.createTextNode('Submit answer'));
+    answerButton.setAttribute('id', 'answerbutton');
 
     answerForm.appendChild(answerInput);
     answerForm.appendChild(answerButton);
@@ -95,8 +104,8 @@ function displayquestion_answers(json){
         questionForm.appendChild(questionTitle);
         questionForm.appendChild(text);
     
-        questionForm.setAttribute('id', 'question-form');
-        text.setAttribute('id', 'question-box');
+        questionForm.setAttribute('id', 'containeranswer');
+        text.setAttribute('id', 'answer');
         username.setAttribute('id', 'username');
         mainPannel.appendChild(questionForm);
 

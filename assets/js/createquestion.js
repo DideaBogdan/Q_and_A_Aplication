@@ -50,7 +50,9 @@ async function createquestion(e){
 function convertToJSON(formData){
     let obj={};
     for(let key of formData.keys()){
-        obj[key]=formData.get(key);
+        let noExtraSpaces = formData.get(key).replace(/\s+/g, ' ').trim();
+        console.log(noExtraSpaces);
+        obj[key]= noExtraSpaces;
     }
     if(user_id.value === ""){
         obj['user_id'] = "";

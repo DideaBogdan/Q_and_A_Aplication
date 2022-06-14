@@ -39,13 +39,13 @@
             echo json_encode($result);
 
         }
-        public function  displayquestionanswers(){
-            $stmt = $this->conn->prepare("CALL get_question_answers(:id)");
+        public function  displayquestion(){
+            $stmt = $this->conn->prepare("CALL get_question(:id)");
             $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);
 
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
+            return $result;
             
         }
     }

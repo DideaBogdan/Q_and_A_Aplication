@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2022 at 10:18 PM
+-- Generation Time: Jun 14, 2022 at 07:51 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -51,17 +51,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCH
 	INSERT INTO users (username, password, firstname, lastname, email) VALUES (p_username, p_password, p_firstname, p_lastname, p_email);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
-	SELECT q.id, q.text, u.username from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_answers` (IN `p_id` INT(50))   BEGIN
+    SELECT a.id, a.text, u.username,  a.updated_at, a.created_at from answers a LEFT OUTER JOIN users u ON u.id = a.user  WHERE a.question = p_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question_answers` (IN `p_id` INT(20))   BEGIN
-    SELECT q.id, q.text, u.username,  q.updated_at, q.created_at from questions q LEFT OUTER JOIN users u ON u.id = q.user  WHERE q.id = p_id
-    UNION
-    SELECT a.id, a.text, u.username, a.updated_at, a.created_at FROM answers a LEFT OUTER JOIN users u ON a.user = u.id WHERE a.id IN (
-    SELECT a.id FROM answers a JOIN users u ON a.user = u.id WHERE question = p_id 
-    UNION
-    SELECT id FROM answers where user IS NULL ORDER BY updated_at desc) ;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question` (IN `p_id` INT(20))   BEGIN
+    SELECT q.id, q.text, u.username,  q.updated_at, q.created_at from questions q LEFT OUTER JOIN users u ON u.id = q.user  WHERE q.id = p_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
+	SELECT q.id, q.text, u.username from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20))   BEGIN
@@ -102,7 +101,10 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (6, 'un al doilea raspuns', 1, 0, '2022-06-13 20:07:13', '2022-06-13 20:07:13'),
 (7, 'cred ca asta e un raspuns bun', 23, 1, '2022-06-13 20:15:19', '2022-06-13 20:15:19'),
 (8, 'dar asta e un raspuns si mai bun', 23, 1, '2022-06-13 20:15:49', '2022-06-13 20:15:49'),
-(9, 'a treia oara e cu noroc', 23, 1, '2022-06-13 20:16:08', '2022-06-13 20:16:08');
+(9, 'a treia oara e cu noroc', 23, 1, '2022-06-13 20:16:08', '2022-06-13 20:16:08'),
+(10, 'un raspuns cult dom\'le', 44, 1, '2022-06-14 15:51:04', '2022-06-14 15:51:04'),
+(11, 'alt raspuns', 44, 1, '2022-06-14 16:02:26', '2022-06-14 16:02:26'),
+(12, 'e stricata ceva functie din baza de date...', 1, 1, '2022-06-14 16:03:00', '2022-06-14 16:03:00');
 
 -- --------------------------------------------------------
 
@@ -160,7 +162,15 @@ INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUE
 (35, 'adasdadadads', NULL, '2022-06-13 16:43:25', '2022-06-13 16:43:25'),
 (36, 'i hope this works', NULL, '2022-06-13 16:44:07', '2022-06-13 16:44:07'),
 (37, 'i hope this works', NULL, '2022-06-13 16:53:47', '2022-06-13 16:53:47'),
-(38, 'intrebare pusa de anonim-', NULL, '2022-06-13 16:54:09', '2022-06-13 16:54:09');
+(38, 'intrebare pusa de anonim-', NULL, '2022-06-13 16:54:09', '2022-06-13 16:54:09'),
+(39, 'o intrebare de test cu form-ul de intrbare customizat', 1, '2022-06-14 14:49:17', '2022-06-14 14:49:17'),
+(44, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut pellentesque ante, vel gravida sem. Nullam neque nibh, porta eu dui sed, porttitor tempor augue. In laoreet justo in justo scelerisque, id rutrum mauris sollicitudin. Sed commodo, ex quis tincidunt suscipit, felis odio ultrices orci, at accumsan sapien erat vel lacus. Vestibulum tristique eu nunc et ullamcorper. Maecenas in iaculis ex, sed efficitur sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce aliquet id libero quis porttitor. Aenean id nunc tristique, facilisis purus sit amet, congue elit. Quisque condimentum lorem condimentum lobortis euismod. Vivamus a pretium sem. Aenean consequat dui lectus, id sagittis tortor congue vitae. Vestibulum vulputate nec magna a elementum. Morbi ultrices nisi ex. Morbi a lectus sodales, vulputate est quis, egestas purus. Donec eleifend elit consectetur purus eleifend, at tempus tellus convallis. Etiam vulputate feugiat arcu, ut placerat velit cursus at. Maecenas eget sagittis massa. Morbi sapien sapien, rutrum et velit vitae, tempus imperdiet nisi. Duis ligula odio, suscipit ut turpis et, elementum euismod lorem. Vivamus vel congue purus, eget tincidunt magna. Etiam feugiat orci diam, ac tincidunt neque scelerisque ut. Integer vitae scelerisque lorem, in dignissim tortor. Vivamus ac tristique eros, et tincidunt metus. Etiam quis placerat sapien. Proin tempor, velit ut suscipit ultricies, nibh risus sodales velit, sed sodales turpis lorem eget dolor. Morbi nisl augue, dignissim ut tristique eget, fringilla in quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec placerat cursus ipsum eget ullamcorper. Sed consectetur tempus luctus. Vestibulum posuere, arcu ut mollis ultricies, arcu eros dapibus nisi, a posuere erat ante vitae dui. Sed varius pharetra hendrerit. Suspendisse gravida bibendum neque, quis interdum mauris venenatis vitae. Pellentesque finibus nisi urna, sed sagittis nibh commodo nec. Quisque iaculis orci sollicitudin, pharetra orci sed, egestas magna. Maecenas a nibh eget elit congue blandit a at risus. Ut orci ante, tincidunt vel sollicitudin eget, varius nec urna. Nulla nec nisi auctor diam vulputate laoreet nec in est. Nam rutrum metus id leo blandit, id suscipit massa ultricies. Nam mollis tempus tortor a feugiat. Sed nec lorem vel quam lobortis egestas. Ut id enim tristique, fringilla dolor a, egestas velit. Donec hendrerit eget neque at faucibus. Etiam elit eros, facilisis ac lobortis ac, mollis nec augue. Integer at tortor id odio dignissim aliquet. Ut feugiat, mi nec gravida dignissim, ligula leo molestie nibh, quis facilisis velit erat nec risus. Donec nec mattis sapien. Ut et pellentesque elit, at laoreet dolor. Nam volutpat commodo ante id tincidunt. Curabitur maximus accumsan lorem, vestibulum tincidunt erat blandit vel. Donec id libero quis velit ultricies tempus. In tempor lacus dui, at dignissim risus varius vel. Maecenas tellus odio, sollicitudin et nisl id, finibus vestibulum lectus. Nam ullamcorper ac ligula vel hendrerit. Aliquam facilisis bibendum tellus, sit amet commodo erat malesuada in. Fusce sed dui vitae dolor sollicitudin posuere in a augue. Curabitur vel nulla quis enim luctus aliquet non in ligula. Ut volutpat cursus orci, non dignissim justo venenatis auctor. Phasellus tincidunt felis non tempus bibendum. Vestibulum mollis, mi vitae facilisis luctus, odio mi semper erat, sit amet suscipit lectus orci ac quam. Integer posuere mi vitae eros consequat, ut vehicula metus feugiat. Fusce eget ex neque. Sed nec venenatis purus, in elementum libero. Aenean dapibus scelerisque malesuada. Sed ut tincidunt enim, ac dapibus lectus. Nunc suscipit velit nec lectus bibendum, ut efficitur dolor hendrerit.', 1, '2022-06-14 15:09:43', '2022-06-14 15:09:43'),
+(45, 'intrebaree     cu     multe    spatii    ', 1, '2022-06-14 15:36:31', '2022-06-14 15:36:31'),
+(46, 'intrebare    care   are multe spatii    dar sppeeeee rrrr ca mergeeee   ', 1, '2022-06-14 15:38:41', '2022-06-14 15:38:41'),
+(47, '    asddas      ', 1, '2022-06-14 15:38:54', '2022-06-14 15:38:54'),
+(48, 'adadasdasdadada daasdas asddasda', 1, '2022-06-14 15:41:28', '2022-06-14 15:41:28'),
+(49, 'intrebare de test', 1, '2022-06-14 16:02:40', '2022-06-14 16:02:40'),
+(50, 'adsdfsvdffdgdfgdfgdfgdgdf', 1, '2022-06-14 16:06:56', '2022-06-14 16:06:56');
 
 -- --------------------------------------------------------
 
@@ -238,13 +248,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `users`

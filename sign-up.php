@@ -45,7 +45,7 @@
             <span id="msg"></span>
 
             <label for="username">Username</label>
-            <input type="text" placeholder="Email or Phone" id="username" name="username" required >
+            <input type="text" placeholder="Username" id="username" name="username" required >
 
             <label for="username">First Name</label>
             <input type="text" placeholder="First Name" id="first" name="firstname" required>
@@ -54,7 +54,7 @@
             <input type="text" placeholder="Last Name" id="last" name="lastname" required>
 
             <label for="email">Email Address</label>
-            <input type="email" placeholder="Email or Phone" id="email" name="email"  required>
+            <input type="email" placeholder="Email" id="email" name="email"  required>
 
             <label for="password">Password</label>
             <input type="password" placeholder="Password" id="password" name="password" required minlength="8">

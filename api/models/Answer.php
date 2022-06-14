@@ -33,15 +33,17 @@
                 return false;
             }
         }
-/*
-        public function  displayquestions(){
-            $stmt = $this->conn->prepare("CALL get_questions()");
+
+        public function  displayanswers($id){
+            $stmt = $this->conn->prepare("CALL get_answers(:id)");
+            $stmt->bindParam(':id', $id, PDO::PARAM_STR);
 
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
+            return $result;
 
         }
+        /*
         public function  displayquestionanswers(){
             $stmt = $this->conn->prepare("CALL get_question_answers(:id)");
             $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);

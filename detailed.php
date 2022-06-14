@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knowledge Bag</title>
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/detailed.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Updock&display=swap" rel="stylesheet">
   <!--Search bar icon -->
@@ -54,7 +54,10 @@
     </div>
     <div id="main-pannel">
       <input type="hidden" id="question_id" value="<?php echo $_GET['id']?>"/>
-      <input type="hidden" id="user_answer" value="<?php echo $_SESSION['user_id']?>"/>
+      <?php
+        if(isset($_SESSION['user_id']))
+          echo '<input type="hidden" id="user_answer" value="'. $_SESSION['user_id'] .'"/>';
+      ?>
       <script type="text/javascript" src="assets/js/displayquestion&answers.js"></script>
     </div> 
     <button onclick="topFunction()" id="topBtn">Top</button>

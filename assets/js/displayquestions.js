@@ -63,10 +63,12 @@ function displayquestions(json){
 
 function redirect(e){
     e.preventDefault();
-    let id = 0;
+    let id = -1;
     permData.forEach(element => {
-        if(e.currentTarget.innerText.localeCompare(element.text) == 0 )
+        console.log(element.text);
+        if(e.currentTarget.innerText == element.text)
             id = element.id;
+            
     });
     console.log(id);
     location.assign("http://localhost/Q_and_A_Aplication/detailed.php?id=" + id);
