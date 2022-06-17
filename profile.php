@@ -97,7 +97,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
-    <link rel="stylesheet" href="assets/css/profile.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/profile.css">
     
 </head>
 
@@ -137,7 +137,7 @@
           <p>total questions: <?php echo $total_questions[0]; ?></p>
           <div class="scroll-data">
             <?php foreach($questions as $question):  ?>
-              <p> <?php echo $question['text']; ?></p>
+              <a href="detailed.php?id=<?php echo $question['id'] ?>"> <?php echo $question['text']; ?></a>
             <?php endforeach; ?>
           </div>
         </div>
@@ -146,7 +146,7 @@
           <p>total answers: <?php echo $total_answers[0] ?></p>
           <div class="scroll-data">
           <?php foreach($answers as $answer):  ?>
-              <p> <?php echo $answer['text']; ?></p>
+              <a href="detailed.php?id=<?php echo $answer['question'] ?>"> <?php echo $answer['text']; ?></a>
             <?php endforeach; ?>
       </div>
         </div>
