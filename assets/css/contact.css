@@ -118,6 +118,25 @@ textarea {
   color: #fff;
   text-decoration: none;
 }
+#button{
+  margin-top: 50px;
+  margin-left:350px;
+  width: 50%;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 100;
+  border-radius: 5px;
+  cursor: pointer;
+  background: linear-gradient(
+      to right,
+      #ff512f,
+      #f09819
+  );
+   color: white;
+  
+}
 
 
 hr {
@@ -138,16 +157,6 @@ hr {
     margin-top: 60px;
     max-width: 300px;
   }    
-  .social-media-list li {
-    height: 60px;
-    width: 60px;
-    line-height: 60px;
-  }
-  .social-media-list li:after {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-  }
 }
 
 @media screen and (max-width: 569px) {
@@ -170,20 +179,7 @@ hr {
     margin-top: 60px;
     max-width: 280px;
   }  
-  .social-media-list {
-    left: 0;
-  }
-  .social-media-list li {
-    height: 55px;
-    width: 55px;
-    line-height: 55px;
-    font-size: 2rem;
-  }
-  .social-media-list li:after {
-    width: 55px;
-    height: 55px;
-    line-height: 55px;
-  }
+
   
 }
 
@@ -274,31 +270,13 @@ textarea{
     background-color: aliceblue;
     width: 80%;
     height: 100%;
-    padding: 12px;
+    padding: 10px;
     margin-top: 5%;
     border: 1px solid rgb(101, 101, 101); /* Gray border */
     border-radius: 4px; /* Rounded borders */
     box-sizing: border-box;
     resize: none;
     color: black;
-}
-
-input[type="submit"]{
-     background-color: rgb(3, 38, 124);
-     font-size: 20px;
-     color: aliceblue;
-     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-     cursor: pointer;
-     padding: 20px 40px;
-     border: 4px groove rgb(3, 38, 124);
-     float: left;
-     margin-top: 45%;
-     margin-left: 5%;
-}
-
-input[type="submit"]:hover{
-    background-color: rgb(28, 123, 231);
-    border: 4px groove rgb(28, 123, 231);
 }
 
 
@@ -310,7 +288,7 @@ input[type="submit"]:hover{
 .more-info h3{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
     margin-right: 10%;
     margin-bottom: 13%;
