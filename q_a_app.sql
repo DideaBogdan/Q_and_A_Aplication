@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2022 at 07:51 PM
+-- Generation Time: Jun 17, 2022 at 12:06 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -47,8 +47,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_question` (IN `p_text` VARCH
     INSERT into questions (text, user) VALUES (p_text, val);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_reaction` (IN `p_like` BOOLEAN, IN `p_dislike` BOOLEAN, IN `p_user` VARCHAR(50), IN `p_id_post` INT(38))   BEGIN
+	DECLARE 
+    	user_id INT;
+    SELECT id INTO user_id FROM users WHERE trim(username) = trim(p_user);
+    
+    INSERT INTO reactions (`like`, dislike, user, id_post) VALUES (p_like, p_dislike, user_id, p_id_post); 
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20), IN `p_firstname` VARCHAR(50), IN `p_lastname` VARCHAR(50), IN `p_email` VARCHAR(50))   BEGIN
 	INSERT INTO users (username, password, firstname, lastname, email) VALUES (p_username, p_password, p_firstname, p_lastname, p_email);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_reaction` (IN `p_user` VARCHAR(38), IN `p_id_post` INT(38))   BEGIN
+	DECLARE 
+    	user_id INT;
+    SELECT id INTO user_id FROM users WHERE trim(username) = trim(p_user);
+    
+    DELETE FROM reactions WHERE user = user_id AND id_post = p_id_post;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_answers` (IN `p_id` INT(50))   BEGIN
@@ -60,7 +76,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question` (IN `p_id` INT(20))  
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
-	SELECT q.id, q.text, u.username from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
+	SELECT q.id, q.text, u.username, q.updated_at from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20))   BEGIN
@@ -104,7 +120,13 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (9, 'a treia oara e cu noroc', 23, 1, '2022-06-13 20:16:08', '2022-06-13 20:16:08'),
 (10, 'un raspuns cult dom\'le', 44, 1, '2022-06-14 15:51:04', '2022-06-14 15:51:04'),
 (11, 'alt raspuns', 44, 1, '2022-06-14 16:02:26', '2022-06-14 16:02:26'),
-(12, 'e stricata ceva functie din baza de date...', 1, 1, '2022-06-14 16:03:00', '2022-06-14 16:03:00');
+(12, 'e stricata ceva functie din baza de date...', 1, 1, '2022-06-14 16:03:00', '2022-06-14 16:03:00'),
+(13, 'sadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadad', 44, NULL, '2022-06-16 15:16:10', '2022-06-16 15:16:10'),
+(14, 'saddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsdffdghdddddddddddddddddddddddddddddd fd gfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgfdgdfgdf', 52, NULL, '2022-06-16 15:30:50', '2022-06-16 15:30:50'),
+(15, 'SADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADSADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDSADASDASDASDASDASDASDASDASDASDASDASDASDASDHJSF KSDH KSD SDLK HSDKJSD GSDSH JDK HSD JAK JJ HADJKASG ', 52, NULL, '2022-06-16 15:40:40', '2022-06-16 15:40:40'),
+(16, 'saddasdasdasdasda', 52, NULL, '2022-06-16 21:28:47', '2022-06-16 21:28:47'),
+(17, 'asdasdasdasfdas asd as das das', 54, 1, '2022-06-16 21:30:52', '2022-06-16 21:30:52'),
+(18, 'asdasdasdadas', 54, 1, '2022-06-17 07:42:10', '2022-06-17 07:42:10');
 
 -- --------------------------------------------------------
 
@@ -125,7 +147,7 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUES
-(1, 'intrebare de test', 1, '2022-06-04 21:00:00', '2022-06-04 21:00:00'),
+(1, 'intrebare de test', 1, '2022-06-04 21:00:00', '2018-12-05 22:00:00'),
 (2, 'dasdgfgdf', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
 (3, 'hello this is my first', 2, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
 (4, 'i hope this works', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
@@ -170,7 +192,47 @@ INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUE
 (47, '    asddas      ', 1, '2022-06-14 15:38:54', '2022-06-14 15:38:54'),
 (48, 'adadasdasdadada daasdas asddasda', 1, '2022-06-14 15:41:28', '2022-06-14 15:41:28'),
 (49, 'intrebare de test', 1, '2022-06-14 16:02:40', '2022-06-14 16:02:40'),
-(50, 'adsdfsvdffdgdfgdfgdfgdgdf', 1, '2022-06-14 16:06:56', '2022-06-14 16:06:56');
+(50, 'adsdfsvdffdgdfgdfgdfgdgdf', 1, '2022-06-14 16:06:56', '2022-06-14 16:06:56'),
+(52, 'wqeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdasdasdasdas', NULL, '2022-06-16 15:05:07', '2022-06-16 15:05:07'),
+(53, 'intrebare recenta', NULL, '2022-06-16 15:58:32', '2022-06-16 15:58:32'),
+(54, 'hbvjh hhj uy', NULL, '2022-06-16 16:42:23', '2022-06-16 16:42:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reactions`
+--
+
+CREATE TABLE `reactions` (
+  `id` int(11) NOT NULL,
+  `like` tinyint(1) NOT NULL,
+  `dislike` tinyint(1) NOT NULL,
+  `user` int(38) NOT NULL,
+  `id_post` int(38) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reactions`
+--
+
+INSERT INTO `reactions` (`id`, `like`, `dislike`, `user`, `id_post`) VALUES
+(1, 0, 0, 1, 1),
+(2, 0, 0, 1, 1),
+(3, 0, 1, 1, 1),
+(4, 1, 0, 1, 1),
+(5, 0, 0, 1, 49),
+(7, 1, 0, 1, 50),
+(8, 1, 0, 1, 52),
+(9, 1, 0, 1, 52),
+(10, 1, 0, 1, 52),
+(11, 1, 0, 1, 52),
+(12, 1, 0, 1, 52),
+(13, 1, 0, 1, 52),
+(14, 1, 0, 1, 52),
+(15, 1, 0, 1, 52),
+(16, 1, 0, 1, 52),
+(40, 0, 1, 1, 54),
+(41, 0, 1, 1, 54);
 
 -- --------------------------------------------------------
 
@@ -235,6 +297,12 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `reactions`
+--
+ALTER TABLE `reactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -248,13 +316,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `reactions`
+--
+ALTER TABLE `reactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`

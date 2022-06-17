@@ -6,7 +6,7 @@
         public $question = "";
         public $text = '';
         public $user = '';
-        //public $created_at = '';
+        public $created_at = '';
 
 
         public function __construct($db){
@@ -43,15 +43,4 @@
             return $result;
 
         }
-        /*
-        public function  displayquestionanswers(){
-            $stmt = $this->conn->prepare("CALL get_question_answers(:id)");
-            $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);
-
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
-            
-        }
-        */
     }

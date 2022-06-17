@@ -52,6 +52,16 @@
         <i class="fa fa-search" aria-hidden="true"></i>
       </a>
     </div>
+    <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/>
+    <div id="containerpopup">
+        <div id="popUp">
+          <button id="close">&times;</button>
+          <p id = "content">You must have an account to react to posts!</p>
+          <button id="buttons" onclick="window.location.href='login.php'">Log in</button>
+          <button id="buttons" onclick="window.location.href='sign-up.php'">Sign in</button>
+        </div>
+      </div>
+
     <div id="main-pannel">
       <input type="hidden" id="question_id" value="<?php echo $_GET['id']?>"/>
       <?php

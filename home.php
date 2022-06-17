@@ -66,7 +66,14 @@
       <p>Raspunsuri la toate intrebarile posibile</p>
     </div>
 
-   
+    <div id="containerpopup">
+        <div id="popUp">
+          <button id="close">&times;</button>
+          <p id = "content">You must have an account to react to posts!</p>
+          <button id="buttons" onclick="window.location.href='login.php'">Log in</button>
+          <button id="buttons" onclick="window.location.href='sign-up.php'">Sign in</button>
+        </div>
+      </div>
     
 
     <div class="main-page">
@@ -103,7 +110,7 @@
       <div id="main-pannel">
         <button type="button" id="formbutton">Ask a question</button>
         <form id="formquestion" name="formquestion">
-          <input type="text" placeholder="Type your question here..." id="question" name="question" role="textbox" maxlength="5000"/>
+          <textarea  type="text" placeholder="Type your question here..." id="question" name="question" role="textbox" maxlength="5000" required></textarea>
           <button id="button">Submit</button>
         </form>
         <script src="../Q_and_A_Aplication/assets/js/createquestion.js"></script>
