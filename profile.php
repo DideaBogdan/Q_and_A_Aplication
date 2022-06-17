@@ -9,6 +9,7 @@
   $db = $database->connect();
 
   $username = $_SESSION['user_id'] ?? null;
+  $error = null;
 
   if(isset($_SESSION['user_id'])){
     $statement = $db->prepare('SELECT id FROM users WHERE username = :username');
@@ -41,6 +42,11 @@
   $statement->execute();
   $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+  $statement = $db->prepare('SELECT username, email FROM users WHERE id != :id');
+  $statement->bindValue(':id',$user_id[0]);
+  $statement->execute();
+  $allUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
   $password = $user['password'];
   $firstname = $user['firstname'];
   $lastname = $user['lastname'];
@@ -53,17 +59,26 @@
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
 
-    $statement = $db->prepare("UPDATE users SET username = :username, password = :password, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
+    foreach($allUsers as $userinfo):  
+    if($userinfo['email'] == $email || $userinfo['username'] == $username){
+      $error = "Username or email already taken!";
+    }
+    endforeach; 
 
-    //trebuie sa updatez si userul sesiunii curente!!! si validare info
-    $statement->bindValue(':username', $username);
-    $statement->bindValue(':password', $password);
-    $statement->bindValue(':firstname', $firstname);
-    $statement->bindValue(':lastname', $lastname);
-    $statement->bindValue(':email', $email);
-    $statement->bindValue(':id',$user_id[0]);
-    $statement->execute();
+    if($error == null){
+      $statement = $db->prepare("UPDATE users SET username = :username, password = :password, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
 
+      $_SESSION['user_id'] = $username;
+
+      $statement->bindValue(':username', $username);
+      $statement->bindValue(':password', $password);
+      $statement->bindValue(':firstname', $firstname);
+      $statement->bindValue(':lastname', $lastname);
+      $statement->bindValue(':email', $email);
+      $statement->bindValue(':id',$user_id[0]);
+      $statement->execute();
+
+    }
   }
 
   }
@@ -137,12 +152,16 @@
         </div>
         <div class="update-info">
         <form action="" method="post">
-          <?php if($_SERVER['REQUEST_METHOD'] == 'POST'){ ?>
+          <?php if($_SERVER['REQUEST_METHOD'] == 'POST' && $error == null){ ?>
             <h2>Data saved successfully!</h2>
          <?php } 
           ?>
             <h3>Edit your info</h3>
-            <span id="msg"></span>
+            <span id="msg">
+              <?php if($error != null){
+                echo $error;
+              } ?>
+            </span>
 
             <label for="username">Username</label>
             <input type="text"  id="username" name="username" value="<?php echo $username ?>" required >
