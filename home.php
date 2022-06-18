@@ -78,20 +78,10 @@
 
     <div class="main-page">
       <div class="left-pannel">
-        <div class="leaderboard">
+        <div id="leaderboard_answer" >
           <h3>Cele mai multe raspunsuri date</h3>
-          <span class="ladeboard-row"><p>1.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>2.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>3.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>4.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>5.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>6.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>7.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>8.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>9.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row" id="row-10th"><p>10.</p><p>Numele</p><p>Scor</p></span>
         </div>
-        <div class="leaderboard">
+        <div id="leaderboard_questions">
           <h3>Cele mai curioase persoane</h3>
           <span class="ladeboard-row"><p>1.</p><p>Numele</p><p>Scor</p></span>
           <span class="ladeboard-row"><p>2.</p><p>Numele</p><p>Scor</p></span>
@@ -105,6 +95,7 @@
           <span class="ladeboard-row" id="row-10th"><p>10.</p><p>Numele</p><p>Scor</p></span>
         </div>
       </div>
+      <script type="text/javascript" src="assets/js/createleaderboard.js"></script>
       <div class="line"></div>
   
       <div id="main-pannel">
