@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 04:22 PM
+-- Generation Time: Jun 18, 2022 at 07:06 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -59,7 +59,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_reaction` (IN `p_is_question
     INSERT INTO reactions (is_question, `like`, dislike, user, id_post) VALUES (p_is_question, p_like, p_dislike, user_id, p_id_post); 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20), IN `p_firstname` VARCHAR(50), IN `p_lastname` VARCHAR(50), IN `p_email` VARCHAR(50))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(300), IN `p_firstname` VARCHAR(50), IN `p_lastname` VARCHAR(50), IN `p_email` VARCHAR(50))   BEGIN
 	INSERT INTO users (username, password, firstname, lastname, email) VALUES (p_username, p_password, p_firstname, p_lastname, p_email);
 END$$
 
@@ -83,7 +83,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_a` ()   BEGIN
     DECLARE cur_id INT;
     DECLARE stop INT DEFAULT 0;
     DECLARE ct INT DEFAULT 0;
-    DECLARE  utilizatori CURSOR FOR SELECT u.id from users u;
+    DECLARE nume VARCHAR(50);
+    DECLARE  utilizatori CURSOR FOR SELECT u.id, u.username from users u;
     DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' 
     SET stop = 1;  
     DECLARE CONTINUE HANDLER FOR SQLSTATE '23000' 
@@ -94,8 +95,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_a` ()   BEGIN
     LEAVE lbl;  
     END IF;  
     IF NOT stop = 1 THEN
-    FETCH utilizatori INTO cur_id; 
-    SELECT COUNT(*), cur_id FROM answers WHERE cur_id=answers.user ORDER BY 1;
+    FETCH utilizatori INTO cur_id, nume; 
+    SELECT COUNT(*) AS score, cur_id, nume FROM answers WHERE cur_id=answers.user ORDER BY 1;
     END IF;  
     END LOOP;
    CLOSE utilizatori;
@@ -105,7 +106,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_q` ()   BEGIN
     DECLARE cur_id INT;
     DECLARE stop INT DEFAULT 0;
     DECLARE ct INT DEFAULT 0;
-    DECLARE  utilizatori CURSOR FOR SELECT u.id from users u;
+    DECLARE nume VARCHAR(50);
+    DECLARE  utilizatori CURSOR FOR SELECT u.id, u.username from users u;
     DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' 
     SET stop = 1;  
     DECLARE CONTINUE HANDLER FOR SQLSTATE '23000' 
@@ -116,8 +118,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_q` ()   BEGIN
     LEAVE lbl;  
     END IF;  
     IF NOT stop = 1 THEN
-    FETCH utilizatori INTO cur_id; 
-    SELECT COUNT(*), cur_id FROM questions WHERE cur_id=questions.user ORDER by 1;
+    FETCH utilizatori INTO cur_id, nume; 
+    SELECT COUNT(*) AS score, cur_id,nume FROM questions WHERE cur_id=questions.user ORDER by 1;
     END IF;  
     END LOOP;
    CLOSE utilizatori;
@@ -141,8 +143,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_stats` ()   BEGIN
 	SELECT a.user, a.id FROM users u RIGHT OUTER JOIN answers a ON u.id = a.user ORDER BY u.id asc;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20))   BEGIN
-	SELECT id, username, password FROM users WHERE username = p_username and password = p_password;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20))   BEGIN
+	SELECT id, username, password FROM users WHERE username = p_username ;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `used_username` (IN `p_username` VARCHAR(20), IN `p_email` VARCHAR(50))   BEGIN 
@@ -212,7 +214,7 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
 (1, 'Natura', 2),
 (2, 'Sport', 3),
-(5, 'Diverse', 2);
+(5, 'Diverse', 3);
 
 -- --------------------------------------------------------
 
@@ -292,7 +294,8 @@ INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `update
 (64, 'intrebare la Natura', NULL, 'Diverse', '2022-06-18 11:53:43', '2022-06-18 11:53:43'),
 (65, 'intrebre la sport', NULL, 'Sport', '2022-06-18 11:55:53', '2022-06-18 11:55:53'),
 (66, 'alta la sport', NULL, 'Sport', '2022-06-18 11:56:25', '2022-06-18 11:56:25'),
-(67, 'una la diverse', NULL, 'Diverse', '2022-06-18 11:56:39', '2022-06-18 11:56:39');
+(67, 'una la diverse', NULL, 'Diverse', '2022-06-18 11:56:39', '2022-06-18 11:56:39'),
+(68, 'asdqdn kas', NULL, 'Diverse', '2022-06-18 14:32:46', '2022-06-18 14:32:46');
 
 -- --------------------------------------------------------
 
@@ -344,7 +347,7 @@ INSERT INTO `reactions` (`id`, `is_question`, `like`, `dislike`, `user`, `id_pos
 CREATE TABLE `users` (
   `id` int(38) NOT NULL,
   `username` varchar(20) NOT NULL DEFAULT '',
-  `password` varchar(20) NOT NULL DEFAULT '',
+  `password` varchar(300) NOT NULL DEFAULT '',
   `firstname` varchar(50) NOT NULL DEFAULT '',
   `lastname` varchar(50) NOT NULL DEFAULT '',
   `email` varchar(50) NOT NULL DEFAULT ''
@@ -379,7 +382,9 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `ema
 (106, 'asdasdasdasas', '12345678', 'Didea', 'Bogdan', 'dideabogdan@gmail.com'),
 (107, 'bogdanhjgkhjgghj', '12345678', 'Didea', 'Bogdan', 'dideabogdan@gmail.com'),
 (108, 'bogdan11111111', '12345678', 'asdas', 'asda', 'bogdan@ads'),
-(109, 'wqewqewqe', '12345678', 'wqeqweqw', 'eqwewqewqewq', 'bogdan@adseqweqwwe');
+(109, 'wqewqewqe', '12345678', 'wqeqweqw', 'eqwewqewqewq', 'bogdan@adseqweqwwe'),
+(110, 'bogdan2', '$2y$10$Jt0ADasB0q4tG', 'Didea', 'Bogdan', 'bogdan@dsadaasa.com'),
+(111, 'bogdan3', '$2y$10$SYFmZKZaTDJBgn1JoNuAzuGRu/k8zlrFpgpBtHT0wsHBLHraKxmSK', 'Didea', 'Bogdan', 'bogdan@qeasfasca');
 
 --
 -- Indexes for dumped tables
@@ -435,7 +440,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `reactions`
@@ -447,7 +452,7 @@ ALTER TABLE `reactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
