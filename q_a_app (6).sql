@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 04:39 PM
+-- Generation Time: Jun 18, 2022 at 07:06 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -83,7 +83,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_a` ()   BEGIN
     DECLARE cur_id INT;
     DECLARE stop INT DEFAULT 0;
     DECLARE ct INT DEFAULT 0;
-    DECLARE  utilizatori CURSOR FOR SELECT u.id from users u;
+    DECLARE nume VARCHAR(50);
+    DECLARE  utilizatori CURSOR FOR SELECT u.id, u.username from users u;
     DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' 
     SET stop = 1;  
     DECLARE CONTINUE HANDLER FOR SQLSTATE '23000' 
@@ -94,8 +95,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_a` ()   BEGIN
     LEAVE lbl;  
     END IF;  
     IF NOT stop = 1 THEN
-    FETCH utilizatori INTO cur_id; 
-    SELECT COUNT(*), cur_id FROM answers WHERE cur_id=answers.user ORDER BY 1;
+    FETCH utilizatori INTO cur_id, nume; 
+    SELECT COUNT(*) AS score, cur_id, nume FROM answers WHERE cur_id=answers.user ORDER BY 1;
     END IF;  
     END LOOP;
    CLOSE utilizatori;
@@ -105,7 +106,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_q` ()   BEGIN
     DECLARE cur_id INT;
     DECLARE stop INT DEFAULT 0;
     DECLARE ct INT DEFAULT 0;
-    DECLARE  utilizatori CURSOR FOR SELECT u.id from users u;
+    DECLARE nume VARCHAR(50);
+    DECLARE  utilizatori CURSOR FOR SELECT u.id, u.username from users u;
     DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' 
     SET stop = 1;  
     DECLARE CONTINUE HANDLER FOR SQLSTATE '23000' 
@@ -116,8 +118,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_q` ()   BEGIN
     LEAVE lbl;  
     END IF;  
     IF NOT stop = 1 THEN
-    FETCH utilizatori INTO cur_id; 
-    SELECT COUNT(*), cur_id FROM questions WHERE cur_id=questions.user ORDER by 1;
+    FETCH utilizatori INTO cur_id, nume; 
+    SELECT COUNT(*) AS score, cur_id,nume FROM questions WHERE cur_id=questions.user ORDER by 1;
     END IF;  
     END LOOP;
    CLOSE utilizatori;
