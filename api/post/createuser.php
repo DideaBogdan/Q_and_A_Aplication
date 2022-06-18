@@ -15,8 +15,8 @@
 
     $data = json_decode(file_get_contents("php://input"));
     
-    $user->username = $data->username;
-    $user->password = $data->password;
+    $user->username = $data->username; 
+    $user->password = password_hash($data->password,  PASSWORD_DEFAULT);;
     $user->firstname = $data->firstname;
     $user->lastname = $data->lastname;
     $user->email = $data->email;

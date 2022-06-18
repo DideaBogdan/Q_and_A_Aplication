@@ -54,22 +54,22 @@
         public function loginuser() {
            
 
-            $stmt = $this->conn->prepare("CALL login_by_username(:username, :password)");
+            $stmt = $this->conn->prepare("CALL login_by_username(:username)");
             
             $stmt->bindParam(':username', $this->username, PDO::PARAM_STR);
-            $stmt->bindParam(':password', $this->password, PDO::PARAM_STR);
+            //$stmt->bindParam(':password', $this->password, PDO::PARAM_STR);
           
             $stmt->execute();
-            $result = $stmt->fetchColumn();
+            $result = $stmt-> fetchAll();
+            $vf_pass=$result[0]["password"];
             
-            if($result){
+            if(password_verify($this->password, $vf_pass)){
                 echo json_encode(array('message'=> 'Logged into the account!'));
-                return $result;
+                return $result[0]["id"];
             } else {
                 echo json_encode(array('message'=> 'Username or password are incorect!'));
                 return false;
-            }
-           
+            }    
          }
     }
 

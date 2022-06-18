@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2022 at 12:06 PM
+-- Generation Time: Jun 18, 2022 at 04:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -47,12 +47,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_question` (IN `p_text` VARCH
     INSERT into questions (text, user) VALUES (p_text, val);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_reaction` (IN `p_like` BOOLEAN, IN `p_dislike` BOOLEAN, IN `p_user` VARCHAR(50), IN `p_id_post` INT(38))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_reaction` (IN `p_is_question` BOOLEAN, IN `p_like` BOOLEAN, IN `p_dislike` BOOLEAN, IN `p_user` VARCHAR(50), IN `p_id_post` INT(38))   BEGIN
 	DECLARE 
     	user_id INT;
     SELECT id INTO user_id FROM users WHERE trim(username) = trim(p_user);
     
-    INSERT INTO reactions (`like`, dislike, user, id_post) VALUES (p_like, p_dislike, user_id, p_id_post); 
+    INSERT INTO reactions (is_question, `like`, dislike, user, id_post) VALUES (p_is_question, p_like, p_dislike, user_id, p_id_post); 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20), IN `p_firstname` VARCHAR(50), IN `p_lastname` VARCHAR(50), IN `p_email` VARCHAR(50))   BEGIN
@@ -76,7 +76,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question` (IN `p_id` INT(20))  
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
-	SELECT q.id, q.text, u.username, q.updated_at from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
+	SELECT q.id, q.text, u.username, q.user, q.updated_at from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
+
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reactions` ()   BEGIN
+	SELECT id_post, `like`, dislike, user, is_question from reactions ;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20))   BEGIN
@@ -112,8 +118,6 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (1, 'raspuns la prima intrebare', 1, 2, '2022-06-13 18:11:19', '2022-06-13 18:11:19'),
 (2, 'prim raspuns', 1, NULL, '2022-06-13 19:10:21', '2022-06-13 19:10:21'),
 (3, 'un al doilea raspuns', 1, 1, '2022-06-13 20:02:13', '2022-06-13 20:02:13'),
-(4, 'cred ca asta e un raspuns bun', 23, 0, '2022-06-13 20:04:44', '2022-06-13 20:04:44'),
-(5, 'cred ca asta e un raspuns bun', 23, 0, '2022-06-13 20:04:57', '2022-06-13 20:04:57'),
 (6, 'un al doilea raspuns', 1, 0, '2022-06-13 20:07:13', '2022-06-13 20:07:13'),
 (7, 'cred ca asta e un raspuns bun', 23, 1, '2022-06-13 20:15:19', '2022-06-13 20:15:19'),
 (8, 'dar asta e un raspuns si mai bun', 23, 1, '2022-06-13 20:15:49', '2022-06-13 20:15:49'),
@@ -126,7 +130,8 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (15, 'SADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADSADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDSADASDASDASDASDASDASDASDASDASDASDASDASDASDHJSF KSDH KSD SDLK HSDKJSD GSDSH JDK HSD JAK JJ HADJKASG ', 52, NULL, '2022-06-16 15:40:40', '2022-06-16 15:40:40'),
 (16, 'saddasdasdasdasda', 52, NULL, '2022-06-16 21:28:47', '2022-06-16 21:28:47'),
 (17, 'asdasdasdasfdas asd as das das', 54, 1, '2022-06-16 21:30:52', '2022-06-16 21:30:52'),
-(18, 'asdasdasdadas', 54, 1, '2022-06-17 07:42:10', '2022-06-17 07:42:10');
+(18, 'asdasdasdadas', 54, 1, '2022-06-17 07:42:10', '2022-06-17 07:42:10'),
+(19, 'wqewqfxcz  as xz vxz', 55, 2, '2022-06-18 01:21:07', '2022-06-18 01:21:07');
 
 -- --------------------------------------------------------
 
@@ -195,7 +200,8 @@ INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUE
 (50, 'adsdfsvdffdgdfgdfgdfgdgdf', 1, '2022-06-14 16:06:56', '2022-06-14 16:06:56'),
 (52, 'wqeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdasdasdasdas', NULL, '2022-06-16 15:05:07', '2022-06-16 15:05:07'),
 (53, 'intrebare recenta', NULL, '2022-06-16 15:58:32', '2022-06-16 15:58:32'),
-(54, 'hbvjh hhj uy', NULL, '2022-06-16 16:42:23', '2022-06-16 16:42:23');
+(54, 'hbvjh hhj uy', NULL, '2022-06-16 16:42:23', '2022-06-16 16:42:23'),
+(55, 'intrebare ca sa vad daca merge sistemul de like/ dislike', 1, '2022-06-17 21:26:56', '2022-06-17 21:26:56');
 
 -- --------------------------------------------------------
 
@@ -205,34 +211,12 @@ INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUE
 
 CREATE TABLE `reactions` (
   `id` int(11) NOT NULL,
+  `is_question` tinyint(1) NOT NULL,
   `like` tinyint(1) NOT NULL,
   `dislike` tinyint(1) NOT NULL,
   `user` int(38) NOT NULL,
   `id_post` int(38) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `reactions`
---
-
-INSERT INTO `reactions` (`id`, `like`, `dislike`, `user`, `id_post`) VALUES
-(1, 0, 0, 1, 1),
-(2, 0, 0, 1, 1),
-(3, 0, 1, 1, 1),
-(4, 1, 0, 1, 1),
-(5, 0, 0, 1, 49),
-(7, 1, 0, 1, 50),
-(8, 1, 0, 1, 52),
-(9, 1, 0, 1, 52),
-(10, 1, 0, 1, 52),
-(11, 1, 0, 1, 52),
-(12, 1, 0, 1, 52),
-(13, 1, 0, 1, 52),
-(14, 1, 0, 1, 52),
-(15, 1, 0, 1, 52),
-(16, 1, 0, 1, 52),
-(40, 0, 1, 1, 54),
-(41, 0, 1, 1, 54);
 
 -- --------------------------------------------------------
 
@@ -316,19 +300,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `reactions`
 --
 ALTER TABLE `reactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`

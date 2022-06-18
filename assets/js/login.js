@@ -25,7 +25,7 @@ async function submitlogin(e){
             console.log('Response from server');
             console.log(data);
             let msg1 = document.getElementById('msg-login');
-            if(data.message ==='Logged into the account!')
+            if(data.message ==="Logged into the account!")
                 window.location.replace("http://localhost/Q_and_A_Aplication/home.php");
             else msg1.textContent = data.message;
         })
