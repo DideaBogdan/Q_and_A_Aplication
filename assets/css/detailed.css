@@ -400,6 +400,37 @@ body{
 }
 
 
+#buttons{
+    width:auto;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 5%;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    color: white;
+    display: inline;
+    
+}
+
+
+.reacted{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+}
+
 
 @media only screen and (max-width: 600px) {
 

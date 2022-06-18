@@ -2,39 +2,25 @@
     class Reaction {
         private $conn;
 
-        public $id = '';
+        public $is_question = '';
         public $like = '';
         public $dislike = '';
-        public $user = '';
+        public $user;
         public $id_post = '';
 
         public function __construct($db){
             $this->conn = $db;
         }
 
-        public function exists(){
-            $stmt = $this->conn->prepare("CALL verify_reaction(:like, :dislike, :user, :id_post)");
-            
-            $stmt->bindParam(':like', $this->like, PDO::PARAM_STR);
-            $stmt->bindParam(':dislike', $this->dislike, PDO::PARAM_STR);
-            $stmt->bindParam(':user', $this->user, PDO::PARAM_STR);
-            $stmt->bindParam(':id_post', $this->id_post, PDO::PARAM_STR);
-
-            if($stmt->execute()){
-                return true;
-            } else {
-                printf("ERROR: %s. \n", $stmt->error);
-                return false;
-            }
-        }
 
         public function createreaction(){
             
-            $stmt = $this->conn->prepare("CALL create_reaction(:like, :dislike, :user, :id_post)");
+            $stmt = $this->conn->prepare("CALL create_reaction(:is_question,:like, :dislike, :user, :id_post)");
             
-            $stmt->bindParam(':like', $this->like, PDO::PARAM_STR);
-            $stmt->bindParam(':dislike', $this->dislike, PDO::PARAM_STR);
-            $stmt->bindParam(':user', $this->user, PDO::PARAM_STR);
+            $stmt->bindParam(':is_question', $this->is_question);
+            $stmt->bindParam(':like', $this->like);
+            $stmt->bindParam(':dislike', $this->dislike);
+            $stmt->bindParam(":user", $this->user);
             $stmt->bindParam(':id_post', $this->id_post, PDO::PARAM_STR);
 
             if($stmt->execute()){
@@ -62,6 +48,21 @@
                 return false;
             }
 
+        }
+
+        public function getreactions(){
+            $stmt = $this->conn->prepare("CALL get_reactions()");
+            
+           // $stmt->bindParam(':id_post', $this->id_post, PDO::PARAM_STR);
+
+            if($stmt->execute()){
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                echo json_encode($result);
+                return true;
+            } else {
+                printf("ERROR: %s. \n", $stmt->error);
+                return false;
+            }
         }
 
     }
