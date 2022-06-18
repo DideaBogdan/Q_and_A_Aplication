@@ -137,8 +137,10 @@ async function displayquestions(json){
         dislikeButton.setAttribute('class', 'dislikeButton');
 
 
-        divcount = document.createElement('p');
-        divcount.setAttribute('id', 'reactionscount');
+        spanLike = document.createElement('span');
+        spanDislike = document.createElement('span');
+        spanLike.setAttribute('class', 'likespan');
+        spanDislike.setAttribute('class', 'dislikespan');
 
         let likeint = 0;
         let dislikeint = 0;
@@ -160,8 +162,11 @@ async function displayquestions(json){
                 }
         }
         })
-        divcount.innerText=likeint + "    " + dislikeint; 
-        console.log(divcount);
+        spanLike.innerText = likeint;
+        spanDislike.innerText = dislikeint;
+
+        likeButton.appendChild(spanLike);
+        dislikeButton.appendChild(spanDislike);
     
         divBtns.addEventListener('click', giveReaction);
         
@@ -170,7 +175,6 @@ async function displayquestions(json){
        
 
         questionForm.appendChild(divBtns);
-        questionForm.appendChild(divcount);
        
         questionForm.setAttribute('id', 'question-form');
         text.setAttribute('id', 'question-box');
@@ -225,12 +229,10 @@ function showPopup(){
 
 function giveReaction(e){
     btnDiv = e.target.parentNode;
-    if(e.target.innerText === 'Like'){
+    if(e.target.classList.contains('likeButton')){
         giveLike(e);
-        ///ca idee- trebuie schimbat modul de afisare al like-urilor si apoi actualizat numarul de like-uri fara refresh
-        /// gen : numberlikes - 1
     }
-    else if(e.target.innerText === 'Dislike'){
+    else if(e.target.classList.contains('dislikeButton')){
         giveDislike(e);
         
     }
@@ -241,12 +243,15 @@ async function giveLike(e){
     e.preventDefault();
     let question = e.target.parentNode.parentNode;
     let questionId = question.querySelector('#questionIDhidden').value;
+
+    let spanLikeBtn = e.target.lastChild;
+    let spanDislikeBtn = question.lastChild.lastChild.lastChild;
+    console.log(spanLikeBtn);
+    console.log(spanDislikeBtn);
     if(isLogged == ""){
         showPopup();
     }
     else {
-        console.log(e.target.parentNode.lastChild);
-
         if(e.target.parentNode.lastChild.classList.contains('reacted')){
             console.log("intra aici in undislike then like");
             let data = {
@@ -269,6 +274,9 @@ async function giveLike(e){
                     console.log('Response from server');
                     if(data.message === 'Reaction deleted'){
                         e.target.parentNode.lastChild.classList.remove('reacted');
+                        let numb = Number(spanDislikeBtn.innerText);
+                        numb = numb-1;
+                        spanDislikeBtn.innerText = numb;
                     }
             })
             .catch(console.warn);
@@ -296,6 +304,9 @@ async function giveLike(e){
                     console.log('Response from server');
                     if(data.message === 'Reaction created'){
                         e.target.classList.add('reacted');
+                        let numb = Number(spanLikeBtn.innerText);
+                        numb = numb+1;
+                        spanLikeBtn.innerText = numb;
                     }
             })
             .catch(console.warn);
@@ -323,6 +334,9 @@ async function giveLike(e){
                             console.log('Response from server');
                             if(data.message === 'Reaction deleted'){
                                 e.target.classList.remove('reacted');
+                                let numb = Number(spanLikeBtn.innerText);
+                                numb = numb-1;
+                                spanLikeBtn.innerText = numb;
                             }
                         })
                     .catch(console.warn);
@@ -351,6 +365,9 @@ async function giveLike(e){
                             console.log('Response from server');
                             if(data.message === 'Reaction created'){
                                 e.target.classList.add('reacted');
+                                let numb = Number(spanLikeBtn.innerText);
+                                numb = numb+1;
+                                spanLikeBtn.innerText = numb;
                             }
                         })
                     .catch(console.warn);
@@ -364,73 +381,22 @@ async function giveDislike(e){
     isLogged = document.getElementById('session_var').value;
     let question = e.target.parentNode.parentNode;
     let questionId = question.querySelector('#questionIDhidden').value;
+
+    let spanLikeBtn = question.lastChild.lastChild.previousSibling.lastChild;
+    let spanDislikeBtn =  e.target.lastChild;
+    console.log(spanLikeBtn);
+    console.log(spanDislikeBtn);
     if(isLogged == ""){
         showPopup();
-    }
-    if(e.target.parentNode.firstChild.classList.contains('reacted')){
-        console.log("intra aici in unlike then dislike");
-        let data = {
-                user : isLogged,
-                id_post : parseInt(questionId),
-                is_question : parseInt("1"),
-                };
-        let json = JSON.stringify(data);
-
-        let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
-        let requestReact = new Request( urlReact, {
-            headers: header,
-            body: json,
-            method: 'POST',
-        });
-        
-        await fetch(requestReact)
-            .then((response) => response.json())
-            .then((data)=>{
-                console.log('Response from server');
-                if(data.message === 'Reaction deleted'){
-                    e.target.parentNode.firstChild.classList.remove('reacted');
-                    console.log("a fost sters reactul vechi");
-                }
-            })
-        .catch(console.warn);
-
-        let data2 = {like : parseInt("0"),
-                    dislike : parseInt("1"),
-                    user : isLogged,
-                    id_post : parseInt(questionId),
-                    is_question : parseInt("1"),
-                    };
-        let json2 = JSON.stringify(data2);
-        console.log(json2);
-
-        let urlReact2 = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
-        let requestReact2 = new Request( urlReact2, {
-            headers: header,
-            body: json2,
-            method: 'POST',
-        });
-
-        await fetch(requestReact2)
-            .then((response) => response.json())
-            .then((data)=>{
-                console.log('Response from server');
-                if(data.message === 'Reaction created'){
-                    e.target.classList.add('reacted');
-                }
-            })
-        .catch(console.warn);
-        }
-    else {
-        if(e.target.classList.contains('reacted')){
-            console.log("intra aici in dislike");
+    }  else {
+        if(e.target.parentNode.firstChild.classList.contains('reacted')){
+            console.log("intra aici in unlike then dislike");
             let data = {
                     user : isLogged,
                     id_post : parseInt(questionId),
                     is_question : parseInt("1"),
                     };
-            const json = JSON.stringify(data);
-            console.log(json);
-
+            let json = JSON.stringify(data);
 
             let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
             let requestReact = new Request( urlReact, {
@@ -444,37 +410,106 @@ async function giveDislike(e){
                 .then((data)=>{
                     console.log('Response from server');
                     if(data.message === 'Reaction deleted'){
-                        e.target.classList.remove('reacted');
+                        e.target.parentNode.firstChild.classList.remove('reacted');
+                        let numb = Number(spanLikeBtn.innerText);
+                        console.log(spanLikeBtn.innerText);
+                        numb = numb-1;
+                        spanLikeBtn.innerText = numb;
                     }
                 })
             .catch(console.warn);
-        }
-        else {
-            let data = {like : parseInt("0"),
+
+            let data2 = {like : parseInt("0"),
                         dislike : parseInt("1"),
                         user : isLogged,
                         id_post : parseInt(questionId),
                         is_question : parseInt("1"),
                         };
-            let json = JSON.stringify(data);
-            console.log(json);
+            let json2 = JSON.stringify(data2);
+            console.log(json2);
 
-            let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
-            let requestReact = new Request( urlReact, {
+            let urlReact2 = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
+            let requestReact2 = new Request( urlReact2, {
                 headers: header,
-                body: json,
+                body: json2,
                 method: 'POST',
             });
 
-           await fetch(requestReact)
+            await fetch(requestReact2)
                 .then((response) => response.json())
                 .then((data)=>{
                     console.log('Response from server');
                     if(data.message === 'Reaction created'){
                         e.target.classList.add('reacted');
+                        let numb = Number(spanDislikeBtn.innerText);
+                        numb = numb+1;
+                        spanDislikeBtn.innerText = numb;
                     }
                 })
             .catch(console.warn);
+            }
+        else {
+            if(e.target.classList.contains('reacted')){
+                console.log("intra aici in dislike");
+                let data = {
+                        user : isLogged,
+                        id_post : parseInt(questionId),
+                        is_question : parseInt("1"),
+                        };
+                const json = JSON.stringify(data);
+                console.log(json);
+
+
+                let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
+                let requestReact = new Request( urlReact, {
+                    headers: header,
+                    body: json,
+                    method: 'POST',
+                });
+                
+                await fetch(requestReact)
+                    .then((response) => response.json())
+                    .then((data)=>{
+                        console.log('Response from server');
+                        if(data.message === 'Reaction deleted'){
+                            e.target.classList.remove('reacted');
+                            let numb = Number(spanDislikeBtn.innerText);
+                            numb = numb-1;
+                            spanDislikeBtn.innerText = numb;
+                        }
+                    })
+                .catch(console.warn);
+            }
+            else {
+                let data = {like : parseInt("0"),
+                            dislike : parseInt("1"),
+                            user : isLogged,
+                            id_post : parseInt(questionId),
+                            is_question : parseInt("1"),
+                            };
+                let json = JSON.stringify(data);
+                console.log(json);
+
+                let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
+                let requestReact = new Request( urlReact, {
+                    headers: header,
+                    body: json,
+                    method: 'POST',
+                });
+
+            await fetch(requestReact)
+                    .then((response) => response.json())
+                    .then((data)=>{
+                        console.log('Response from server');
+                        if(data.message === 'Reaction created'){
+                            e.target.classList.add('reacted');
+                            let numb = Number(spanDislikeBtn.innerText);
+                            numb = numb+1;
+                            spanDislikeBtn.innerText = numb;
+                        }
+                    })
+                .catch(console.warn);
+                }
             }
         }
     }

@@ -343,7 +343,7 @@ body{
 #formbutton{
     margin-top: 5px;
     margin-left: 5%;
-    width:15%;
+    width:auto;
     background-color: #ffffff;
     color: #080710;
     padding: 15px 0;
@@ -536,7 +536,33 @@ body{
     display: inline;
     
 }
+/* Pop css end*/
 
+.likeButton{
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    font-size: 18px;
+}
+
+.dislikeButton{
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    font-size: 18px;
+}
 
 .reacted{
     background: linear-gradient(

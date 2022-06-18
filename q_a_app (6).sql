@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 04:21 AM
+-- Generation Time: Jun 18, 2022 at 12:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -85,6 +85,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reactions` ()   BEGIN
 	SELECT id_post, `like`, dislike, user, is_question from reactions ;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_stats` ()   BEGIN 
+	SELECT a.user, a.id FROM users u RIGHT OUTER JOIN answers a ON u.id = a.user ORDER BY u.id asc;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(20))   BEGIN
 	SELECT id, username, password FROM users WHERE username = p_username and password = p_password;
 END$$
@@ -131,7 +135,10 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (16, 'saddasdasdasdasda', 52, NULL, '2022-06-16 21:28:47', '2022-06-16 21:28:47'),
 (17, 'asdasdasdasfdas asd as das das', 54, 1, '2022-06-16 21:30:52', '2022-06-16 21:30:52'),
 (18, 'asdasdasdadas', 54, 1, '2022-06-17 07:42:10', '2022-06-17 07:42:10'),
-(19, 'wqewqfxcz  as xz vxz', 55, 2, '2022-06-18 01:21:07', '2022-06-18 01:21:07');
+(19, 'wqewqfxcz  as xz vxz', 55, 2, '2022-06-18 01:21:07', '2022-06-18 01:21:07'),
+(20, 'xczxcxzz s sdf asda ', 55, 1, '2022-06-18 09:37:11', '2022-06-18 09:37:11'),
+(21, '', 55, NULL, '2022-06-18 10:18:13', '2022-06-18 10:18:13'),
+(22, 'dsaasd asa as asdd a', 55, NULL, '2022-06-18 10:20:40', '2022-06-18 10:20:40');
 
 -- --------------------------------------------------------
 
@@ -218,6 +225,32 @@ CREATE TABLE `reactions` (
   `id_post` int(38) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `reactions`
+--
+
+INSERT INTO `reactions` (`id`, `is_question`, `like`, `dislike`, `user`, `id_post`) VALUES
+(312, 1, 0, 1, 1, 47),
+(313, 1, 1, 0, 1, 46),
+(316, 1, 1, 0, 2, 55),
+(317, 1, 0, 1, 2, 54),
+(318, 1, 1, 0, 2, 53),
+(320, 1, 1, 0, 2, 50),
+(322, 1, 1, 0, 2, 52),
+(323, 1, 0, 1, 2, 49),
+(324, 1, 1, 0, 2, 48),
+(325, 1, 1, 0, 2, 47),
+(326, 1, 0, 1, 2, 46),
+(338, 1, 0, 1, 1, 54),
+(339, 1, 1, 0, 1, 53),
+(340, 1, 1, 0, 1, 52),
+(341, 1, 1, 0, 1, 50),
+(343, 1, 1, 0, 1, 49),
+(344, 1, 1, 0, 1, 48),
+(347, 1, 1, 0, 1, 55),
+(349, 0, 1, 0, 1, 19),
+(351, 0, 1, 0, 1, 20);
+
 -- --------------------------------------------------------
 
 --
@@ -300,7 +333,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -312,7 +345,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `reactions`
 --
 ALTER TABLE `reactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
 
 --
 -- AUTO_INCREMENT for table `users`
