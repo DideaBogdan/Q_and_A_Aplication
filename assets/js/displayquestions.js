@@ -51,6 +51,7 @@ async function displayquestions(json){
         questionForm = document.createElement('div');
         questionTitle = document.createElement('h3');
         username = document.createElement('p');
+        category = document.createElement('p');
         text = document.createElement('a');
         
         questionIDhidden = document.createElement('input');
@@ -70,11 +71,21 @@ async function displayquestions(json){
         text.classList.add("questionText");
         text.addEventListener('click', redirect);
         text.appendChild(node);
+        username.setAttribute("style", "float : left; margin : 10px;");
+
+        questionTitle.setAttribute("style", "margin : -10px");
         questionTitle.appendChild(username);
 
+        category.setAttribute("style", "display : inline-block");
+        category.innerText = " in " + element.category;
+       
+
+        category.setAttribute("style", "float : right; margin : 10px;");
+        questionTitle.appendChild(category);   
 
         // pentru afisarea acum cat timp a fost pusa o intrebare sau cand s-a raspuns
         timestamp = document.createElement('p');
+        timestamp.setAttribute("style" , "margin : 5px");
         const date = new Date(element.updated_at);
         const currentSeconds = new Date().getTime() / 1000;
         const questionSeconds = Math.floor(date.getTime() / 1000);
@@ -121,9 +132,8 @@ async function displayquestions(json){
         }
 
 
-
-        questionForm.appendChild(questionTitle);
         questionForm.appendChild(timestamp);
+        questionForm.appendChild(questionTitle);
         questionForm.appendChild(text);
 
         divBtns = document.createElement('div');

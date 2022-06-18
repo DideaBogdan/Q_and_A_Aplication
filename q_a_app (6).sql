@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 12:21 PM
+-- Generation Time: Jun 18, 2022 at 04:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -29,8 +29,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_answer` (IN `p_tex
 	INSERT INTO answers (text, question) VALUES (p_text, p_question);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_question` (IN `p_text` VARCHAR(5000))   BEGIN 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_question` (IN `p_text` VARCHAR(5000), IN `p_category` VARCHAR(500))   BEGIN 
     INSERT into questions (text, user) VALUES (p_text, null);
+    
+     INSERT into questions (text, user, category) VALUES (p_text, null, p_category);
+    UPDATE categories SET questions_count = questions_count+1 where p_category = name ;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_answer` (IN `p_text` VARCHAR(5000), IN `p_user` VARCHAR(50), IN `p_question` INT(50))   BEGIN
@@ -40,11 +43,12 @@ SELECT id INTO var from users where username = p_user;
 	INSERT INTO answers ( text, user, question) VALUES (p_text, var, p_question);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_question` (IN `p_text` VARCHAR(5000), IN `p_username` VARCHAR(20))   BEGIN 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_question` (IN `p_text` VARCHAR(5000), IN `p_username` VARCHAR(20), IN `p_category` VARCHAR(500))   BEGIN 
 	DECLARE val INT;
     SELECT id INTO val FROM users WHERE p_username = username;
     
-    INSERT into questions (text, user) VALUES (p_text, val);
+    INSERT into questions (text, user, category) VALUES (p_text, val, p_category);
+    UPDATE categories SET questions_count = questions_count+1 where p_category = name ;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_reaction` (IN `p_is_question` BOOLEAN, IN `p_like` BOOLEAN, IN `p_dislike` BOOLEAN, IN `p_user` VARCHAR(50), IN `p_id_post` INT(38))   BEGIN
@@ -71,12 +75,60 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_answers` (IN `p_id` INT(50))   
     SELECT a.id, a.text, u.username,  a.updated_at, a.created_at from answers a LEFT OUTER JOIN users u ON u.id = a.user  WHERE a.question = p_id;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_categories` ()   BEGIN
+	SELECT * FROM categories ORDER by name asc;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_a` ()   BEGIN
+    DECLARE cur_id INT;
+    DECLARE stop INT DEFAULT 0;
+    DECLARE ct INT DEFAULT 0;
+    DECLARE  utilizatori CURSOR FOR SELECT u.id from users u;
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' 
+    SET stop = 1;  
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '23000' 
+    SET stop = 1;
+    OPEN utilizatori;
+       lbl: LOOP  
+    IF stop = 1 THEN  
+    LEAVE lbl;  
+    END IF;  
+    IF NOT stop = 1 THEN
+    FETCH utilizatori INTO cur_id; 
+    SELECT COUNT(*), cur_id FROM answers WHERE cur_id=answers.user ORDER BY 1;
+    END IF;  
+    END LOOP;
+   CLOSE utilizatori;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_q` ()   BEGIN
+    DECLARE cur_id INT;
+    DECLARE stop INT DEFAULT 0;
+    DECLARE ct INT DEFAULT 0;
+    DECLARE  utilizatori CURSOR FOR SELECT u.id from users u;
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' 
+    SET stop = 1;  
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '23000' 
+    SET stop = 1;
+    OPEN utilizatori;
+       lbl: LOOP  
+    IF stop = 1 THEN  
+    LEAVE lbl;  
+    END IF;  
+    IF NOT stop = 1 THEN
+    FETCH utilizatori INTO cur_id; 
+    SELECT COUNT(*), cur_id FROM questions WHERE cur_id=questions.user ORDER by 1;
+    END IF;  
+    END LOOP;
+   CLOSE utilizatori;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question` (IN `p_id` INT(20))   BEGIN
-    SELECT q.id, q.text, u.username,  q.updated_at, q.created_at from questions q LEFT OUTER JOIN users u ON u.id = q.user  WHERE q.id = p_id;
+    SELECT q.id, q.text, u.username, q.category, q.updated_at, q.created_at from questions q LEFT OUTER JOIN users u ON u.id = q.user  WHERE q.id = p_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
-	SELECT q.id, q.text, u.username, q.user, q.updated_at from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
+	SELECT q.id, q.text, u.username, q.category, q.user, q.updated_at from questions q LEFT OUTER JOIN users u ON u.id = q.user ORDER by q.updated_at desc;
 
 
 END$$
@@ -138,7 +190,29 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (19, 'wqewqfxcz  as xz vxz', 55, 2, '2022-06-18 01:21:07', '2022-06-18 01:21:07'),
 (20, 'xczxcxzz s sdf asda ', 55, 1, '2022-06-18 09:37:11', '2022-06-18 09:37:11'),
 (21, '', 55, NULL, '2022-06-18 10:18:13', '2022-06-18 10:18:13'),
-(22, 'dsaasd asa as asdd a', 55, NULL, '2022-06-18 10:20:40', '2022-06-18 10:20:40');
+(22, 'dsaasd asa as asdd a', 55, NULL, '2022-06-18 10:20:40', '2022-06-18 10:20:40'),
+(23, ' dasb hj ojasb asbkhas sdb  a\n', 67, NULL, '2022-06-18 12:32:58', '2022-06-18 12:32:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(38) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `questions_count` int(38) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
+(1, 'Natura', 2),
+(2, 'Sport', 3),
+(5, 'Diverse', 2);
 
 -- --------------------------------------------------------
 
@@ -150,6 +224,7 @@ CREATE TABLE `questions` (
   `id` int(6) UNSIGNED NOT NULL,
   `text` varchar(5000) NOT NULL,
   `user` int(6) UNSIGNED DEFAULT NULL,
+  `category` varchar(500) NOT NULL DEFAULT 'Diverse',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -158,57 +233,66 @@ CREATE TABLE `questions` (
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUES
-(1, 'intrebare de test', 1, '2022-06-04 21:00:00', '2018-12-05 22:00:00'),
-(2, 'dasdgfgdf', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(3, 'hello this is my first', 2, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(4, 'i hope this works', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(5, 'fdsfsdfs', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(6, 'adasdasdadas', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(7, 'i hope this works 2', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(8, 'i hope this works 2', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(9, 'i hope this works 3', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(10, 'i hope this works 4', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(11, 'i hope this works 5', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(12, 'i hope this works 5', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(13, 'i hope this works 6', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(14, 'i hope this works 7', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(15, 'test intrebare', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(16, 'intrebare pusa de anonim?', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(17, 'intrebare pusa de anonim --2', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(18, 'intrebare pusa de anonim-', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(19, 'de uitat pe q&a simplu', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(20, 'intrebare pusa de anonim-', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(21, 'este frumos afara?', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(22, 'qwerrtttytrr', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(23, 'intrebare pusa de anonim-', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(24, 'intrebare pusa de anonim-23', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(25, 'intrebare pusa de anonim-5555', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(26, 'intrebare pusa de anonim-1234', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(27, 'intrebare pusa de anonim-12345', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(28, 'intrebare pusa de anonim-1234567', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(29, 'intrebare pusa de anonim-11112', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(30, 'test-1', 1, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(31, 'test-anonim', NULL, '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
-(32, 'intrebare pusa de bogdan la 8:19PM', 1, '2022-06-08 17:19:10', '2022-06-08 17:19:10'),
-(33, 'intrebare pusa de anonim la 8:19PM', NULL, '2022-06-08 17:19:42', '2022-06-08 17:19:42'),
-(34, 'ultima intrebare pusa sa vad daca inca merge', NULL, '2022-06-13 13:58:03', '2022-06-13 13:58:03'),
-(35, 'adasdadadads', NULL, '2022-06-13 16:43:25', '2022-06-13 16:43:25'),
-(36, 'i hope this works', NULL, '2022-06-13 16:44:07', '2022-06-13 16:44:07'),
-(37, 'i hope this works', NULL, '2022-06-13 16:53:47', '2022-06-13 16:53:47'),
-(38, 'intrebare pusa de anonim-', NULL, '2022-06-13 16:54:09', '2022-06-13 16:54:09'),
-(39, 'o intrebare de test cu form-ul de intrbare customizat', 1, '2022-06-14 14:49:17', '2022-06-14 14:49:17'),
-(44, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut pellentesque ante, vel gravida sem. Nullam neque nibh, porta eu dui sed, porttitor tempor augue. In laoreet justo in justo scelerisque, id rutrum mauris sollicitudin. Sed commodo, ex quis tincidunt suscipit, felis odio ultrices orci, at accumsan sapien erat vel lacus. Vestibulum tristique eu nunc et ullamcorper. Maecenas in iaculis ex, sed efficitur sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce aliquet id libero quis porttitor. Aenean id nunc tristique, facilisis purus sit amet, congue elit. Quisque condimentum lorem condimentum lobortis euismod. Vivamus a pretium sem. Aenean consequat dui lectus, id sagittis tortor congue vitae. Vestibulum vulputate nec magna a elementum. Morbi ultrices nisi ex. Morbi a lectus sodales, vulputate est quis, egestas purus. Donec eleifend elit consectetur purus eleifend, at tempus tellus convallis. Etiam vulputate feugiat arcu, ut placerat velit cursus at. Maecenas eget sagittis massa. Morbi sapien sapien, rutrum et velit vitae, tempus imperdiet nisi. Duis ligula odio, suscipit ut turpis et, elementum euismod lorem. Vivamus vel congue purus, eget tincidunt magna. Etiam feugiat orci diam, ac tincidunt neque scelerisque ut. Integer vitae scelerisque lorem, in dignissim tortor. Vivamus ac tristique eros, et tincidunt metus. Etiam quis placerat sapien. Proin tempor, velit ut suscipit ultricies, nibh risus sodales velit, sed sodales turpis lorem eget dolor. Morbi nisl augue, dignissim ut tristique eget, fringilla in quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec placerat cursus ipsum eget ullamcorper. Sed consectetur tempus luctus. Vestibulum posuere, arcu ut mollis ultricies, arcu eros dapibus nisi, a posuere erat ante vitae dui. Sed varius pharetra hendrerit. Suspendisse gravida bibendum neque, quis interdum mauris venenatis vitae. Pellentesque finibus nisi urna, sed sagittis nibh commodo nec. Quisque iaculis orci sollicitudin, pharetra orci sed, egestas magna. Maecenas a nibh eget elit congue blandit a at risus. Ut orci ante, tincidunt vel sollicitudin eget, varius nec urna. Nulla nec nisi auctor diam vulputate laoreet nec in est. Nam rutrum metus id leo blandit, id suscipit massa ultricies. Nam mollis tempus tortor a feugiat. Sed nec lorem vel quam lobortis egestas. Ut id enim tristique, fringilla dolor a, egestas velit. Donec hendrerit eget neque at faucibus. Etiam elit eros, facilisis ac lobortis ac, mollis nec augue. Integer at tortor id odio dignissim aliquet. Ut feugiat, mi nec gravida dignissim, ligula leo molestie nibh, quis facilisis velit erat nec risus. Donec nec mattis sapien. Ut et pellentesque elit, at laoreet dolor. Nam volutpat commodo ante id tincidunt. Curabitur maximus accumsan lorem, vestibulum tincidunt erat blandit vel. Donec id libero quis velit ultricies tempus. In tempor lacus dui, at dignissim risus varius vel. Maecenas tellus odio, sollicitudin et nisl id, finibus vestibulum lectus. Nam ullamcorper ac ligula vel hendrerit. Aliquam facilisis bibendum tellus, sit amet commodo erat malesuada in. Fusce sed dui vitae dolor sollicitudin posuere in a augue. Curabitur vel nulla quis enim luctus aliquet non in ligula. Ut volutpat cursus orci, non dignissim justo venenatis auctor. Phasellus tincidunt felis non tempus bibendum. Vestibulum mollis, mi vitae facilisis luctus, odio mi semper erat, sit amet suscipit lectus orci ac quam. Integer posuere mi vitae eros consequat, ut vehicula metus feugiat. Fusce eget ex neque. Sed nec venenatis purus, in elementum libero. Aenean dapibus scelerisque malesuada. Sed ut tincidunt enim, ac dapibus lectus. Nunc suscipit velit nec lectus bibendum, ut efficitur dolor hendrerit.', 1, '2022-06-14 15:09:43', '2022-06-14 15:09:43'),
-(45, 'intrebaree     cu     multe    spatii    ', 1, '2022-06-14 15:36:31', '2022-06-14 15:36:31'),
-(46, 'intrebare    care   are multe spatii    dar sppeeeee rrrr ca mergeeee   ', 1, '2022-06-14 15:38:41', '2022-06-14 15:38:41'),
-(47, '    asddas      ', 1, '2022-06-14 15:38:54', '2022-06-14 15:38:54'),
-(48, 'adadasdasdadada daasdas asddasda', 1, '2022-06-14 15:41:28', '2022-06-14 15:41:28'),
-(49, 'intrebare de test', 1, '2022-06-14 16:02:40', '2022-06-14 16:02:40'),
-(50, 'adsdfsvdffdgdfgdfgdfgdgdf', 1, '2022-06-14 16:06:56', '2022-06-14 16:06:56'),
-(52, 'wqeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdasdasdasdas', NULL, '2022-06-16 15:05:07', '2022-06-16 15:05:07'),
-(53, 'intrebare recenta', NULL, '2022-06-16 15:58:32', '2022-06-16 15:58:32'),
-(54, 'hbvjh hhj uy', NULL, '2022-06-16 16:42:23', '2022-06-16 16:42:23'),
-(55, 'intrebare ca sa vad daca merge sistemul de like/ dislike', 1, '2022-06-17 21:26:56', '2022-06-17 21:26:56');
+INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `updated_at`) VALUES
+(1, 'intrebare de test', 1, '', '2022-06-04 21:00:00', '2018-12-05 22:00:00'),
+(2, 'dasdgfgdf', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(3, 'hello this is my first', 2, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(4, 'i hope this works', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(5, 'fdsfsdfs', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(6, 'adasdasdadas', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(7, 'i hope this works 2', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(8, 'i hope this works 2', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(9, 'i hope this works 3', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(10, 'i hope this works 4', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(11, 'i hope this works 5', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(12, 'i hope this works 5', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(13, 'i hope this works 6', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(14, 'i hope this works 7', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(15, 'test intrebare', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(16, 'intrebare pusa de anonim?', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(17, 'intrebare pusa de anonim --2', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(18, 'intrebare pusa de anonim-', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(19, 'de uitat pe q&a simplu', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(20, 'intrebare pusa de anonim-', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(21, 'este frumos afara?', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(22, 'qwerrtttytrr', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(23, 'intrebare pusa de anonim-', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(24, 'intrebare pusa de anonim-23', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(25, 'intrebare pusa de anonim-5555', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(26, 'intrebare pusa de anonim-1234', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(27, 'intrebare pusa de anonim-12345', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(28, 'intrebare pusa de anonim-1234567', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(29, 'intrebare pusa de anonim-11112', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(30, 'test-1', 1, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(31, 'test-anonim', NULL, '', '2022-06-07 21:00:00', '2022-06-07 21:00:00'),
+(32, 'intrebare pusa de bogdan la 8:19PM', 1, '', '2022-06-08 17:19:10', '2022-06-08 17:19:10'),
+(33, 'intrebare pusa de anonim la 8:19PM', NULL, '', '2022-06-08 17:19:42', '2022-06-08 17:19:42'),
+(34, 'ultima intrebare pusa sa vad daca inca merge', NULL, '', '2022-06-13 13:58:03', '2022-06-13 13:58:03'),
+(35, 'adasdadadads', NULL, '', '2022-06-13 16:43:25', '2022-06-13 16:43:25'),
+(36, 'i hope this works', NULL, '', '2022-06-13 16:44:07', '2022-06-13 16:44:07'),
+(37, 'i hope this works', NULL, '', '2022-06-13 16:53:47', '2022-06-13 16:53:47'),
+(38, 'intrebare pusa de anonim-', NULL, '', '2022-06-13 16:54:09', '2022-06-13 16:54:09'),
+(39, 'o intrebare de test cu form-ul de intrbare customizat', 1, '', '2022-06-14 14:49:17', '2022-06-14 14:49:17'),
+(44, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut pellentesque ante, vel gravida sem. Nullam neque nibh, porta eu dui sed, porttitor tempor augue. In laoreet justo in justo scelerisque, id rutrum mauris sollicitudin. Sed commodo, ex quis tincidunt suscipit, felis odio ultrices orci, at accumsan sapien erat vel lacus. Vestibulum tristique eu nunc et ullamcorper. Maecenas in iaculis ex, sed efficitur sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce aliquet id libero quis porttitor. Aenean id nunc tristique, facilisis purus sit amet, congue elit. Quisque condimentum lorem condimentum lobortis euismod. Vivamus a pretium sem. Aenean consequat dui lectus, id sagittis tortor congue vitae. Vestibulum vulputate nec magna a elementum. Morbi ultrices nisi ex. Morbi a lectus sodales, vulputate est quis, egestas purus. Donec eleifend elit consectetur purus eleifend, at tempus tellus convallis. Etiam vulputate feugiat arcu, ut placerat velit cursus at. Maecenas eget sagittis massa. Morbi sapien sapien, rutrum et velit vitae, tempus imperdiet nisi. Duis ligula odio, suscipit ut turpis et, elementum euismod lorem. Vivamus vel congue purus, eget tincidunt magna. Etiam feugiat orci diam, ac tincidunt neque scelerisque ut. Integer vitae scelerisque lorem, in dignissim tortor. Vivamus ac tristique eros, et tincidunt metus. Etiam quis placerat sapien. Proin tempor, velit ut suscipit ultricies, nibh risus sodales velit, sed sodales turpis lorem eget dolor. Morbi nisl augue, dignissim ut tristique eget, fringilla in quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec placerat cursus ipsum eget ullamcorper. Sed consectetur tempus luctus. Vestibulum posuere, arcu ut mollis ultricies, arcu eros dapibus nisi, a posuere erat ante vitae dui. Sed varius pharetra hendrerit. Suspendisse gravida bibendum neque, quis interdum mauris venenatis vitae. Pellentesque finibus nisi urna, sed sagittis nibh commodo nec. Quisque iaculis orci sollicitudin, pharetra orci sed, egestas magna. Maecenas a nibh eget elit congue blandit a at risus. Ut orci ante, tincidunt vel sollicitudin eget, varius nec urna. Nulla nec nisi auctor diam vulputate laoreet nec in est. Nam rutrum metus id leo blandit, id suscipit massa ultricies. Nam mollis tempus tortor a feugiat. Sed nec lorem vel quam lobortis egestas. Ut id enim tristique, fringilla dolor a, egestas velit. Donec hendrerit eget neque at faucibus. Etiam elit eros, facilisis ac lobortis ac, mollis nec augue. Integer at tortor id odio dignissim aliquet. Ut feugiat, mi nec gravida dignissim, ligula leo molestie nibh, quis facilisis velit erat nec risus. Donec nec mattis sapien. Ut et pellentesque elit, at laoreet dolor. Nam volutpat commodo ante id tincidunt. Curabitur maximus accumsan lorem, vestibulum tincidunt erat blandit vel. Donec id libero quis velit ultricies tempus. In tempor lacus dui, at dignissim risus varius vel. Maecenas tellus odio, sollicitudin et nisl id, finibus vestibulum lectus. Nam ullamcorper ac ligula vel hendrerit. Aliquam facilisis bibendum tellus, sit amet commodo erat malesuada in. Fusce sed dui vitae dolor sollicitudin posuere in a augue. Curabitur vel nulla quis enim luctus aliquet non in ligula. Ut volutpat cursus orci, non dignissim justo venenatis auctor. Phasellus tincidunt felis non tempus bibendum. Vestibulum mollis, mi vitae facilisis luctus, odio mi semper erat, sit amet suscipit lectus orci ac quam. Integer posuere mi vitae eros consequat, ut vehicula metus feugiat. Fusce eget ex neque. Sed nec venenatis purus, in elementum libero. Aenean dapibus scelerisque malesuada. Sed ut tincidunt enim, ac dapibus lectus. Nunc suscipit velit nec lectus bibendum, ut efficitur dolor hendrerit.', 1, '', '2022-06-14 15:09:43', '2022-06-14 15:09:43'),
+(45, 'intrebaree     cu     multe    spatii    ', 1, '', '2022-06-14 15:36:31', '2022-06-14 15:36:31'),
+(46, 'intrebare    care   are multe spatii    dar sppeeeee rrrr ca mergeeee   ', 1, '', '2022-06-14 15:38:41', '2022-06-14 15:38:41'),
+(47, '    asddas      ', 1, '', '2022-06-14 15:38:54', '2022-06-14 15:38:54'),
+(48, 'adadasdasdadada daasdas asddasda', 1, '', '2022-06-14 15:41:28', '2022-06-14 15:41:28'),
+(49, 'intrebare de test', 1, '', '2022-06-14 16:02:40', '2022-06-14 16:02:40'),
+(50, 'adsdfsvdffdgdfgdfgdfgdgdf', 1, '', '2022-06-14 16:06:56', '2022-06-14 16:06:56'),
+(52, 'wqeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdasdasdasdas', NULL, '', '2022-06-16 15:05:07', '2022-06-16 15:05:07'),
+(53, 'intrebare recenta', NULL, '', '2022-06-16 15:58:32', '2022-06-16 15:58:32'),
+(54, 'hbvjh hhj uy', NULL, '', '2022-06-16 16:42:23', '2022-06-16 16:42:23'),
+(55, 'intrebare ca sa vad daca merge sistemul de like/ dislike', 1, '', '2022-06-17 21:26:56', '2022-06-17 21:26:56'),
+(59, 'dsad ssd fsfse', NULL, '', '2022-06-18 11:19:01', '2022-06-18 11:19:01'),
+(60, 'prima intrebare cu categorie?', NULL, '', '2022-06-18 11:42:49', '2022-06-18 11:42:49'),
+(61, 'intrebare care incrementeaza categoria diverse', NULL, '', '2022-06-18 11:46:15', '2022-06-18 11:46:15'),
+(62, 'intrebare care incrementeaza categoria diverse', NULL, '', '2022-06-18 11:46:53', '2022-06-18 11:46:53'),
+(63, 'd dadhas djd khjasj b asl das ndas da', NULL, 'Diverse', '2022-06-18 11:52:09', '2022-06-18 11:52:09'),
+(64, 'intrebare la Natura', NULL, 'Diverse', '2022-06-18 11:53:43', '2022-06-18 11:53:43'),
+(65, 'intrebre la sport', NULL, 'Sport', '2022-06-18 11:55:53', '2022-06-18 11:55:53'),
+(66, 'alta la sport', NULL, 'Sport', '2022-06-18 11:56:25', '2022-06-18 11:56:25'),
+(67, 'una la diverse', NULL, 'Diverse', '2022-06-18 11:56:39', '2022-06-18 11:56:39');
 
 -- --------------------------------------------------------
 
@@ -308,6 +392,12 @@ ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
@@ -333,13 +423,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `reactions`

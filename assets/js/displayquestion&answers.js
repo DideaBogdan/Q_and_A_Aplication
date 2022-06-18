@@ -111,6 +111,8 @@ async function displayquestion_answers(json){
             questionForm = document.createElement('div');
             questionTitle = document.createElement('h3');
             username = document.createElement('p');
+            category = document.createElement('p');
+            text = document.createElement('a');
 
             questionIDhidden = document.createElement('input');
             questionIDhidden.setAttribute('type', 'hidden');
@@ -118,7 +120,7 @@ async function displayquestion_answers(json){
             questionIDhidden.setAttribute('value', element.id);
             questionForm.appendChild(questionIDhidden);
 
-            text = document.createElement('a');
+            
 
             if(element.username == null){
                 const user = document.createTextNode( "Anonymous asks:");
@@ -129,8 +131,17 @@ async function displayquestion_answers(json){
             }
             const node = document.createTextNode(element.text);
             text.appendChild(node);
+           
+            username.setAttribute("style", "float : left; margin : 10px;");
+
+            questionTitle.setAttribute("style", "margin : -10px")
             questionTitle.appendChild(username);
 
+            category.setAttribute("style", "display : inline-block");
+            category.innerText = " in " + element.category;
+           
+            category.setAttribute("style", "float : right; margin : 10px;");
+            questionTitle.appendChild(category);   
             
             divBtns = document.createElement('div');
             likeButton = document.createElement('button');
@@ -178,9 +189,8 @@ async function displayquestion_answers(json){
             divBtns.appendChild(likeButton);  
             divBtns.appendChild(dislikeButton);
         
-
-            questionForm.appendChild(questionTitle);
             questionForm.appendChild(get_time(element));
+            questionForm.appendChild(questionTitle);
             questionForm.appendChild(text); 
             questionForm.appendChild(divBtns);
 
@@ -284,9 +294,10 @@ async function displayquestion_answers(json){
         
         divBtns.appendChild(likeButton);  
         divBtns.appendChild(dislikeButton);
-       
-        questionForm.appendChild(questionTitle);
+        
         questionForm.appendChild(get_time(element));
+        questionForm.appendChild(questionTitle);
+        
         questionForm.appendChild(text); 
         questionForm.appendChild(divBtns);
 

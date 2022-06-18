@@ -108,22 +108,15 @@
       <div class="line"></div>
   
       <div id="main-pannel">
-        <button type="button" id="formbutton">Ask a question</button>
-        <form id="formquestion" name="formquestion">
-          <textarea  type="text" placeholder="Type your question here..." id="question" name="question" role="textbox" maxlength="5000" required></textarea>
-          <button id="button">Submit</button>
-        </form>
-        <script src="../Q_and_A_Aplication/assets/js/createquestion.js"></script>
-        <script type="text/javascript" src="assets/js/displayquestions.js"></script>
-        <!--
-        <div id="question-form">
-          <h3 id="question-title">
-            <p id="username"></p>
-            <p>intreaba :</p>
-          </h3>
-          <div id="question-box"><p></p></div>
-        </div>
-    -->
+          <button type="button" id="formbutton">Ask a question</button>
+          <form id="formquestion" name="formquestion">
+            <select name="category" id="category" required>
+              <option value="">Select one category to post this question to:</option>
+              <textarea  type="text" placeholder="Type your question here..." id="question" name="question" role="textbox" maxlength="5000" required></textarea>
+            <button id="button">Submit</button>
+          </form>
+          <script src="../Q_and_A_Aplication/assets/js/createquestion.js"></script>
+          <script type="text/javascript" src="assets/js/displayquestions.js"></script>
       </div>
      <div class="line"></div>
       <div class="right-pannel">

@@ -100,7 +100,7 @@ body{
     color:blue;
 }
 #question-box{
-    display: block;
+    display: flex;
     word-wrap: break-word;
     height: fit-content;
     width: 95%;

@@ -99,7 +99,6 @@ body{
 }
 .left-pannel{
     display: block;
-    margin-top: -100%;
 }
 /*.main-pannel{
     display: block;
@@ -111,7 +110,6 @@ body{
 }*/
 .right-pannel{
     display: block;
-    margin-top: -50%;
 }
 /*.line{
     margin-left: 30px;
@@ -121,6 +119,13 @@ body{
     filter: blur(2px); 
     border-image: linear-gradient(#f09819, #ff512f, #f09819) 10 stretch;
 }*/
+#buttons-pannel{
+    display: inline-block;
+    margin-left: 4%;
+    width: auto;
+}
+
+
 /* ---------------------Aranjare continut pagina------------- */
 
 
@@ -340,6 +345,29 @@ body{
 ::placeholder{
     color: #e5e5e5;
 }
+
+#category {
+    display: block;
+    
+    height: fit-content;
+    width: 95%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 3px 10px 3px 10px;
+    margin-top: 8px;
+    resize: none;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: 300;
+    outline: none;
+    border: none;
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+#category option {
+     background-color:  rgb(95, 95, 95);
+  }
 #formbutton{
     margin-top: 5px;
     margin-left: 5%;
