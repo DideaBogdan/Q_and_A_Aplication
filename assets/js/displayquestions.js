@@ -185,8 +185,6 @@ async function displayquestions(json){
        
 
         questionForm.appendChild(divBtns);
-        questionForm.appendChild(divcount);
-       
         questionForm.setAttribute('id', 'question-form');
         text.setAttribute('id', 'question-box');
         username.setAttribute('id', 'username');
