@@ -185,6 +185,7 @@ async function displayquestions(json){
        
 
         questionForm.appendChild(divBtns);
+        questionForm.appendChild(divcount);
        
         questionForm.setAttribute('id', 'question-form');
         text.setAttribute('id', 'question-box');
@@ -241,6 +242,8 @@ function giveReaction(e){
     btnDiv = e.target.parentNode;
     if(e.target.classList.contains('likeButton')){
         giveLike(e);
+        ///ca idee- trebuie schimbat modul de afisare al like-urilor si apoi actualizat numarul de like-uri fara refresh
+        /// gen : numberlikes - 1
     }
     else if(e.target.classList.contains('dislikeButton')){
         giveDislike(e);

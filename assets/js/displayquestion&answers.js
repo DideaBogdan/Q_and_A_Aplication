@@ -548,7 +548,6 @@ async function giveLike(e){
     }
 }
 
-
 async function giveDislike(e){
     e.preventDefault();
     isLogged = document.getElementById('session_var').value;
@@ -699,6 +698,59 @@ async function giveLikeAnswer(e){
     if(isLogged == ""){
         showPopup();
     }
+    if(e.target.parentNode.firstChild.classList.contains('reacted')){
+        console.log("intra aici in unlike then dislike");
+        let data = {
+                user : isLogged,
+                id_post : parseInt(questionId),
+                is_question : parseInt("1"),
+                };
+        let json = JSON.stringify(data);
+
+        let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
+        let requestReact = new Request( urlReact, {
+            headers: header,
+            body: json,
+            method: 'POST',
+        });
+        
+        await fetch(requestReact)
+            .then((response) => response.json())
+            .then((data)=>{
+                console.log('Response from server');
+                if(data.message === 'Reaction deleted'){
+                    e.target.parentNode.firstChild.classList.remove('reacted');
+                    console.log("a fost sters reactul vechi");
+                }
+            })
+        .catch(console.warn);
+
+        let data2 = {like : parseInt("0"),
+                    dislike : parseInt("1"),
+                    user : isLogged,
+                    id_post : parseInt(questionId),
+                    is_question : parseInt("1"),
+                    };
+        let json2 = JSON.stringify(data2);
+        console.log(json2);
+
+        let urlReact2 = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
+        let requestReact2 = new Request( urlReact2, {
+            headers: header,
+            body: json2,
+            method: 'POST',
+        });
+
+        await fetch(requestReact2)
+            .then((response) => response.json())
+            .then((data)=>{
+                console.log('Response from server');
+                if(data.message === 'Reaction created'){
+                    e.target.classList.add('reacted');
+                }
+            })
+        .catch(console.warn);
+        }
     else {
         if(e.target.parentNode.lastChild.classList.contains('reacted')){
             console.log("intra aici in undislike then like");
@@ -937,7 +989,6 @@ async function giveDislikeAnswer(e){
                             };
                 let json = JSON.stringify(data);
                 console.log(json);
-
                 let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
                 let requestReact = new Request( urlReact, {
                     headers: header,
