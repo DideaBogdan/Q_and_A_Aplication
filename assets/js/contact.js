@@ -25,8 +25,8 @@ async function createcontact(e){
         })
     .catch(console.warn);
 
-    window.location.reload();
-    
+    showPopup();
+  //window.location.reload();    
 }
 
 function convertToJSON(formData){
@@ -35,4 +35,26 @@ function convertToJSON(formData){
         obj[key]= formData.get(key);
     }
     return JSON.stringify(obj);
+}
+
+function showPopup(){
+    popUp = document.getElementById('popUp');
+    popUp.style.display = "block";
+
+    container = document.getElementById('containerpopup');
+    container.style.display = "block";
+
+
+    container.addEventListener('click', function(e){
+        if(e.target === container) {
+            popUp.style.display = "none";
+            container.style.display = "none";
+        }
+    })
+
+    closeBtn = document.getElementById('close');
+    closeBtn.addEventListener('click', function(e){
+        popUp.style.display = "none";
+        container.style.display = "none";
+    })
 }

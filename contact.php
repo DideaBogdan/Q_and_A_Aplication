@@ -38,6 +38,14 @@
       }
   ?>
 
+<div id="containerpopup">
+        <div id="popUp">
+          <button id="close">&times;</button>
+          <p id = "content">The message was successfully sent!</p>
+          <button id="buttons" onclick="window.location.href='home.php'">Home</button>
+        </div>
+</div>
+
 
 <section>
     <div id="contact-title"><h3>Contact</h3></div>
