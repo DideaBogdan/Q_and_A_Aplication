@@ -4,6 +4,8 @@ mainPannel = document.getElementById('main-pannel');
 //username = document.createElement('p');//.setAttribute('id', 'username');
 //text = document.createElement('div');//.setAttribute('id', 'question-box');
 
+
+///trebuie modificat sa nu mai apara liked dupa logout
 isLogged = document.getElementById('session_var').value;
 isLogged_ID = document.getElementById('session_var_id').value;
 

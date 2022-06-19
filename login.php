@@ -39,7 +39,6 @@
 
 <body>
 
-    <div class="background"> </div>
     <form id="login" name="login">
         <h3>Login Here</h3>
 

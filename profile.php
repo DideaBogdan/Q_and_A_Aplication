@@ -55,32 +55,32 @@
   }
 
   $statement = $db->prepare('SELECT COUNT(*) FROM questions WHERE user = :id');
-  $statement->bindValue(':id',$user_id);
+  $statement->bindValue(':id',$user_id[0]);
   $statement->execute();
   $total_questions = $statement->fetch();
 
   $statement = $db->prepare('SELECT COUNT(*) FROM answers WHERE user = :id');
-  $statement->bindValue(':id',$user_id);
+  $statement->bindValue(':id',$user_id[0]);
   $statement->execute();
   $total_answers = $statement->fetch();
 
   $statement_question = $db->prepare('SELECT * FROM questions WHERE user = :id');
-  $statement_question->bindValue(':id',$user_id);
+  $statement_question->bindValue(':id',$user_id[0]);
   $statement_question->execute();
   $questions = $statement_question->fetchAll(PDO::FETCH_ASSOC);
 
   $statement_answer = $db->prepare('SELECT * FROM answers WHERE user = :id');
-  $statement_answer->bindValue(':id',$user_id);
+  $statement_answer->bindValue(':id',$user_id[0]);
   $statement_answer->execute();
   $answers = $statement_answer->fetchAll(PDO::FETCH_ASSOC);
 
   $statement = $db->prepare('SELECT * FROM users WHERE id = :id');
-  $statement->bindValue(':id',$user_id);
+  $statement->bindValue(':id',$user_id[0]);
   $statement->execute();
   $user = $statement->fetch(PDO::FETCH_ASSOC);
 
   $statement = $db->prepare('SELECT username, email FROM users WHERE id != :id');
-  $statement->bindValue(':id',$user_id);
+  $statement->bindValue(':id',$user_id[0]);
   $statement->execute();
   $allUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
 

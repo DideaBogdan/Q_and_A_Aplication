@@ -15,9 +15,6 @@
     <title>Knowledge Bag</title>
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
-    <link href="https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Updock&display=swap" rel="stylesheet">
-  <!--Search bar icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <script defer type="text/javascript" src="assets/js/scripts.js"></script>
 
@@ -48,13 +45,6 @@
   <input type="hidden" id="session_var_id" value="<?php echo isset($_SESSION['user_username']) ? $_SESSION['user_username'] : '' ?>"/>
 
   <body>  
-    <div class="search-box">
-      <input type="text" name="name" class="search-txt" placeholder="Type to search" />
-      <a class="search-btn" href="#">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </a>
-    </div>
-
 
   <?php 
     if(isset($_SESSION['user_id']))
