@@ -69,8 +69,7 @@ async function displayquestions(json){
         }
         const node = document.createTextNode(element.text);
         text.classList.add("questionText");
-        text.setAttribute("href", "http://localhost/Q_and_A_Aplication/detailed.php?id="+element.id);
-      //  text.addEventListener('click', redirect);
+        text.addEventListener('click', redirect);
         text.appendChild(node);
         username.setAttribute("style", "float : left; margin : 10px;");
 
@@ -187,6 +186,7 @@ async function displayquestions(json){
 
         questionForm.appendChild(divBtns);
         questionForm.setAttribute('id', 'question-form');
+        text.setAttribute('id', 'question-box');
         username.setAttribute('id', 'username');
         mainPannel.appendChild(questionForm);
 
