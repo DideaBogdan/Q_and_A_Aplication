@@ -46,12 +46,6 @@
 
   <!--this is used to get the @_SESSION variable -->
   <body>  
-    <div class="search-box">
-      <input type="text" name="name" class="search-txt" placeholder="Type to search" />
-      <a class="search-btn" href="#">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </a>
-    </div>
     <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/>
     <input type="hidden" id="session_var_id" value="<?php echo isset($_SESSION['user_username']) ? $_SESSION['user_username'] : '' ?>"/>
     <div id="containerpopup">

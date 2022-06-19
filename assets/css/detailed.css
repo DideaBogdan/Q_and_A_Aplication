@@ -5,59 +5,6 @@ body{
     margin: 0;
 }
 
-/*search bar style*/
-.search-box {
-    position: absolute;
-    left: 50%;
-    bottom: 93%;
-
-    transform: translate(-50%, -50%);
-    background: #666666;
-    height: 22px;
-    border-radius: 22px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-.search-box:hover > .search-txt {
-    width: 300px;
-    padding: 0 6px;
-}
-.search-box:hover > .search-btn {
-    color: black;
-}
-.search-btn {
-    color: #eeeeee;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.4s;
-    cursor: pointer;
-    text-decoration: none;
-}
-.search-btn > i {
-    font-size: 20px;
-}
-.search-txt {
-    border: none;
-    background: none;
-    outline: none;
-    padding: 0;
-    color: white;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
-    font-weight: bold;
-}
-/*search bar style*/
-
-
-
-
 /* ---------------------Aranjare continut pagina------------- */
 .main-page{
     display: grid;
