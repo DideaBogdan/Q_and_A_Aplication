@@ -10,12 +10,49 @@
 
   $username = $_SESSION['user_id'] ?? null;
   $error = null;
+  $is_top_questioner = false;
+  $is_top_answerer = false;
 
   if(isset($_SESSION['user_id'])){
-    $statement = $db->prepare('SELECT id FROM users WHERE username = :username');
+  $statement = $db->prepare('SELECT id FROM users WHERE username = :username');
   $statement->bindValue(':username',$username);
   $statement->execute();
   $user_id = $statement->fetch();
+
+  $statement = $db->prepare('SELECT * FROM badges WHERE category = :category');
+  $statement->bindValue(':category',"questions");
+  $statement->execute();
+  $question_badges = $statement->fetchAll();
+
+  $statement = $db->prepare('SELECT * FROM badges WHERE category = :category');
+  $statement->bindValue(':category',"answers");
+  $statement->execute();
+  $answer_badges = $statement->fetchAll();
+
+  $statement = $db->prepare('SELECT * FROM badges WHERE category = :category');
+  $statement->bindValue(':category',"locked");
+  $statement->execute();
+  $locked_badge = $statement->fetch();
+
+  $statement = $db->prepare('SELECT user, COUNT(user) FROM questions GROUP BY user HAVING COUNT(user) =( SELECT MAX(mycount) FROM ( SELECT user, COUNT(user) mycount FROM questions GROUP BY user) as md);');
+  $statement->execute();
+  $top_questioners = $statement->fetchAll();
+
+  foreach($top_questioners as $top_questioner){
+    if($top_questioner['user'] == $user_id[0]){
+      $is_top_questioner = true;
+    }
+  }
+
+  $statement = $db->prepare('SELECT user, COUNT(user) FROM answers GROUP BY user HAVING COUNT(user) =( SELECT MAX(mycount) FROM ( SELECT user, COUNT(user) mycount FROM answers GROUP BY user) as md);');
+  $statement->execute();
+  $top_answerers = $statement->fetchAll();
+
+  foreach($top_answerers as $top_answerer){
+    if($top_answerer['user'] == $user_id[0]){
+      $is_top_answerer = true;
+    }
+  }
 
   $statement = $db->prepare('SELECT COUNT(*) FROM questions WHERE user = :id');
   $statement->bindValue(':id',$user_id[0]);
@@ -92,6 +129,9 @@
 <head>
     <title>User profile</title>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
@@ -131,6 +171,104 @@
         <div class="profile-body">
         <div class="badges">
           <p>Badges</p>
+        <div>
+          <div>
+            <?php foreach($question_badges as $i => $question_badge): ?>
+              <div class="badge-item">
+            <?php switch ($i) {
+              case 0:
+                if($total_questions[0] >= 5){ ?>
+                <img title="<?php echo $question_badge['description'] ?>" src="<?php echo $question_badge['image_path'] ?>" class="badge-image">
+                <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                <?php }
+                else{ ?>
+                <img title="<?php echo $question_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                <?php }
+                break;
+              case 1:
+                if($total_questions[0] >= 15){ ?>
+                  <img title="<?php echo $question_badge['description'] ?>" src="<?php echo $question_badge['image_path'] ?>" class="badge-image">
+                  <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                  <?php }
+                  else{ ?>
+                  <img title="<?php echo $question_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                  <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                  <?php }
+                break;
+              case 2:
+                if($total_questions[0] >= 50){ ?>
+                  <img title="<?php echo $question_badge['description'] ?>" src="<?php echo $question_badge['image_path'] ?>" class="badge-image">
+                  <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                  <?php }
+                  else{ ?>
+                  <img title="<?php echo $question_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                  <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                  <?php }
+                break;
+              case 3:
+                if($is_top_questioner){ ?>
+                  <img title="<?php echo $question_badge['description'] ?>" src="<?php echo $question_badge['image_path'] ?>" class="badge-image">
+                  <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                  <?php }
+                  else{ ?>
+                  <img title="<?php echo $question_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                  <p class="badge-title"><?php echo $question_badge['title'] ?></p>
+                  <?php }
+                break;
+            } ?>
+            </div>
+            <?php endforeach; ?>
+          </div>
+          <div>
+          <?php foreach($answer_badges as $i => $answer_badge): ?>
+              <div class="badge-item">
+            <?php switch ($i) {
+              case 0:
+                if($total_answers[0] >= 10){ ?>
+                <img title="<?php echo $answer_badge['description'] ?>" src="<?php echo $answer_badge['image_path'] ?>" class="badge-image">
+                <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                <?php }
+                else{ ?>
+                <img title="<?php echo $answer_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                <?php }
+                break;
+              case 1:
+                if($total_answers[0] >= 25){ ?>
+                  <img title="<?php echo $answer_badge['description'] ?>" src="<?php echo $answer_badge['image_path'] ?>" class="badge-image">
+                  <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                  <?php }
+                  else{ ?>
+                  <img title="<?php echo $answer_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                  <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                  <?php }
+                break;
+              case 2:
+                if($total_answers[0] >= 100){ ?>
+                  <img title="<?php echo $answer_badge['description'] ?>" src="<?php echo $answer_badge['image_path'] ?>" class="badge-image">
+                  <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                  <?php }
+                  else{ ?>
+                  <img title="<?php echo $answer_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                  <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                  <?php }
+                break;
+              case 3:
+                if($is_top_answerer){ ?>
+                  <img title="<?php echo $answer_badge['description'] ?>" src="<?php echo $answer_badge['image_path'] ?>" class="badge-image">
+                  <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                  <?php }
+                  else{ ?>
+                  <img title="<?php echo $answer_badge['desc_locked'] ?>" src="<?php echo $locked_badge['image_path'] ?>" class="badge-image" id="badge-locked">
+                  <p class="badge-title"><?php echo $answer_badge['title'] ?></p>
+                  <?php }
+                break;
+            } ?>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
         </div>
         <div class="questions">
           <h3>Your questions</h3>
@@ -193,9 +331,6 @@
       } else {
         echo '<div class="shouldnt-be-here"><p>HOOPS!</p> You shouldnt be here, go back to the <a href="home.php"> mainpage</a> or <a href="login.php">login</a> first.</div>';
       }
-        
-
-        // badges - adaugare info - apar intrebarile si raspunsurile userului
     ?>
 </body>
 </html>

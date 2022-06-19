@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.3.0-dev+20220618.41c48b423e
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 17, 2022 at 12:06 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Gazdă: 127.0.0.1
+-- Timp de generare: iun. 19, 2022 la 02:28 PM
+-- Versiune server: 10.4.24-MariaDB
+-- Versiune PHP: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `q&a_app`
+-- Bază de date: `q&a_app`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Proceduri
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_answer` (IN `p_text` VARCHAR(5000), IN `p_question` INT(20))   BEGIN
 	INSERT INTO answers (text, question) VALUES (p_text, p_question);
@@ -92,7 +92,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers`
+-- Structură tabel pentru tabel `answers`
 --
 
 CREATE TABLE `answers` (
@@ -105,7 +105,7 @@ CREATE TABLE `answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `answers`
+-- Eliminarea datelor din tabel `answers`
 --
 
 INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_at`) VALUES
@@ -126,12 +126,49 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (15, 'SADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADSADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDSADASDASDASDASDASDASDASDASDASDASDASDASDASDHJSF KSDH KSD SDLK HSDKJSD GSDSH JDK HSD JAK JJ HADJKASG ', 52, NULL, '2022-06-16 15:40:40', '2022-06-16 15:40:40'),
 (16, 'saddasdasdasdasda', 52, NULL, '2022-06-16 21:28:47', '2022-06-16 21:28:47'),
 (17, 'asdasdasdasfdas asd as das das', 54, 1, '2022-06-16 21:30:52', '2022-06-16 21:30:52'),
-(18, 'asdasdasdadas', 54, 1, '2022-06-17 07:42:10', '2022-06-17 07:42:10');
+(18, 'asdasdasdadas', 54, 1, '2022-06-17 07:42:10', '2022-06-17 07:42:10'),
+(19, 'deoarece gravitatie.', 59, 110, '2022-06-19 10:11:22', '2022-06-19 10:11:22'),
+(20, 'da', 4, 110, '2022-06-19 10:15:56', '2022-06-19 10:15:56'),
+(21, '', 59, 1, '2022-06-19 12:00:47', '2022-06-19 12:00:47');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Structură tabel pentru tabel `badges`
+--
+
+CREATE TABLE `badges` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `desc_locked` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Eliminarea datelor din tabel `badges`
+--
+
+INSERT INTO `badges` (`id`, `title`, `description`, `image_path`, `category`, `desc_locked`) VALUES
+(1, 'QUESTIONER 1', 'Awarded to users who ask at least 5 questions.', 'images\\badges\\questions\\bronze\\Question-bronze.png', 'questions', 'Unlock this badge by asking 5 questions.'),
+(2, 'QUESTIONER 2', 'Awarded to users who ask at least 15 questions.', 'images\\badges\\questions\\silver\\Question-silver.png', 'questions', 'Unlock this badge by asking 15 questions.'),
+(3, 'QUESTIONER 3', 'Awarded to users who ask at least 50 questions.', 'images\\badges\\questions\\gold\\Question-gold.png', 'questions', 'Unlock this badge by asking 50 questions.'),
+(4, 'QUESTIONER 4', 'Awarded to the user with the most asked questions.', 'images\\badges\\questions\\diamond\\Question-diamond.png', 'questions', 'Unlock this badge by asking the most questions.'),
+(5, 'ALL-KNOWING 1', 'Awarded to users who gave at least 10 answers.', 'images\\badges\\answers\\bronze\\Answer-bronze.png', 'answers', 'Unlock this badge by giving 10 answers.'),
+(6, 'ALL-KNOWING 2', 'Awarded to users who gave at least 25 answers.', 'images\\badges\\answers\\silver\\Answer-silver.png', 'answers', 'Unlock this badge by giving 25 answers.'),
+(7, 'ALL-KNOWING 3', 'Awarded to users who gave at least 100 answers.', 'images\\badges\\answers\\gold\\Answer-gold.png', 'answers', 'Unlock this badge by giving 100 answers.'),
+(8, 'ALL-KNOWING 4', 'Awarded to the user who has given the most answers.', 'images\\badges\\answers\\diamond\\Answer-diamond.png', 'answers', 'Unlock this badge by giving the most answers.'),
+(9, 'POPULAR 1', 'Awarded to users who manage to get a total of  20 likes.', 'images\\badges\\Likes\\bronze\\Like-bronze.png', 'likes', 'Unlock this badge by getting 20 likes.'),
+(10, 'POPULAR 2', 'Awarded to users who manage to get a total of  50 likes.', 'images\\badges\\Likes\\silver\\Like-silver.png', 'likes', ''),
+(11, 'POPULAR 3', 'Awarded to users who manage to get a total of  200 likes.', 'images\\badges\\Likes\\gold\\Like-gold.png', 'likes', ''),
+(12, 'POPULAR 4', 'Awarded to the user who manages to get the most likes.', 'images\\badges\\Likes\\diamond\\Like-diamond.png', 'likes', ''),
+(13, 'LOCKED', 'You have yet to unlock this badge.', 'images\\badges\\locked.png', 'locked', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `questions`
 --
 
 CREATE TABLE `questions` (
@@ -143,7 +180,7 @@ CREATE TABLE `questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `questions`
+-- Eliminarea datelor din tabel `questions`
 --
 
 INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUES
@@ -195,12 +232,17 @@ INSERT INTO `questions` (`id`, `text`, `user`, `created_at`, `updated_at`) VALUE
 (50, 'adsdfsvdffdgdfgdfgdfgdgdf', 1, '2022-06-14 16:06:56', '2022-06-14 16:06:56'),
 (52, 'wqeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqasdasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdasdasdasdas', NULL, '2022-06-16 15:05:07', '2022-06-16 15:05:07'),
 (53, 'intrebare recenta', NULL, '2022-06-16 15:58:32', '2022-06-16 15:58:32'),
-(54, 'hbvjh hhj uy', NULL, '2022-06-16 16:42:23', '2022-06-16 16:42:23');
+(54, 'hbvjh hhj uy', NULL, '2022-06-16 16:42:23', '2022-06-16 16:42:23'),
+(55, 'intrebare1', 110, '2022-06-19 10:10:30', '2022-06-19 10:10:30'),
+(56, 'intrebare 2', 110, '2022-06-19 10:10:38', '2022-06-19 10:10:38'),
+(57, 'intrebare 5', 110, '2022-06-19 10:10:43', '2022-06-19 10:10:43'),
+(58, 'intrebare 213', 110, '2022-06-19 10:10:47', '2022-06-19 10:10:47'),
+(59, 'de ce plutim', 110, '2022-06-19 10:10:56', '2022-06-19 10:10:56');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reactions`
+-- Structură tabel pentru tabel `reactions`
 --
 
 CREATE TABLE `reactions` (
@@ -212,7 +254,7 @@ CREATE TABLE `reactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `reactions`
+-- Eliminarea datelor din tabel `reactions`
 --
 
 INSERT INTO `reactions` (`id`, `like`, `dislike`, `user`, `id_post`) VALUES
@@ -237,7 +279,7 @@ INSERT INTO `reactions` (`id`, `like`, `dislike`, `user`, `id_post`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structură tabel pentru tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -250,7 +292,7 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Eliminarea datelor din tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `email`) VALUES
@@ -278,65 +320,81 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `ema
 (106, 'asdasdasdasas', '12345678', 'Didea', 'Bogdan', 'dideabogdan@gmail.com'),
 (107, 'bogdanhjgkhjgghj', '12345678', 'Didea', 'Bogdan', 'dideabogdan@gmail.com'),
 (108, 'bogdan11111111', '12345678', 'asdas', 'asda', 'bogdan@ads'),
-(109, 'wqewqewqe', '12345678', 'wqeqweqw', 'eqwewqewqewq', 'bogdan@adseqweqwwe');
+(109, 'wqewqewqe', '12345678', 'wqeqweqw', 'eqwewqewqewq', 'bogdan@adseqweqwwe'),
+(110, 'sebi', '12345678', 'Drumia', 'Sebastian', 'sebastiandrumia@gmail.com');
 
 --
--- Indexes for dumped tables
+-- Indexuri pentru tabele eliminate
 --
 
 --
--- Indexes for table `answers`
+-- Indexuri pentru tabele `answers`
 --
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `questions`
+-- Indexuri pentru tabele `badges`
+--
+ALTER TABLE `badges`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexuri pentru tabele `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `reactions`
+-- Indexuri pentru tabele `reactions`
 --
 ALTER TABLE `reactions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexuri pentru tabele `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pentru tabele eliminate
 --
 
 --
--- AUTO_INCREMENT for table `answers`
+-- AUTO_INCREMENT pentru tabele `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `questions`
+-- AUTO_INCREMENT pentru tabele `badges`
+--
+ALTER TABLE `badges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pentru tabele `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
--- AUTO_INCREMENT for table `reactions`
+-- AUTO_INCREMENT pentru tabele `reactions`
 --
 ALTER TABLE `reactions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
