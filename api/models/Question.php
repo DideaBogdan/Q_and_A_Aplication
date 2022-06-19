@@ -5,6 +5,7 @@
         public $id ='';
         public $user_id ='';
         public $text = '';
+        public $category = '';
         //public $created_at = '';
 
 
@@ -14,12 +15,14 @@
 
         public function createquestion(){
             if(!isset($this->user_id)){
-                $stmt = $this->conn->prepare("CALL create_anonymous_question(:text)");
+                $stmt = $this->conn->prepare("CALL create_anonymous_question(:text, :category)");
                 $stmt->bindParam(':text', $this->text, PDO::PARAM_STR);
+                $stmt->bindParam(':category', $this->category, PDO::PARAM_STR);
             } else {
-                $stmt = $this->conn->prepare("CALL create_question(:text, :user_id)");
+                $stmt = $this->conn->prepare("CALL create_question(:text, :user_id, :category)");
                 $stmt->bindParam(':text', $this->text, PDO::PARAM_STR);
                 $stmt->bindParam(':user_id', $this->user_id, PDO::PARAM_STR);
+                $stmt->bindParam(':category', $this->category, PDO::PARAM_STR);
             }
             if($stmt->execute()){
                 echo json_encode(array('message'=> 'Question created'));

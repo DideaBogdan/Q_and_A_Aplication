@@ -111,6 +111,8 @@ async function displayquestion_answers(json){
             questionForm = document.createElement('div');
             questionTitle = document.createElement('h3');
             username = document.createElement('p');
+            category = document.createElement('p');
+            text = document.createElement('a');
 
             questionIDhidden = document.createElement('input');
             questionIDhidden.setAttribute('type', 'hidden');
@@ -118,7 +120,7 @@ async function displayquestion_answers(json){
             questionIDhidden.setAttribute('value', element.id);
             questionForm.appendChild(questionIDhidden);
 
-            text = document.createElement('a');
+            
 
             if(element.username == null){
                 const user = document.createTextNode( "Anonymous asks:");
@@ -129,8 +131,17 @@ async function displayquestion_answers(json){
             }
             const node = document.createTextNode(element.text);
             text.appendChild(node);
+           
+            username.setAttribute("style", "float : left; margin : 10px;");
+
+            questionTitle.setAttribute("style", "margin : -10px")
             questionTitle.appendChild(username);
 
+            category.setAttribute("style", "display : inline-block");
+            category.innerText = " in " + element.category;
+           
+            category.setAttribute("style", "float : right; margin : 10px;");
+            questionTitle.appendChild(category);   
             
             divBtns = document.createElement('div');
             likeButton = document.createElement('button');
@@ -142,18 +153,19 @@ async function displayquestion_answers(json){
             likeButton.setAttribute('class', 'likeButton');
             dislikeButton.setAttribute('class', 'dislikeButton');
 
-
-            divcount = document.createElement('p');
-
+            spanLike = document.createElement('span');
+            spanDislike = document.createElement('span');
+            spanLike.setAttribute('class', 'likespan');
+            spanDislike.setAttribute('class', 'dislikespan');
+    
             let likeint = 0;
             let dislikeint = 0;
-
+    
             response.forEach(entry=>{
-                if(entry.id_post === element.id)
+                if(entry.id_post === element.id && Number(entry.is_question) === 1)
                 {
                     if(entry.like === 1){
                         likeint= likeint+1;
-                        console.log(entry.user + " "+ isLogged_ID );
                         if(Number(entry.user) === Number(isLogged_ID) ){
                             likeButton.classList.add('reacted');
                         } 
@@ -166,20 +178,21 @@ async function displayquestion_answers(json){
                     }
             }
             })
-            divcount.innerText=likeint + "    " + dislikeint; 
-            console.log(divcount);
+            spanLike.innerText = likeint;
+            spanDislike.innerText = dislikeint;
+    
+            likeButton.appendChild(spanLike);
+            dislikeButton.appendChild(spanDislike);
         
             divBtns.addEventListener('click', giveReaction);
             
             divBtns.appendChild(likeButton);  
             divBtns.appendChild(dislikeButton);
         
-
-            questionForm.appendChild(questionTitle);
             questionForm.appendChild(get_time(element));
+            questionForm.appendChild(questionTitle);
             questionForm.appendChild(text); 
             questionForm.appendChild(divBtns);
-            questionForm.appendChild(divcount);
 
         
             questionForm.setAttribute('id', 'question-form');
@@ -199,6 +212,7 @@ async function displayquestion_answers(json){
     answerInput.setAttribute('name', 'answer');
     answerInput.setAttribute('id', 'answer');
     answerInput.setAttribute("style", "height: fit-content");
+    answerInput.setAttribute("required" ,"true");
     answerInput.addEventListener("input", OnInput, false);
 
     answerButton = document.createElement('button');
@@ -245,17 +259,19 @@ async function displayquestion_answers(json){
         dislikeButton.setAttribute('class', 'dislikeButton');
 
 
-        divcount = document.createElement('p');
+        spanLike = document.createElement('span');
+        spanDislike = document.createElement('span');
+        spanLike.setAttribute('class', 'likespan');
+        spanDislike.setAttribute('class', 'dislikespan');
 
         let likeint = 0;
         let dislikeint = 0;
 
         response.forEach(entry=>{
-            if(entry.id_post === element.id)
+            if(entry.id_post === element.id && Number(entry.is_question) === 1)
             {
                 if(entry.like === 1){
                     likeint= likeint+1;
-                    console.log(entry.user + " "+ isLogged_ID );
                     if(Number(entry.user) === Number(isLogged_ID) ){
                         likeButton.classList.add('reacted');
                     } 
@@ -268,20 +284,22 @@ async function displayquestion_answers(json){
                 }
         }
         })
-        divcount.innerText=likeint + "    " + dislikeint; 
-        console.log(divcount);
+        spanLike.innerText = likeint;
+        spanDislike.innerText = dislikeint;
+
+        likeButton.appendChild(spanLike);
+        dislikeButton.appendChild(spanDislike);
     
         divBtns.addEventListener('click', giveReaction);
         
         divBtns.appendChild(likeButton);  
         divBtns.appendChild(dislikeButton);
-    
-
-        questionForm.appendChild(questionTitle);
+        
         questionForm.appendChild(get_time(element));
+        questionForm.appendChild(questionTitle);
+        
         questionForm.appendChild(text); 
         questionForm.appendChild(divBtns);
-        questionForm.appendChild(divcount);
 
     
         questionForm.setAttribute('id', 'containeranswer');
@@ -376,14 +394,14 @@ function OnInput() {
 
 function giveReaction(e){
     btnDiv = e.target.parentNode;
-    if(e.target.innerText === 'Like'){
+     if(e.target.classList.contains('likeButton')){
         if(e.target.parentNode.parentNode.id === "question-form"){
             giveLike(e);
         } else {
             giveLikeAnswer(e);
         }
     }
-    else if(e.target.innerText === 'Dislike'){
+    else if(e.target.classList.contains('dislikeButton')){
         if(e.target.parentNode.parentNode.id === "question-form"){
             giveDislike(e);
         } else {
@@ -397,12 +415,15 @@ async function giveLike(e){
     e.preventDefault();
     let question = e.target.parentNode.parentNode;
     let questionId = question.querySelector('#questionIDhidden').value;
+
+    let spanLikeBtn = e.target.lastChild;
+    let spanDislikeBtn = question.lastChild.lastChild.lastChild;
+    console.log(spanLikeBtn);
+    console.log(spanDislikeBtn);
     if(isLogged == ""){
         showPopup();
     }
     else {
-        console.log(e.target.parentNode.lastChild);
-
         if(e.target.parentNode.lastChild.classList.contains('reacted')){
             console.log("intra aici in undislike then like");
             let data = {
@@ -425,6 +446,9 @@ async function giveLike(e){
                     console.log('Response from server');
                     if(data.message === 'Reaction deleted'){
                         e.target.parentNode.lastChild.classList.remove('reacted');
+                        let numb = Number(spanDislikeBtn.innerText);
+                        numb = numb-1;
+                        spanDislikeBtn.innerText = numb;
                     }
             })
             .catch(console.warn);
@@ -452,6 +476,9 @@ async function giveLike(e){
                     console.log('Response from server');
                     if(data.message === 'Reaction created'){
                         e.target.classList.add('reacted');
+                        let numb = Number(spanLikeBtn.innerText);
+                        numb = numb+1;
+                        spanLikeBtn.innerText = numb;
                     }
             })
             .catch(console.warn);
@@ -479,6 +506,9 @@ async function giveLike(e){
                             console.log('Response from server');
                             if(data.message === 'Reaction deleted'){
                                 e.target.classList.remove('reacted');
+                                let numb = Number(spanLikeBtn.innerText);
+                                numb = numb-1;
+                                spanLikeBtn.innerText = numb;
                             }
                         })
                     .catch(console.warn);
@@ -507,6 +537,9 @@ async function giveLike(e){
                             console.log('Response from server');
                             if(data.message === 'Reaction created'){
                                 e.target.classList.add('reacted');
+                                let numb = Number(spanLikeBtn.innerText);
+                                numb = numb+1;
+                                spanLikeBtn.innerText = numb;
                             }
                         })
                     .catch(console.warn);
@@ -520,6 +553,148 @@ async function giveDislike(e){
     isLogged = document.getElementById('session_var').value;
     let question = e.target.parentNode.parentNode;
     let questionId = question.querySelector('#questionIDhidden').value;
+
+    let spanLikeBtn = question.lastChild.lastChild.previousSibling.lastChild;
+    let spanDislikeBtn =  e.target.lastChild;
+    console.log(spanLikeBtn);
+    console.log(spanDislikeBtn);
+    if(isLogged == ""){
+        showPopup();
+    }  else {
+        if(e.target.parentNode.firstChild.classList.contains('reacted')){
+            console.log("intra aici in unlike then dislike");
+            let data = {
+                    user : isLogged,
+                    id_post : parseInt(questionId),
+                    is_question : parseInt("1"),
+                    };
+            let json = JSON.stringify(data);
+
+            let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
+            let requestReact = new Request( urlReact, {
+                headers: header,
+                body: json,
+                method: 'POST',
+            });
+            
+            await fetch(requestReact)
+                .then((response) => response.json())
+                .then((data)=>{
+                    console.log('Response from server');
+                    if(data.message === 'Reaction deleted'){
+                        e.target.parentNode.firstChild.classList.remove('reacted');
+                        let numb = Number(spanLikeBtn.innerText);
+                        console.log(spanLikeBtn.innerText);
+                        numb = numb-1;
+                        spanLikeBtn.innerText = numb;
+                    }
+                })
+            .catch(console.warn);
+
+            let data2 = {like : parseInt("0"),
+                        dislike : parseInt("1"),
+                        user : isLogged,
+                        id_post : parseInt(questionId),
+                        is_question : parseInt("1"),
+                        };
+            let json2 = JSON.stringify(data2);
+            console.log(json2);
+
+            let urlReact2 = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
+            let requestReact2 = new Request( urlReact2, {
+                headers: header,
+                body: json2,
+                method: 'POST',
+            });
+
+            await fetch(requestReact2)
+                .then((response) => response.json())
+                .then((data)=>{
+                    console.log('Response from server');
+                    if(data.message === 'Reaction created'){
+                        e.target.classList.add('reacted');
+                        let numb = Number(spanDislikeBtn.innerText);
+                        numb = numb+1;
+                        spanDislikeBtn.innerText = numb;
+                    }
+                })
+            .catch(console.warn);
+            }
+        else {
+            if(e.target.classList.contains('reacted')){
+                console.log("intra aici in dislike");
+                let data = {
+                        user : isLogged,
+                        id_post : parseInt(questionId),
+                        is_question : parseInt("1"),
+                        };
+                const json = JSON.stringify(data);
+                console.log(json);
+
+
+                let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
+                let requestReact = new Request( urlReact, {
+                    headers: header,
+                    body: json,
+                    method: 'POST',
+                });
+                
+                await fetch(requestReact)
+                    .then((response) => response.json())
+                    .then((data)=>{
+                        console.log('Response from server');
+                        if(data.message === 'Reaction deleted'){
+                            e.target.classList.remove('reacted');
+                            let numb = Number(spanDislikeBtn.innerText);
+                            numb = numb-1;
+                            spanDislikeBtn.innerText = numb;
+                        }
+                    })
+                .catch(console.warn);
+            }
+            else {
+                let data = {like : parseInt("0"),
+                            dislike : parseInt("1"),
+                            user : isLogged,
+                            id_post : parseInt(questionId),
+                            is_question : parseInt("1"),
+                            };
+                let json = JSON.stringify(data);
+                console.log(json);
+
+                let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
+                let requestReact = new Request( urlReact, {
+                    headers: header,
+                    body: json,
+                    method: 'POST',
+                });
+
+            await fetch(requestReact)
+                    .then((response) => response.json())
+                    .then((data)=>{
+                        console.log('Response from server');
+                        if(data.message === 'Reaction created'){
+                            e.target.classList.add('reacted');
+                            let numb = Number(spanDislikeBtn.innerText);
+                            numb = numb+1;
+                            spanDislikeBtn.innerText = numb;
+                        }
+                    })
+                .catch(console.warn);
+                }
+            }
+        }
+    }
+
+async function giveLikeAnswer(e){
+    e.preventDefault();
+    let question = e.target.parentNode.parentNode;
+    let questionId = question.querySelector('#questionIDhidden').value;
+
+    let spanLikeBtn = e.target.lastChild;
+    let spanDislikeBtn = question.lastChild.lastChild.lastChild;
+    console.log(spanLikeBtn);
+    console.log(spanDislikeBtn);
     if(isLogged == ""){
         showPopup();
     }
@@ -577,16 +752,14 @@ async function giveDislike(e){
         .catch(console.warn);
         }
     else {
-        if(e.target.classList.contains('reacted')){
-            console.log("intra aici in dislike");
+        if(e.target.parentNode.lastChild.classList.contains('reacted')){
+            console.log("intra aici in undislike then like");
             let data = {
                     user : isLogged,
                     id_post : parseInt(questionId),
-                    is_question : parseInt("1"),
+                    is_question : parseInt("0"),
                     };
-            const json = JSON.stringify(data);
-            console.log(json);
-
+            let json = JSON.stringify(data);
 
             let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
             let requestReact = new Request( urlReact, {
@@ -600,172 +773,122 @@ async function giveDislike(e){
                 .then((data)=>{
                     console.log('Response from server');
                     if(data.message === 'Reaction deleted'){
-                        e.target.classList.remove('reacted');
+                        e.target.parentNode.lastChild.classList.remove('reacted');
+                        let numb = Number(spanDislikeBtn.innerText);
+                        numb = numb-1;
+                        spanDislikeBtn.innerText = numb;
                     }
-                })
+            })
             .catch(console.warn);
-        }
-        else {
-            let data = {like : parseInt("0"),
-                        dislike : parseInt("1"),
+
+            
+            let data2 = {like : parseInt("1"),
+                        dislike : parseInt("0"),
                         user : isLogged,
                         id_post : parseInt(questionId),
-                        is_question : parseInt("1"),
+                        is_question : parseInt("0"),
                         };
-            let json = JSON.stringify(data);
-            console.log(json);
+            let json2 = JSON.stringify(data2);
+            console.log(json2);
 
-            let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
-            let requestReact = new Request( urlReact, {
+            let urlReact2 = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
+            let requestReact2 = new Request( urlReact2, {
                 headers: header,
-                body: json,
+                body: json2,
                 method: 'POST',
             });
 
-            await fetch(requestReact)
+            await fetch(requestReact2)
                 .then((response) => response.json())
                 .then((data)=>{
                     console.log('Response from server');
                     if(data.message === 'Reaction created'){
                         e.target.classList.add('reacted');
+                        let numb = Number(spanLikeBtn.innerText);
+                        numb = numb+1;
+                        spanLikeBtn.innerText = numb;
                     }
-                })
+            })
             .catch(console.warn);
             }
-        }
-    }
-
-
-    async function giveLikeAnswer(e){
-        e.preventDefault();
-        let question = e.target.parentNode.parentNode;
-        let questionId = question.querySelector('#questionIDhidden').value;
-        if(isLogged == ""){
-            showPopup();
-        }
         else {
-            console.log(e.target.parentNode.lastChild);
-    
-            if(e.target.parentNode.lastChild.classList.contains('reacted')){
-                console.log("intra aici in undislike then like");
-                let data = {
-                        user : isLogged,
-                        id_post : parseInt(questionId),
-                        is_question : parseInt("0"),
-                        };
-                let json = JSON.stringify(data);
-    
-                let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
-                let requestReact = new Request( urlReact, {
-                    headers: header,
-                    body: json,
-                    method: 'POST',
-                });
-                
-                await fetch(requestReact)
-                    .then((response) => response.json())
-                    .then((data)=>{
-                        console.log('Response from server');
-                        if(data.message === 'Reaction deleted'){
-                            e.target.parentNode.lastChild.classList.remove('reacted');
-                        }
-                })
-                .catch(console.warn);
-    
-                
-                let data2 = {like : parseInt("1"),
-                            dislike : parseInt("0"),
+                if(e.target.classList.contains('reacted')){
+                    console.log("intra aici");
+                    let data = {
                             user : isLogged,
                             id_post : parseInt(questionId),
                             is_question : parseInt("0"),
                             };
-                let json2 = JSON.stringify(data2);
-                console.log(json2);
-    
-                let urlReact2 = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
-                let requestReact2 = new Request( urlReact2, {
-                    headers: header,
-                    body: json2,
-                    method: 'POST',
-                });
-    
-                await fetch(requestReact2)
-                    .then((response) => response.json())
-                    .then((data)=>{
-                        console.log('Response from server');
-                        if(data.message === 'Reaction created'){
-                            e.target.classList.add('reacted');
-                        }
-                })
-                .catch(console.warn);
+                    let json = JSON.stringify(data);
+
+                    let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
+                    let requestReact = new Request( urlReact, {
+                        headers: header,
+                        body: json,
+                        method: 'POST',
+                    });
+                    
+                    await fetch(requestReact)
+                        .then((response) => response.json())
+                        .then((data)=>{
+                            console.log('Response from server');
+                            if(data.message === 'Reaction deleted'){
+                                e.target.classList.remove('reacted');
+                                let numb = Number(spanLikeBtn.innerText);
+                                numb = numb-1;
+                                spanLikeBtn.innerText = numb;
+                            }
+                        })
+                    .catch(console.warn);
                 }
-            else {
-                    if(e.target.classList.contains('reacted')){
-                        console.log("intra aici");
-                        let data = {
+                else { 
+                    console.log("intra aici-la baza");
+                    let data = {like : parseInt("1"),
+                                dislike : parseInt("0"),
                                 user : isLogged,
                                 id_post : parseInt(questionId),
                                 is_question : parseInt("0"),
                                 };
-                        let json = JSON.stringify(data);
-    
-                        let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
-                        let requestReact = new Request( urlReact, {
-                            headers: header,
-                            body: json,
-                            method: 'POST',
-                        });
-                        
-                        await fetch(requestReact)
-                            .then((response) => response.json())
-                            .then((data)=>{
-                                console.log('Response from server');
-                                if(data.message === 'Reaction deleted'){
-                                    e.target.classList.remove('reacted');
-                                }
-                            })
-                        .catch(console.warn);
-                    }
-                    else { 
-                        console.log("intra aici-la baza");
-                        let data = {like : parseInt("1"),
-                                    dislike : parseInt("0"),
-                                    user : isLogged,
-                                    id_post : parseInt(questionId),
-                                    is_question : parseInt("0"),
-                                    };
-                        let json = JSON.stringify(data);
-                        console.log(json);
-    
-                        let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
-                        let requestReact = new Request( urlReact, {
-                            headers: header,
-                            body: json,
-                            method: 'POST',
-                        });
-    
-                        await fetch(requestReact)
-                            .then((response) => response.json())
-                            .then((data)=>{
-                                console.log('Response from server');
-                                if(data.message === 'Reaction created'){
-                                    e.target.classList.add('reacted');
-                                }
-                            })
-                        .catch(console.warn);
-                    }
-                }
-        }
-    }
+                    let json = JSON.stringify(data);
+                    console.log(json);
 
-    async function giveDislikeAnswer(e){
-        e.preventDefault();
-        isLogged = document.getElementById('session_var').value;
-        let question = e.target.parentNode.parentNode;
-        let questionId = question.querySelector('#questionIDhidden').value;
-        if(isLogged == ""){
-            showPopup();
-        }
+                    let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
+                    let requestReact = new Request( urlReact, {
+                        headers: header,
+                        body: json,
+                        method: 'POST',
+                    });
+
+                    await fetch(requestReact)
+                        .then((response) => response.json())
+                        .then((data)=>{
+                            console.log('Response from server');
+                            if(data.message === 'Reaction created'){
+                                e.target.classList.add('reacted');
+                                let numb = Number(spanLikeBtn.innerText);
+                                numb = numb+1;
+                                spanLikeBtn.innerText = numb;
+                            }
+                        })
+                    .catch(console.warn);
+                }
+            }
+    }
+}
+    
+async function giveDislikeAnswer(e){
+    e.preventDefault();
+    isLogged = document.getElementById('session_var').value;
+    let question = e.target.parentNode.parentNode;
+    let questionId = question.querySelector('#questionIDhidden').value;
+
+    let spanLikeBtn = question.lastChild.lastChild.previousSibling.lastChild;
+    let spanDislikeBtn =  e.target.lastChild;
+    console.log(spanLikeBtn);
+    console.log(spanDislikeBtn);
+    if(isLogged == ""){
+        showPopup();
+    }  else {
         if(e.target.parentNode.firstChild.classList.contains('reacted')){
             console.log("intra aici in unlike then dislike");
             let data = {
@@ -774,7 +897,7 @@ async function giveDislike(e){
                     is_question : parseInt("0"),
                     };
             let json = JSON.stringify(data);
-    
+
             let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
             let requestReact = new Request( urlReact, {
                 headers: header,
@@ -788,11 +911,14 @@ async function giveDislike(e){
                     console.log('Response from server');
                     if(data.message === 'Reaction deleted'){
                         e.target.parentNode.firstChild.classList.remove('reacted');
-                        console.log("a fost sters reactul vechi");
+                        let numb = Number(spanLikeBtn.innerText);
+                        console.log(spanLikeBtn.innerText);
+                        numb = numb-1;
+                        spanLikeBtn.innerText = numb;
                     }
                 })
             .catch(console.warn);
-    
+
             let data2 = {like : parseInt("0"),
                         dislike : parseInt("1"),
                         user : isLogged,
@@ -801,20 +927,23 @@ async function giveDislike(e){
                         };
             let json2 = JSON.stringify(data2);
             console.log(json2);
-    
+
             let urlReact2 = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
             let requestReact2 = new Request( urlReact2, {
                 headers: header,
                 body: json2,
                 method: 'POST',
             });
-    
+
             await fetch(requestReact2)
                 .then((response) => response.json())
                 .then((data)=>{
                     console.log('Response from server');
                     if(data.message === 'Reaction created'){
                         e.target.classList.add('reacted');
+                        let numb = Number(spanDislikeBtn.innerText);
+                        numb = numb+1;
+                        spanDislikeBtn.innerText = numb;
                     }
                 })
             .catch(console.warn);
@@ -829,8 +958,8 @@ async function giveDislike(e){
                         };
                 const json = JSON.stringify(data);
                 console.log(json);
-    
-    
+
+
                 let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/deletereaction.php';
                 let requestReact = new Request( urlReact, {
                     headers: header,
@@ -844,6 +973,9 @@ async function giveDislike(e){
                         console.log('Response from server');
                         if(data.message === 'Reaction deleted'){
                             e.target.classList.remove('reacted');
+                            let numb = Number(spanDislikeBtn.innerText);
+                            numb = numb-1;
+                            spanDislikeBtn.innerText = numb;
                         }
                     })
                 .catch(console.warn);
@@ -857,23 +989,26 @@ async function giveDislike(e){
                             };
                 let json = JSON.stringify(data);
                 console.log(json);
-    
                 let urlReact = 'http://localhost/Q_and_A_Aplication/api/post/createreaction.php';
                 let requestReact = new Request( urlReact, {
                     headers: header,
                     body: json,
                     method: 'POST',
                 });
-    
-                await fetch(requestReact)
+
+            await fetch(requestReact)
                     .then((response) => response.json())
                     .then((data)=>{
                         console.log('Response from server');
                         if(data.message === 'Reaction created'){
                             e.target.classList.add('reacted');
+                            let numb = Number(spanDislikeBtn.innerText);
+                            numb = numb+1;
+                            spanDislikeBtn.innerText = numb;
                         }
                     })
                 .catch(console.warn);
                 }
             }
         }
+    }

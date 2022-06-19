@@ -15,6 +15,29 @@ function createform(e){
       }
 }
 
+select = document.getElementById('category');
+
+let urlget = 'http://localhost/Q_and_A_Aplication/api/post/getcategories.php';
+let header2 = new Headers();
+header2.append('Content-type', 'application/json');   
+let request2 = new Request( urlget, {
+    headers: header2,
+    method: 'GET',
+});
+fetch(request2)
+    .then((response) => response.json())
+    .then((data)=>{
+        console.log('Response from server');
+        data.forEach(element => {
+        option = document.createElement('option');
+        option.setAttribute('value', element.name);
+        option.innerText = element.name;
+        select.appendChild(option);
+        });
+    })
+.catch(console.warn);
+
+
 
 let form = document.getElementById('formquestion').addEventListener('submit', createquestion);
 const user_id = document.getElementById('session_var');
@@ -26,6 +49,7 @@ async function createquestion(e){
     let myQuestion = e.target;
     let formData = new FormData(myQuestion);
     let json = await convertToJSON(formData); 
+    console.log(json);
    
     let url = 'http://localhost/Q_and_A_Aplication/api/post/createquestion.php';
     let header = new Headers();

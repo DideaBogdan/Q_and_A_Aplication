@@ -100,7 +100,7 @@ body{
     color:blue;
 }
 #question-box{
-    display: block;
+    display: flex;
     word-wrap: break-word;
     height: fit-content;
     width: 95%;
@@ -422,6 +422,31 @@ body{
     
 }
 
+.likeButton{
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    font-size: 18px;
+}
+
+.dislikeButton{
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    font-size: 18px;
+}
 
 .reacted{
     background: linear-gradient(
