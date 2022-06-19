@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 07:06 PM
+-- Generation Time: Jun 19, 2022 at 12:43 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -139,6 +139,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reactions` ()   BEGIN
 	SELECT id_post, `like`, dislike, user, is_question from reactions ;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_statistics` ()   BEGIN
+SELECT COUNT(*) as users FROM users;
+SELECT COUNT(*) as questions FROM questions;
+SELECT COUNT(*) as answers FROM answers;
+SELECT COUNT(*) as q_no_a FROM questions LEFT JOIN answers ON questions.id=answers.question WHERE 
+    answers.question IS NULL; 
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_stats` ()   BEGIN 
 	SELECT a.user, a.id FROM users u RIGHT OUTER JOIN answers a ON u.id = a.user ORDER BY u.id asc;
 END$$
@@ -193,7 +201,10 @@ INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_
 (20, 'xczxcxzz s sdf asda ', 55, 1, '2022-06-18 09:37:11', '2022-06-18 09:37:11'),
 (21, '', 55, NULL, '2022-06-18 10:18:13', '2022-06-18 10:18:13'),
 (22, 'dsaasd asa as asdd a', 55, NULL, '2022-06-18 10:20:40', '2022-06-18 10:20:40'),
-(23, ' dasb hj ojasb asbkhas sdb  a\n', 67, NULL, '2022-06-18 12:32:58', '2022-06-18 12:32:58');
+(23, ' dasb hj ojasb asbkhas sdb  a\n', 67, NULL, '2022-06-18 12:32:58', '2022-06-18 12:32:58'),
+(24, 'dasds ad asjld hasjk has as hask; as as;jas\' \'as jas a \n\n', 70, 111, '2022-06-18 20:17:45', '2022-06-18 20:17:45'),
+(25, 'dasas dsad as das ds', 70, 111, '2022-06-18 20:18:16', '2022-06-18 20:18:16'),
+(26, 'un al treilea raspuns\n', 70, 111, '2022-06-18 20:18:35', '2022-06-18 20:18:35');
 
 -- --------------------------------------------------------
 
@@ -212,9 +223,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
-(1, 'Natura', 2),
+(1, 'Natura', 3),
 (2, 'Sport', 3),
-(5, 'Diverse', 3);
+(5, 'Diverse', 5);
 
 -- --------------------------------------------------------
 
@@ -295,7 +306,10 @@ INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `update
 (65, 'intrebre la sport', NULL, 'Sport', '2022-06-18 11:55:53', '2022-06-18 11:55:53'),
 (66, 'alta la sport', NULL, 'Sport', '2022-06-18 11:56:25', '2022-06-18 11:56:25'),
 (67, 'una la diverse', NULL, 'Diverse', '2022-06-18 11:56:39', '2022-06-18 11:56:39'),
-(68, 'asdqdn kas', NULL, 'Diverse', '2022-06-18 14:32:46', '2022-06-18 14:32:46');
+(68, 'asdqdn kas', NULL, 'Diverse', '2022-06-18 14:32:46', '2022-06-18 14:32:46'),
+(69, 'das asd asd asd as das as', 111, 'Diverse', '2022-06-18 20:12:44', '2022-06-18 20:12:44'),
+(70, 'sdasad as das das dasdasas a as das dasd a', 111, 'Diverse', '2022-06-18 20:13:06', '2022-06-18 20:13:06'),
+(71, 'sd sad as as dsa as fsdf sd fsd ds', NULL, 'Natura', '2022-06-19 09:23:12', '2022-06-19 09:23:12');
 
 -- --------------------------------------------------------
 
@@ -336,7 +350,11 @@ INSERT INTO `reactions` (`id`, `is_question`, `like`, `dislike`, `user`, `id_pos
 (344, 1, 1, 0, 1, 48),
 (347, 1, 1, 0, 1, 55),
 (349, 0, 1, 0, 1, 19),
-(351, 0, 1, 0, 1, 20);
+(351, 0, 1, 0, 1, 20),
+(449, 0, 1, 0, 111, 24),
+(450, 0, 0, 1, 111, 25),
+(451, 0, 1, 0, 111, 26),
+(464, 1, 0, 1, 111, 70);
 
 -- --------------------------------------------------------
 
@@ -428,7 +446,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -440,13 +458,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `reactions`
 --
 ALTER TABLE `reactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=465;
 
 --
 -- AUTO_INCREMENT for table `users`
