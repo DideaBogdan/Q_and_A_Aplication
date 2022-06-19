@@ -49,24 +49,24 @@
 
 <section>
     <div id="contact-title"><h3>Contact</h3></div>
-    <div id="contact">
+    <div id="contact-box">
       <div class="formular">
         <form id="contact" name="contact">
   
           <div id="form-col1">
-          <label>Nume: </label>
-          <input type="text" id="name" name="name" placeholder="Introduceti numele" required>
+          <label>Name: </label>
+          <input type="text" id="name" name="name" placeholder="Insert your name" required>
           
           <label>Email: </label>
-          <input type="email" id="email" name="email" placeholder="exemplu@gmail.com" required>
+          <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
           
-          <label >Telefon: </label>
+          <label>Phone: </label>
           <input type="text" id="phone" name="phone" placeholder="+40712309876" required>
         </div>
   
         <div id="form-col2">
-          <label for="subject">Subiect: </label>
-          <textarea id="subject" name="subject" placeholder="Informatii" style="height:200px"></textarea>
+          <label for="subject">Subject: </label>
+          <textarea id="subject" name="subject" placeholder="Info" style="height:200px"></textarea>
         </div>
         <button id="button">Submit</button>
     
@@ -74,10 +74,10 @@
       </div>
 
       <div class="more-info">
-        <h3>Pentru mai multe informatii, nu ezitati sa ne contactati prin:</h3>
-        <p><strong>Telefon:</strong> +40 232 201090</p>
-        <p><strong>Mail:</strong> qa.knowledge.bag@gmail.com</p>
-        <p><strong>Fax:</strong> +40 21 243 0578</p>
+        <h3>For more information, dont hesitate to contact us directly through:</h3>
+        <p><strong>Phone:</strong><i> +40 232 201090</i></p>
+        <p><strong>Mail:</strong><i> qa.knowledge.bag@gmail.com</i></p>
+        <p><strong>Fax:</strong><i> +40 21 243 0578</i></p>
       </div>
     </div>
 </section>

@@ -1,10 +1,11 @@
 body {
-  color: blanchedalmond;
   margin: 0;
   padding: 0;
   padding-bottom: 100px;
   background-image: url('../../images/background-dark.jpg');
   background-repeat: repeat;
+  font-family: 'Poppins',sans-serif;
+  font-weight: bold;
 }
 
 #contact {
@@ -190,16 +191,19 @@ hr {
 }
 
 #contact-title{
+  background: -webkit-linear-gradient(#1845ad, #23a2f6);
+    background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
     display: block;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 25px;
+    font-size: 2.5vw;
     text-align:center;
     margin: auto;
     padding: 0%;
     border: 3px solid black;
+    padding-bottom: 1vw;;
     border-bottom: transparent;
-    height: 10%;
+    height: 15%;
     width:85%;
 }
 
@@ -207,23 +211,33 @@ hr {
     margin-right: 130px;
 }
 
+#contact-box{
+  border: 3px solid black;
+  box-shadow: 0 4px 5px -2px rgba(8,7,16,0.6);
+  column-gap: 10px;
+  margin: auto;
+  padding: 0%;
+  border-top: transparent;
+  height: auto;
+  width:85%;
+
+}
 
 #contact{
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 55% 45%;
     column-gap: 10px;
     margin: auto;
     margin-bottom: -10;
     padding: 0%;
-    border: 3px solid black;
     border-top: transparent;
     height: auto;
     width:85%;
 }
 
 .formular form{
-    display: grid;
-    grid-template-columns: 35% 50% 15%;
+    /* display: grid;
+    grid-template-columns: 35% 50% 15%; */
     /* column-gap: 3%; */
 }
 
@@ -233,45 +247,39 @@ hr {
 }
 
 #form-col1>label{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 18px;
-    margin: auto;
-    margin-right: 15px;
-    margin-top:30px;
+  background: -webkit-linear-gradient(#1845ad, #23a2f6);
+    background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    font-size: 1.3vw;
+    margin-left: 6vw;
+    margin-top:4.5vw;
 }
 
 #form-col1>input, #form-col1>select{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 14px;
+    font-style: italic;
     background-color: aliceblue;
-    margin:auto;
-    margin-left: 0;
-    margin-top: 20px;
-    padding-right: 80px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-
+    margin-right: 8vw;
+    margin-top: 3.6vw;
 }
 
 label[for="subject"]{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    float:left;
-    margin-top: 17%;
-    margin-right: 6%;
+  background: -webkit-linear-gradient(#1845ad, #23a2f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-left: 10vw;
+  font-size: 1.6vw;
 }
 
 textarea{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 17px;
+    font-size: 1vw;
     background-color: aliceblue;
-    width: 80%;
-    height: 100%;
+    width: 40vw;
+    height: 10vw;
     padding: 10px;
-    margin-top: 5%;
+    margin-top: 8%;
     border: 1px solid rgb(101, 101, 101); /* Gray border */
     border-radius: 4px; /* Rounded borders */
     box-sizing: border-box;
@@ -286,19 +294,24 @@ textarea{
 }
 
 .more-info h3{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
-    color: blanchedalmond;
-    text-align: center;
-    margin-right: 10%;
-    margin-bottom: 13%;
+  background: -webkit-linear-gradient(#1845ad, #23a2f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.3vw;
+  margin-top: 3vw;
+  margin-left: 1.5vw;
+  margin-bottom: 2vw;
 }
 
 .more-info p{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 19px;
-    margin: 20px;
-    border: transparent;
+  background: -webkit-linear-gradient(#1845ad, #23a2f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1vw;
+  margin: 1vw;
+  border: transparent;
 }
 /* ---------------------Sectiunea de contact---------------------- */
 
