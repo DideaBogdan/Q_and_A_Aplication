@@ -1,3 +1,9 @@
+var port = process.env.PORT || 8000;
+server.listen(port, function() {
+    console.log("App is running on port " + port);
+});
+
+
 mainPannel = document.getElementById('main-pannel');
 //questionForm = document.createElement('div');//.setAttribute('id', 'question-form');
 //questionTitle = document.createElement('h3').setAttribute('id', 'question-title');
