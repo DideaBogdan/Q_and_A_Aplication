@@ -84,7 +84,7 @@
   $statement->execute();
   $allUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-  $password = $user['password'];
+  $password = null;
   $firstname = $user['firstname'];
   $lastname = $user['lastname'];
   $email = $user['email'];
@@ -103,18 +103,32 @@
     endforeach; 
 
     if($error == null){
-      $statement = $db->prepare("UPDATE users SET username = :username, password = :password, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
+      if($password != null){
+        $statement = $db->prepare("UPDATE users SET username = :username, password = :password, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
 
-      $_SESSION['user_id'] = $username;
+        $_SESSION['user_id'] = $username;
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+  
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':password', $hashed_password);
+        $statement->bindValue(':firstname', $firstname);
+        $statement->bindValue(':lastname', $lastname);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':id',$user_id[0]);
+        $statement->execute();
+      }
+      else{
+        $statement = $db->prepare("UPDATE users SET username = :username, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
 
-      $statement->bindValue(':username', $username);
-      $statement->bindValue(':password', $password);
-      $statement->bindValue(':firstname', $firstname);
-      $statement->bindValue(':lastname', $lastname);
-      $statement->bindValue(':email', $email);
-      $statement->bindValue(':id',$user_id);
-      $statement->execute();
-
+        $_SESSION['user_id'] = $username;
+  
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':firstname', $firstname);
+        $statement->bindValue(':lastname', $lastname);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':id',$user_id[0]);
+        $statement->execute();
+      }
     }
   }
 
@@ -314,7 +328,7 @@
             <input type="email" id="email" name="email"  value="<?php echo $email ?>" required>
 
             <label for="password">Password</label>
-            <input type="password"  id="password" name="password" value="<?php echo $password ?>" required minlength="8">
+            <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
 
             <button id="button">Save</button>
 
