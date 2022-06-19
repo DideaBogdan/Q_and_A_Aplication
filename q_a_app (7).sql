@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2022 at 04:17 PM
+-- Generation Time: Jun 19, 2022 at 07:25 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -187,7 +187,8 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_at`) VALUES
-(39, 'nu arata bine\n', 80, 111, '2022-06-19 13:41:02', '2022-06-19 13:41:02');
+(39, 'nu arata bine\n', 80, 111, '2022-06-19 13:41:02', '2022-06-19 13:41:02'),
+(40, 'sadasdasas', 85, 111, '2022-06-19 15:40:15', '2022-06-19 15:40:15');
 
 -- --------------------------------------------------------
 
@@ -356,7 +357,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `categories`
