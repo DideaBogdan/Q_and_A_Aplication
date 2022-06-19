@@ -202,13 +202,14 @@ async function displayquestions(json){
 function redirect(e){
     e.preventDefault();
     let id = -1;
+    let texturl = "";
     permData.forEach(element => {
         console.log(element.text);
         if(e.currentTarget.innerText == element.text)
             id = element.id;
-            
+            texturl = e.currentTarget.innerText;
+            console.log(texturl);
     });
-    console.log(id);
     location.assign("http://localhost/Q_and_A_Aplication/detailed.php?id=" + id);
     console.log(e.currentTarget.innerText);
 }

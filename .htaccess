@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^Q_and_A_Aplication/detailed/([^/.]+)/?$ /detailed.php?id=$1 [L]

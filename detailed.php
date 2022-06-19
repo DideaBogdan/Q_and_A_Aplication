@@ -65,6 +65,7 @@
 
     <div id="main-pannel">
       <input type="hidden" id="question_id" value="<?php echo $_GET['id']?>"/>
+   <!--   <input type="hidden" id="question_text" value="<?php echo $_GET['text']?>"/>  -->
       <?php
         if(isset($_SESSION['user_id']))
           echo '<input type="hidden" id="user_answer" value="'. $_SESSION['user_id'] .'"/>';
