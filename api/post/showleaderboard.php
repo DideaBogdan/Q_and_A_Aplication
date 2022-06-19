@@ -21,7 +21,30 @@
                 $rez= $stmt->fetchAll(PDO::FETCH_ASSOC);
                     $rezultat = array_merge($rezultat, $rez);
             }while($stmt->nextRowSet());
-            echo json_encode(array($rezultat));
+            ///gets the answers-count given by every user
+
+
+            $stmt = $db->prepare("CALL get_ledearboard_q()");
+
+            $stmt->execute();
+            $rezultat2=[];
+            do{
+                $rez= $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $rezultat2 = array_merge($rezultat2, $rez);
+            }while($stmt->nextRowSet());
+                ///gets the questions-count given by every user
+
+                $stmt = $db->prepare("CALL get_statistics()");
+
+            $stmt->execute();
+            $rezultat3=[];
+            do{
+                $rez= $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $rezultat3 = array_merge($rezultat3, $rez);
+            }while($stmt->nextRowSet());
+                //gets left statistics
+
+            echo json_encode(array($rezultat, $rezultat2, $rezultat3));
 
         
     }

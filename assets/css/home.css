@@ -147,29 +147,22 @@ body{
     font-size: 25px;
 }
 .ladeboard-row{
-    display:block;
+    display:flex;
+    flex-direction: row;            
     margin: 5%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     font-family: 'Poppins',sans-serif;
 }
 .ladeboard-row>p{
-    display: inline;
+    display: flex;
     margin: auto;
     border: none;
     color: #f09819;
     font-size:17px;
 }
-.ladeboard-row>p:first-child{
-    font-size: 20px;
-    font-weight: 800;
-    margin-right: 15%;
-}
-.ladeboard-row>p:nth-child(2){
-    margin-right: 40%;
-}
 .ladeboard-row>p:nth-child(2):hover{
-    font-size: 25px;
     cursor: pointer;
-    margin-right: 30%;
 }
 .ladeboard-row>p:last-child{
     color: rgb(30,132,242);
@@ -178,11 +171,10 @@ body{
     0 0 15px rgb(20, 20, 193),
     0 0 30px rgb(7, 0, 57), 
     0 0 45px rgb(37, 13, 216);
+    float: right;
 }
 /* spatiul intre pozitie(10) si numele utilizatorului sa fie la fel ca mai sus */
-.ladeboard-row:last-child>p:first-child{
-    margin-right: 12%;
-}
+
 /* --------------------------LEFT PANNEL--------------------------*/
 
 
@@ -230,7 +222,7 @@ body{
 
 /* --------------------------RIGHT PANNEL--------------------------*/
 
-.statistics{
+#statistics{
     display:block;
     font-family: sans-serif;
     margin: 10px;
@@ -240,7 +232,7 @@ body{
     font-style: oblique;
     border: 10px double black; 
 }
-.statistics>h3{
+#statistics>h3{
     margin: 5% 10%;
     padding: 3%;
     color: #f09819;
@@ -248,13 +240,14 @@ body{
     font-size: small;
     border-bottom: #ff512f solid;
 }
-.statistics>p{
+#statistics>p{
     color: #f09819;
     font-size: 17px;
     margin: 15% 10%;
     border-bottom: 1px #ff512f solid;
 }
 .statistic-value{
+    float: right;
     color: rgb(30,132,242);
     text-shadow:
     0 0 10px rgb(27, 122, 194),

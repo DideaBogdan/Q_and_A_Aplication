@@ -83,19 +83,8 @@
         </div>
         <div id="leaderboard_questions">
           <h3>Cele mai curioase persoane</h3>
-          <span class="ladeboard-row"><p>1.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>2.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>3.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>4.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>5.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>6.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>7.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>8.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row"><p>9.</p><p>Numele</p><p>Scor</p></span>
-          <span class="ladeboard-row" id="row-10th"><p>10.</p><p>Numele</p><p>Scor</p></span>
         </div>
       </div>
-      <script type="text/javascript" src="assets/js/createleaderboard.js"></script>
       <div class="line"></div>
   
       <div id="main-pannel">
@@ -111,14 +100,11 @@
       </div>
      <div class="line"></div>
       <div class="right-pannel">
-        <div class="statistics">
+        <div id="statistics">
           <h3>Statistici</h3>
-          <p>Utilizatori: <span class="statistic-value">number</span></p>
-          <p>Intrebari: <span class="statistic-value">number</span></p>
-          <p>Raspunsuri: <span class="statistic-value">number</span></p>
-          <p>Intrebari fara raspuns: <span class="statistic-value">number</span></p>
         </div>
       </div>
+      <script type="text/javascript" src="assets/js/createleaderboard.js"></script>
  
     </div>     
     <button onclick="topFunction()" id="topBtn">Top</button>
