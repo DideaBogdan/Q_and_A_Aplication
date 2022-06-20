@@ -4,87 +4,6 @@
 
 
   $session = new Session();
-
-  $database = new Database();
-  $db = $database->connect();
-
-  $username = $_SESSION['user_id'] ?? null;
-  $error = null;
-
-  if(isset($_SESSION['user_id'])){
-    $statement = $db->prepare('SELECT id FROM users WHERE username = :username');
-  $statement->bindValue(':username',$username);
-  $statement->execute();
-  $user_id = $statement->fetch();
-
-  $statement = $db->prepare('SELECT COUNT(*) FROM questions WHERE user = :id');
-  $statement->bindValue(':id',$user_id);
-  $statement->execute();
-  $total_questions = $statement->fetch();
-
-  $statement = $db->prepare('SELECT COUNT(*) FROM answers WHERE user = :id');
-  $statement->bindValue(':id',$user_id);
-  $statement->execute();
-  $total_answers = $statement->fetch();
-
-  $statement_question = $db->prepare('SELECT * FROM questions WHERE user = :id');
-  $statement_question->bindValue(':id',$user_id);
-  $statement_question->execute();
-  $questions = $statement_question->fetchAll(PDO::FETCH_ASSOC);
-
-  $statement_answer = $db->prepare('SELECT * FROM answers WHERE user = :id');
-  $statement_answer->bindValue(':id',$user_id);
-  $statement_answer->execute();
-  $answers = $statement_answer->fetchAll(PDO::FETCH_ASSOC);
-
-  $statement = $db->prepare('SELECT * FROM users WHERE id = :id');
-  $statement->bindValue(':id',$user_id);
-  $statement->execute();
-  $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-  $statement = $db->prepare('SELECT username, email FROM users WHERE id != :id');
-  $statement->bindValue(':id',$user_id);
-  $statement->execute();
-  $allUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-  $password = $user['password'];
-  $firstname = $user['firstname'];
-  $lastname = $user['lastname'];
-  $email = $user['email'];
-
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
-
-    foreach($allUsers as $userinfo):  
-    if($userinfo['email'] == $email || $userinfo['username'] == $username){
-      $error = "Username or email already taken!";
-    }
-    endforeach; 
-
-    if($error == null){
-      $statement = $db->prepare("UPDATE users SET username = :username, password = :password, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id");
-
-      $_SESSION['user_id'] = $username;
-
-      $statement->bindValue(':username', $username);
-      $statement->bindValue(':password', $password);
-      $statement->bindValue(':firstname', $firstname);
-      $statement->bindValue(':lastname', $lastname);
-      $statement->bindValue(':email', $email);
-      $statement->bindValue(':id',$user_id);
-      $statement->execute();
-
-    }
-  }
-
-  }
-
-  
-
 ?>
 
 <!DOCTYPE html>
@@ -129,10 +48,6 @@
       }
 
   ?>
-<<<<<<< Updated upstream
-
-<body>  
-=======
 <body> 
 <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/> 
 <input type="hidden" id="session_var_id" value="<?php echo isset($_SESSION['user_username']) ? $_SESSION['user_username'] : '' ?>"/>
@@ -145,76 +60,39 @@
       </div>
     </div>
 
->>>>>>> Stashed changes
     <?php
       if(isset($_SESSION['user_id']))
       {
         echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>'; ?>
-<<<<<<< Updated upstream
-        <div class="profile-body">
-        <div class="badges">
-          <p>Badges</p>
-        </div>
-        <div class="questions">
-          <h3>Your questions</h3>
-          <p>total questions: <?php echo $total_questions[0]; ?></p>
-          <div class="scroll-data">
-            <?php foreach($questions as $question):  ?>
-              <a href="detailed.php?id=<?php echo $question['id'] ?>"> <?php echo $question['text']; ?></a>
-            <?php endforeach; ?>
-          </div>
-        </div>
-        <div class="answers">
-          <h3>Your answers</h3>
-          <p>total answers: <?php echo $total_answers[0] ?></p>
-          <div class="scroll-data">
-          <?php foreach($answers as $answer):  ?>
-              <a href="detailed.php?id=<?php echo $answer['question'] ?>"> <?php echo $answer['text']; ?></a>
-            <?php endforeach; ?>
-      </div>
-=======
         <div id="formButtons">
         <button id="showUpdateForm" class = "button">Update your info</button>
->>>>>>> Stashed changes
         </div>
         <div class="update-info">
-        <form action="" method="post">
-          <?php if($_SERVER['REQUEST_METHOD'] == 'POST' && $error == null){ ?>
-            <h2>Data saved successfully!</h2>
-         <?php } 
-          ?>
-            <h3>Edit your info</h3>
-            <span id="msg">
-              <?php if($error != null){
-                echo $error;
-              } ?>
-            </span>
+        <form action="update" name="update">
+
+        <h3>Update your info</h3>
+            <span id="msg"></span>
 
             <label for="username">Username</label>
-            <input type="text"  id="username" name="username" value="<?php echo $username ?>" required >
+            <input type="text"  id="username" name="username"  required >
 
             <label for="username">First Name</label>
-            <input type="text"  id="first" name="firstname" value="<?php echo $firstname ?>" required>
+            <input type="text"  id="first" name="firstname" required>
 
             <label for="username">Last Name</label>
-            <input type="text"  id="last" name="lastname" value="<?php echo $lastname ?>" required>
+            <input type="text"  id="last" name="lastname" required>
 
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email"  value="<?php echo $email ?>" required>
+            <input type="email" id="email" name="email"  required>
 
             <label for="password">Password</label>
-            <input type="password"  id="password" name="password" value="<?php echo $password ?>" required minlength="8">
+            <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
 
             <button class="button">Save</button>
-
         </form>
-<<<<<<< Updated upstream
-        </div>
-=======
         <form id="hobby" name="hobby">
             <h3>Update your info</h3>
             <span id="msg"></span>
->>>>>>> Stashed changes
 
             <label for="username">Username</label>
             <input type="text"  id="username" name="username"  required >

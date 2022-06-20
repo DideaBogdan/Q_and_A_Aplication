@@ -43,11 +43,7 @@
 
 .profile-body{
     display: grid;
-<<<<<<< Updated upstream
-    grid-template-columns: 25% 25% 25% 25%;
-=======
     grid-template-columns: 20% 30% 30% 20%;
->>>>>>> Stashed changes
 }
 
 .badges{
@@ -238,8 +234,6 @@ input{
         #ff512f,
         #f09819
     );
-<<<<<<< Updated upstream
-=======
 }
 
 
@@ -328,5 +322,4 @@ input{
     .profile-body{
         display: inline;
     }
->>>>>>> Stashed changes
 }
