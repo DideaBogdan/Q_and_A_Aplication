@@ -61,7 +61,7 @@
 
     <div id="title">
       <h1>Knowledge Bag</h1>
-      <p>Raspunsuri la toate intrebarile posibile</p>
+      <p>Answers to all possible questions</p>
     </div>
 
     <div id="containerpopup">
@@ -77,29 +77,27 @@
     <div class="main-page">
       <div class="left-pannel">
         <div id="leaderboard_answer" >
-          <h3>Cele mai multe raspunsuri date</h3>
+          <h3>Most answers given</h3>
         </div>
         <div id="leaderboard_questions">
-          <h3>Cele mai curioase persoane</h3>
+          <h3>The most curious people</h3>
         </div>
       </div>
-      <div class="line"></div>
   
       <div id="main-pannel">
           <button type="button" id="formbutton">Ask a question</button>
           <form id="formquestion" name="formquestion">
             <select name="category" id="category" required>
-              <option value="">Select one category to post this question to:</option>
-              <textarea  type="text" placeholder="Type your question here..." id="question" name="question" role="textbox" maxlength="5000" required></textarea>
+              <option value="">Category:</option>
+              <textarea  type="text" placeholder="Your question here..." id="question" name="question" role="textbox" maxlength="5000" required></textarea>
             <button id="button">Submit</button>
           </form>
           <script src="../Q_and_A_Aplication/assets/js/createquestion.js"></script>
           <script type="text/javascript" src="assets/js/displayquestions.js"></script>
       </div>
-     <div class="line"></div>
       <div class="right-pannel">
         <div id="statistics">
-          <h3>Statistici</h3>
+          <h3>Statistics</h3>
         </div>
       </div>
       <script type="text/javascript" src="assets/js/createleaderboard.js"></script>
