@@ -50,7 +50,7 @@ async function displayquestions(json){
 
         questionForm = document.createElement('div');
         questionTitle = document.createElement('h3');
-        username = document.createElement('a');
+        username = document.createElement('p');
         category = document.createElement('p');
         text = document.createElement('a');
         
@@ -72,7 +72,6 @@ async function displayquestions(json){
         text.addEventListener('click', redirect);
         text.appendChild(node);
         username.setAttribute("style", "float : left; margin : 10px;");
-        username.setAttribute("href", "http://localhost/Q_and_A_Aplication/profile.php?username=" + element.username);
 
         questionTitle.setAttribute("style", "margin : -10px");
         questionTitle.appendChild(username);

@@ -17,8 +17,7 @@
     <script defer src="../Q_and_A_Aplication/assets/js/login.js"></script>
     
 </head>
- <!--Nav bar-->
- <?php
+<?php
     
     echo 
     '<div id="topnav">
@@ -28,22 +27,14 @@
       if(!isset($_SESSION['user_id'])){
         echo'
           <a style="float:right;" href="sign-up.php">Sign Up</a>
-          <a style="float:right;" href="login.php" class="active1">Log In</a>
+          <a style="float:right;" class="active1" href="login.php">Log In</a>
         </div>';
       } else {
-        if(isset($_SESSION['user_id'])){
-          echo ' 
-          <a style="float:right;" href="profile.php?username='.$_SESSION['user_id'] .'">Profile</a>
-          <a style="float:right;" href="logout.php">Logout</a>
-        </div>';
-        } else{
-          echo ' 
+        echo ' 
           <a style="float:right;" href="profile.php">Profile</a>
           <a style="float:right;" href="logout.php">Logout</a>
-          </div>';
-        }
+        </div>';
       }
-
   ?>
 
 <body>
