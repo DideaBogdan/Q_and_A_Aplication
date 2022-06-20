@@ -51,4 +51,39 @@
             return $result;
             
         }
+
+        public function  updatequestion(){
+            $stmt = $this->conn->prepare("CALL update_question(:id, :text)");
+            $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);
+            $stmt->bindParam(':text', $this->text, PDO::PARAM_STR);
+
+            $stmt->execute();
+          
+            if($stmt->execute()){
+                echo json_encode(array('message'=> 'Question updated'));
+                return true;
+            } else {
+                printf("ERROR: %s. \n", $stmt->error);
+                echo json_encode(array('message'=> 'Question Not Updated'));
+                return false;
+            }
+
+        }
+
+        public function  deletequestion(){
+            $stmt = $this->conn->prepare("CALL delete_question(:id)");
+            $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);
+
+            $stmt->execute();
+          
+            if($stmt->execute()){
+                echo json_encode(array('message'=> 'Question deleted'));
+                return true;
+            } else {
+                printf("ERROR: %s. \n", $stmt->error);
+                echo json_encode(array('message'=> 'Question not deleted'));
+                return false;
+            }
+
+        }
     }

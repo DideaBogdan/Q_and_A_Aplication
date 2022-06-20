@@ -9,7 +9,7 @@ async function createcontact(e){
     let formData = new FormData(myQuestion);
     let json = await convertToJSON(formData); 
    
-    let url = 'http://localhost/Q_and_A_Aplication/createcontact.php';
+    let url = 'http://localhost/Q_and_A_Aplication/api/post/createcontact.php';
     let header = new Headers();
     header.append('Content-type', 'application/json');
     let request = new Request( url, {
@@ -26,7 +26,6 @@ async function createcontact(e){
     .catch(console.warn);
 
     showPopup();
-  //window.location.reload();    
 }
 
 function convertToJSON(formData){
