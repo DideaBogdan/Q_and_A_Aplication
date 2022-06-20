@@ -33,8 +33,8 @@ body{
     font-family: 'Updock', cursive;
     margin-top: auto;
     font-size: 100%;
-    margin-right: -25%;
     border: none;
+    padding-left: 27%;
 }
 
 /* ---------------------Titlul paginii---------------------- */
@@ -51,11 +51,6 @@ body{
 }
 .right-pannel{
     display: block;
-}
-#buttons-pannel{
-    display: inline-block;
-    margin-left: 4%;
-    width: auto;
 }
 
 /* ---------------------Aranjare continut pagina------------- */
@@ -790,4 +785,155 @@ body{
     font-size: 85%;
 }
 
+.questionText{
+    display: inline-block;
+    height: fit-content;
+    width: 66%;
+    background-color: rgba(255,255,255,0.07);
+    word-wrap: break-word;
+    color: white;
+    border-radius: 3px;
+    padding: 0 10px;
+    font-size: 21px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.questionText:hover{
+    color: rgba(246, 245, 244, 0.3);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.likeButton{
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    font-size: 16px;
+}
+
+.dislikeButton{
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    font-size: 16px;
+}
+.reacted{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+}
+
+/* POPUP CSS*/
+#popUp {
+    display: none;
+    position: fixed; 
+    z-index: 9; 
+    left: 50%;
+    top: 50%;
+    width:70%;
+    transform: translate(-50%, -50%); 
+    background-color: rgb(54, 52, 52); 
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 10px double black;  
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    text-align: center;
+}
+#containerpopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+    background-color : rgba(8,7,16,0.6);
+    font-size: x-large;
+}
+
+#content {
+    background-color: inherit;
+    padding: 20px;
+    color: #eeeeee;
+    width: 80%;
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    text-align: center;
+    font-size: 75%;
+
+}
+
+#close {
+    color: black;
+    float: right;
+    font-size: 22px;
+    background-color: grey;
+    border-radius: 50%;
+}
+
+#close:hover,
+#close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#buttons{
+    width: fit-content;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-left: 5%;
+    margin-bottom: 30px;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    color: white;
+    display: inline;
+    font-size: 55%;
+    
+}
+/* Pop css end*/
+
+#question-form{
+  
+    width: 77%;
+    background-color: rgba(246, 245, 244, 0.3);
+    color: white;
+    position: relative;
+    margin-left: 5%;
+    margin-top: 2%;
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 20px 20px;
+    border: 10px double black;
+    font-style: oblique;
+    display: block;
+}
 }

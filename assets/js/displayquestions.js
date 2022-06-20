@@ -74,9 +74,10 @@ async function displayquestions(json){
         text.setAttribute("href", "http://localhost/Q_and_A_Aplication/detailed.php?id="+element.id);
       //  text.addEventListener('click', redirect);
         text.appendChild(node);
-        username.setAttribute("style", "float : left; margin : 10px;");
+        username.setAttribute("style", "float : left; margin : 10px; text-decoration: none;");
+        if(element.username!= null){
         username.setAttribute("href", "http://localhost/Q_and_A_Aplication/profile.php?username=" + element.username);
-
+        }
         questionTitle.setAttribute("style", "margin : -10px");
         questionTitle.appendChild(username);
 

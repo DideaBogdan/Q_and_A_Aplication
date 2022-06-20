@@ -110,7 +110,7 @@ async function displayquestion_answers(json){
     content.slice(0,1).forEach(element => {
             questionForm = document.createElement('div');
             questionTitle = document.createElement('h3');
-            username = document.createElement('p');
+            username = document.createElement('a');
             category = document.createElement('p');
             text = document.createElement('a');
 
@@ -132,7 +132,10 @@ async function displayquestion_answers(json){
             const node = document.createTextNode(element.text);
             text.appendChild(node);
            
-            username.setAttribute("style", "float : left; margin : 10px;");
+            username.setAttribute("style", "float : left; margin : 10px; text-decoration: none;");
+            if(element.username!= null){
+            username.setAttribute("href", "http://localhost/Q_and_A_Aplication/profile.php?username=" + element.username);
+            }
 
             questionTitle.setAttribute("style", "margin : -10px")
             questionTitle.appendChild(username);
@@ -227,7 +230,7 @@ async function displayquestion_answers(json){
     content.slice(1).forEach(element => {
         questionForm = document.createElement('div');
         questionTitle = document.createElement('h3');
-        username = document.createElement('p');
+        username = document.createElement('a');
         text = document.createElement('a');
 
         questionIDhidden = document.createElement('input');
@@ -244,6 +247,11 @@ async function displayquestion_answers(json){
             username.appendChild(user);
         }
         const node = document.createTextNode(element.text);
+        
+        username.setAttribute("style", "float : left; margin : 10px; text-decoration: none;");
+        if(element.username!= null){
+        username.setAttribute("href", "http://localhost/Q_and_A_Aplication/profile.php?username=" + element.username);
+        }
         text.appendChild(node);
         questionTitle.appendChild(username);
 
