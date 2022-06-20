@@ -75,7 +75,6 @@ function convertToJSON(formData){
     let obj={};
     for(let key of formData.keys()){
         let noExtraSpaces = formData.get(key).replace(/\s+/g, ' ').trim();
-        console.log(noExtraSpaces);
         obj[key]= noExtraSpaces;
     }
     if(user_id.value === ""){
