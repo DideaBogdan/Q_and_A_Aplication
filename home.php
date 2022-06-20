@@ -85,11 +85,12 @@
       </div>
   
       <div id="main-pannel">
+        <div>
           <button type="button" id="formbutton">Ask a question</button>
           <form id="search-question" name="search-question">
             <input type="text" placeholder="Search questions" id="src-question" name="src-question" role="textbox" maxlength="5000">
-            <img src="images/search.png">
           </form>
+        </div>
           <form id="formquestion" name="formquestion">
             <select name="category" id="category" required>
               <option value="">Category:</option>
