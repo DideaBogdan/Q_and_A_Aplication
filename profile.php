@@ -56,15 +56,7 @@
 <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/> 
 <input type="hidden" id="session_var_id" value="<?php echo isset($_SESSION['user_username']) ? $_SESSION['user_username'] : '' ?>"/>
 <input type="hidden" id="user_username" value="<?php echo isset($_GET['username']) ? $_GET['username'] : '' ?>"/>
-<script defer src="../Q_and_A_Aplication/assets/js/userinfo.js"></script>
-    <div id="containerpopup">
-      <div id="popUp">
-        <button id="close">&times;</button>
-        <p id = "content"></p>
-      </div>
-    </div>
 
-<body>  
 <script defer src="../Q_and_A_Aplication/assets/js/userinfo.js"></script>
     <div id="containerpopup">
       <div id="popUp">
@@ -79,31 +71,6 @@
         echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>'; ?>
         <div class="profile-body">
        
-        <div class="questions">
-          <h3>Your questions</h3>
-          <p id="q_numb">total questions: </p>
-          <div class="scroll-data">
-          </div>
-        </div>
-        <div class="answers">
-          <h3>Your answers</h3>
-          <p id="a_numb">total answers: </p>
-          <div class="scroll-data">
-          </div>
-        </div>
-        <div class="badges">
-            <p>Badges</p>
-          <div>
-            <div id="container_questions">
-                <div class="badge-item">
-                </div>
-            </div>
-          <div id="container_answers">
-                <div class="badge-item">
-                </div>
-          </div>
-        </div>
-        </div>
         <div class="update-info">
         <form id="update" name="update">
             <h3>Update your info</h3>
