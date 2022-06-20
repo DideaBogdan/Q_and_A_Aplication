@@ -75,7 +75,6 @@ function convertToJSON(formData){
     let obj={};
     for(let key of formData.keys()){
         let noExtraSpaces = formData.get(key).replace(/\s+/g, ' ').trim();
-        console.log(noExtraSpaces);
         obj[key]= noExtraSpaces;
     }
     if(user_id.value === ""){
@@ -96,4 +95,11 @@ for (let i = 0; i < textArea.length; i++) {
 function OnInput() {
   this.style.height = "auto";
   this.style.height = (this.scrollHeight) + "px";
+}
+
+searchBar = document.getElementById("search-question").addEventListener('keydown' , searchMatch);
+
+function searchMatch(e){
+    // e.preventDefault();
+    console.log(e.key);
 }

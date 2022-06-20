@@ -5,13 +5,17 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Autorization, X-Requested-With');
 
 //Import PHPMailer classes
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+include_once '../../PHPMailer/PHPMailer.php';
+include_once '../../PHPMailer/SMTP.php';
 
-require 'vendor/autoload.php';
+require '../../vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+
 
 $data = json_decode(file_get_contents("php://input"));
 print_r($data);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $mail = new PHPMailer(); // create a new object
 $mail->IsSMTP(); // enable SMTP
@@ -36,6 +40,4 @@ $mail->AddAddress("qa.knowledge.bag@gmail.com");
     echo json_encode(array("answer" => "mesaj trimis"));
     return true;
  }
-
-
-
+}

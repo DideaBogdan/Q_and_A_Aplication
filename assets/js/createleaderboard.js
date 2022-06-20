@@ -35,12 +35,15 @@ scores[0].slice(0,10).forEach(element => {
    pIndex.innerText= index;
    index++;
    pName.innerText = element.nume;
-
+   pName.setAttribute('style', 'margin-left: 10px; margin-right: 10px;')
+   
    pScore.innerText = element.score;
 
    spanElem.appendChild(pIndex);
    spanElem.appendChild(pName);
    spanElem.appendChild(pScore);
+   spanElem.setAttribute('style', 'word-break: break-all; text-align: center;');
+
 
    divAnswers.appendChild(spanElem);
 
@@ -62,22 +65,20 @@ scores[1].slice(0,10).forEach(element => {
     pIndex.innerText= index;
     index++;
     pName.innerText = element.nume;
+    pName.setAttribute('style', 'margin-left: 10px; margin-right: 10px;')
  
     pScore.innerText = element.score;
  
     spanElem.appendChild(pIndex);
     spanElem.appendChild(pName);
     spanElem.appendChild(pScore);
+    spanElem.setAttribute('style', 'word-break: break-all; text-align: center;');
  
     divQuestions.appendChild(spanElem);
  
  });
 
     //left statistic
-    //let users = scores[2][0];
-    let questions = scores[2][1];
-    let answers = scores[2][2];
-    let qNoA = scores[2][3];
 
     //users
     spanNum = document.createElement ('span');
@@ -111,13 +112,10 @@ scores[1].slice(0,10).forEach(element => {
     spanNum.setAttribute('class', 'statistic-value');
     pQNoA= document.createElement('p');
     pQNoA.innerText = 'Intrebari fara raspuns:';
+    pQNoA.setAttribute('style', 'word-break: break-all; text-align: center;');
     spanNum.innerText = scores[2][3].q_no_a;
+    spanNum.setAttribute('style', 'margin-right: 10px;')
     pQNoA.appendChild(spanNum);
     divStatistics.appendChild(pQNoA);
     
- 
- 
-    
- 
-
 }

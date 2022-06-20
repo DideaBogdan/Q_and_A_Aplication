@@ -4,6 +4,9 @@ body {
   padding-bottom: 100px;
   background-image: url('../../images/background-dark.jpg');
   background-repeat: repeat;
+  
+}
+#main{
   font-family: 'Poppins',sans-serif;
   font-weight: bold;
 }
@@ -103,10 +106,6 @@ textarea {
 
 .phone {
   margin-left: 56px;
-}
-
-.gmail {
-  margin-left: 53px;
 }
 
 .contact-text a {
@@ -235,11 +234,6 @@ hr {
     width:85%;
 }
 
-.formular form{
-    /* display: grid;
-    grid-template-columns: 35% 50% 15%; */
-    /* column-gap: 3%; */
-}
 
 #form-col1{
     display: grid;
