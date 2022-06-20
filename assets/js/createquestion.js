@@ -96,3 +96,10 @@ function OnInput() {
   this.style.height = "auto";
   this.style.height = (this.scrollHeight) + "px";
 }
+
+searchBar = document.getElementById("search-question").addEventListener('keydown' , searchMatch);
+
+function searchMatch(e){
+    // e.preventDefault();
+    console.log(e.key);
+}

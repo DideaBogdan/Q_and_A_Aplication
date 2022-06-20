@@ -323,6 +323,47 @@ body{
     
 }
 
+/*--------------------------------SHEARCH BAR--------------------------*/
+
+#search-question{
+    align-items: center;
+    width: auto;
+    display: inline;
+    float: right;
+    margin-right: 6vw;
+    /* margin-top: 1vw; */
+}
+
+#search-question input{
+    font-family:'Courier New', Courier, monospace;
+    font-size: 1vw;
+    font-weight: bold;
+    width: 17vw;
+    padding: 1vw 1vw;
+    background: rgba(246, 245, 244, 0.3);
+    border: 0.2vw black solid;
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
+    border-radius: 60px;
+    backdrop-filter: blur(0.5px) saturate(180%);
+    color: white;
+}
+
+#search-question img{
+    width: 1.8vw;
+    margin-left: -3vw;
+    margin-top: 0.5vw;
+    background: #888585;
+    padding: 0.3vw 0.3vw;
+    border-radius: 50%;
+    position: absolute;
+}
+
+#search-question img:hover{
+    cursor:text;
+}
+
+/*--------------------------------SHEARCH BAR--------------------------*/
+
 #button{
     width: fit-content;
     background-color: #ffffff;
