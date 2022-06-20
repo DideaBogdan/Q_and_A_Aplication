@@ -69,55 +69,54 @@
       if(isset($_SESSION['user_id']))
       {
         echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>'; ?>
-        <div class="profile-body">
-       
+        <button id="showUpdateForm" class="button">Update your info</button>  
         <div class="update-info">
-        <form id="update" name="update">
-            <h3>Update your info</h3>
-            <span id="msg"></span>
+          <form id="update" name="update">
+              <h3>Update your info</h3>
+              <span id="msg"></span>
 
-            <label for="username">Username</label>
-            <input type="text"  id="username" name="username"  required >
+              <label for="username">Username</label>
+              <input type="text"  id="username" name="username"  required >
 
-            <label for="username">First Name</label>
-            <input type="text"  id="first" name="firstname" required>
+              <label for="username">First Name</label>
+              <input type="text"  id="first" name="firstname" required>
 
-            <label for="username">Last Name</label>
-            <input type="text"  id="last" name="lastname" required>
+              <label for="username">Last Name</label>
+              <input type="text"  id="last" name="lastname" required>
 
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email"  required>
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email"  required>
 
-            <label for="password">Password</label>
-            <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
+              <label for="password">Password</label>
+              <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
 
-            <button class="button">Save</button>
-        </form>
-        <form id="hobby" name="hobby">
-            <h3>Update your info</h3>
-            <span id="msg"></span>
+              <button class="button">Save</button>
+          </form>
+          <form id="hobby" name="hobby">
+              <h3>Update your info</h3>
+              <span id="msg"></span>
 
-            <label for="username">Username</label>
-            <input type="text"  id="username" name="username"  required >
+              <label for="username">Username</label>
+              <input type="text"  id="username" name="username"  required >
 
-            <label for="username">First Name</label>
-            <input type="text"  id="first" name="firstname" required>
+              <label for="username">First Name</label>
+              <input type="text"  id="first" name="firstname" required>
 
-            <label for="username">Last Name</label>
-            <input type="text"  id="last" name="lastname" required>
+              <label for="username">Last Name</label>
+              <input type="text"  id="last" name="lastname" required>
 
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email"  required>
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email"  required>
 
-            <label for="password">Password</label>
-            <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
+              <label for="password">Password</label>
+              <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
 
-            <button class="button">Save</button>
+              <button class="button">Save</button>
 
-        </form>
-        </div>
-        </div>
-        <div class="profile-body"> 
+          </form>
+          </div>  
+        <div class="profile-body">
+          
         <div id="user-info">
           <h3>Hello user</h3>
         </div>
