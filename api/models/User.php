@@ -71,6 +71,29 @@
                 return false;
             }    
          }
+
+         public function getid($username){
+            $stmt = $this->conn->prepare("CALL get_user_id(:username)");
+            $stmt->bindParam(':username', $username);
+
+            $stmt->execute();
+            $result = $stmt-> fetch(PDO::FETCH_ASSOC);
+            return $result;
+         }
+
+         public function verifyadmin(){
+
+            $stmt = $this->conn->prepare("CALL verify_admin(:id)");
+            $stmt->bindParam(':id', $this->id);
+
+            if($stmt->execute()){
+                return true;
+            } else {
+                printf("ERROR: %s. \n", $stmt->error);
+                return false;
+            }
+            
+         }
          
 
     }

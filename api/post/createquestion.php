@@ -7,11 +7,13 @@
     include_once '../../api/config/Database.php';
     include_once '../../api/models/Question.php';
     include_once '../../api/models/Session.php';
+    include_once '../../api/models/User.php';
 
     $database = new Database();
     $db = $database->connect();
 
     $question = new Question($db);
+    $user = new User($db);
 
     $data = json_decode(file_get_contents("php://input"));
 
@@ -20,7 +22,13 @@
     $question->category = $data->category;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $user = $user->getid($question->user_id);
         $question->createquestion();
+        $user2 = new User($db);
+
+        $user2->id = $user["id"];
+        print_r($user2);
+        $user2->verifyadmin();
 
         
     }

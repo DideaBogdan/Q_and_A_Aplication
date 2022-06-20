@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2022 at 06:36 AM
+-- Generation Time: Jun 20, 2022 at 05:16 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -64,6 +64,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCH
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_answer` (IN `p_id` INT(38))   BEGIN
+	SELECT user FROM answers WHERE id = p_id;
 	DELETE FROM answers WHERE id = p_id;
 END$$
 
@@ -166,6 +167,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_stats` ()   BEGIN
 	SELECT a.user, a.id FROM users u RIGHT OUTER JOIN answers a ON u.id = a.user ORDER BY u.id asc;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_id` (IN `p_username` VARCHAR(500))   BEGIN
+	SELECT id from users WHERE username = p_username;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20))   BEGIN
 	SELECT id, username, password FROM users WHERE username = p_username ;
 END$$
@@ -180,6 +185,19 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `used_username` (IN `p_username` VARCHAR(20), IN `p_email` VARCHAR(50))   BEGIN 
 	SELECT username, email FROM users WHERE p_username = username or p_email = email;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verify_admin` (IN `p_id` INT(38))   BEGIN
+	DECLARE nrq INT;
+    DECLARE nra INT;
+    SELECT count(id) INTO nrq FROM questions WHERE p_id = user;
+    SELECT count(id) INTO nra FROM answers WHERE p_id = user;
+    
+    IF nrq >= 10 AND nra >=10 THEN 
+    	UPDATE users SET admin = 1 WHERE id = p_id;
+     ELSE
+     	UPDATE users SET admin = 0 WHERE id = p_id;
+       END IF;
 END$$
 
 DELIMITER ;
@@ -198,13 +216,6 @@ CREATE TABLE `answers` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `answers`
---
-
-INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_at`) VALUES
-(49, 'merge si update din site?', 90, 111, '2022-06-20 04:32:28', '2022-06-20 04:32:28');
 
 -- --------------------------------------------------------
 
@@ -257,9 +268,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
-(1, 'Natura', 2),
+(1, 'Natura', 7),
 (2, 'Sport', 1),
-(5, 'Diverse', 8);
+(5, 'Diverse', 47);
 
 -- --------------------------------------------------------
 
@@ -281,7 +292,7 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `updated_at`) VALUES
-(90, 'merge dasdasd as daads haideee', 111, 'Diverse', '2022-06-20 04:07:44', '2022-06-20 04:07:44');
+(148, 'saddasdasdsadasasdaseqweqw', 111, 'Diverse', '2022-06-20 15:06:28', '2022-06-20 15:06:28');
 
 -- --------------------------------------------------------
 
@@ -311,7 +322,10 @@ INSERT INTO `reactions` (`is_question`, `like`, `dislike`, `user`, `id_post`) VA
 (1, 1, 0, 111, 86),
 (1, 0, 1, 111, 88),
 (1, 1, 0, 111, 89),
-(1, 0, 1, 111, 87);
+(1, 0, 1, 111, 87),
+(1, 0, 1, 111, 49),
+(1, 1, 0, 111, 90),
+(1, 0, 1, 111, 91);
 
 -- --------------------------------------------------------
 
@@ -325,17 +339,18 @@ CREATE TABLE `users` (
   `password` varchar(300) NOT NULL DEFAULT '',
   `firstname` varchar(50) NOT NULL DEFAULT '',
   `lastname` varchar(50) NOT NULL DEFAULT '',
-  `email` varchar(50) NOT NULL DEFAULT ''
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `admin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `email`) VALUES
-(111, 'bogdan3', '$2y$10$LIJGuw8M/jUbpR.6s1FJLOkqOAUw.l.TrYUbZATeQgvg56xXQG7uS', 'Didea', 'Bogdan', 'bogdan@qeasfasca'),
-(112, 'bogdan34', '$2y$10$RFf7gSY3AlhaMJFCj0VrvO4AGY3/mRWi6mwq67okylh0UMYaGkH8C', 'Didea', 'Bogdan', 'bogdan34@dasdasd.com'),
-(113, 'bogdansadsadasdaas', '$2y$10$hpDmn3EPxZe69p.CSguUyerc5px4Gi9VyJmE3usqXZgjIxEhrvUiC', 'Didea', 'Bogdan', 'bogdan3@sdasadadsasasddas');
+INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `admin`) VALUES
+(111, 'bogdan3', '$2y$10$LIJGuw8M/jUbpR.6s1FJLOkqOAUw.l.TrYUbZATeQgvg56xXQG7uS', 'Didea', 'Bogdan', 'bogdan@qeasfasca', 0),
+(112, 'bogdan34', '$2y$10$RFf7gSY3AlhaMJFCj0VrvO4AGY3/mRWi6mwq67okylh0UMYaGkH8C', 'Didea', 'Bogdan', 'bogdan34@dasdasd.com', 0),
+(113, 'bogdansadsadasdaas', '$2y$10$hpDmn3EPxZe69p.CSguUyerc5px4Gi9VyJmE3usqXZgjIxEhrvUiC', 'Didea', 'Bogdan', 'bogdan3@sdasadadsasasddas', 0);
 
 --
 -- Indexes for dumped tables
@@ -373,7 +388,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -385,7 +400,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT for table `users`

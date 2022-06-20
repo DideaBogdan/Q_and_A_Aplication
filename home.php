@@ -88,7 +88,7 @@
         <div>
           <button type="button" id="formbutton">Ask a question</button>
           <form id="search-question" name="search-question">
-            <input type="text" placeholder="Search questions" id="src-question" name="src-question" role="textbox" maxlength="5000">
+            <input type="search" placeholder="Search questions" id="src-question" name="src-question" role="textbox" maxlength="5000">
           </form>
         </div>
           <form id="formquestion" name="formquestion">

@@ -6,12 +6,14 @@
 
     include_once '../../api/config/Database.php';
     include_once '../../api/models/Answer.php';
+    include_once '../../api/models/User.php';
     include_once '../../api/models/Session.php';
 
     $database = new Database();
     $db = $database->connect();
 
     $answer = new Answer($db);
+    $user = new User($db);
 
     $data = json_decode(file_get_contents("php://input"));
 
@@ -21,5 +23,9 @@
 
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $rez = $user->getid($answer->user);
         $answer->createanswer();
+        $user->id= $rez["id"];
+        print_r($user);
+        $user->verifyadmin();
     }

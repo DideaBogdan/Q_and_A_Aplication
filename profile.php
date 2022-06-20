@@ -69,6 +69,39 @@
       if(isset($_SESSION['user_id']))
       {
         echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>'; ?>
+       
+        <div class="profile-body">
+          
+        <div id="user-info">
+          <h3>Hello user</h3>
+        </div>
+        <div class="questions">
+          <h3>Your questions</h3>
+          <p id="q_numb">total questions: </p>
+          <div class="scroll-data">
+          </div>
+        </div>
+        <div class="answers">
+          <h3>Your answers</h3>
+          <p id="a_numb">total answers: </p>
+          <div class="scroll-data">
+          </div>
+        </div>
+        <div class="badges">
+            <p>Badges</p>
+          <div>
+            <div id="container_questions">
+                <div class="badge-item">
+                </div>
+            </div>
+          <div id="container_answers">
+                <div class="badge-item">
+                </div>
+          </div>
+        </div>
+        </div>
+        </div>
+
         <button id="showUpdateForm" class="button">Update your info</button>  
         <div class="update-info">
           <form id="update" name="update">
@@ -115,37 +148,6 @@
 
           </form>
           </div>  
-        <div class="profile-body">
-          
-        <div id="user-info">
-          <h3>Hello user</h3>
-        </div>
-        <div class="questions">
-          <h3>Your questions</h3>
-          <p id="q_numb">total questions: </p>
-          <div class="scroll-data">
-          </div>
-        </div>
-        <div class="answers">
-          <h3>Your answers</h3>
-          <p id="a_numb">total answers: </p>
-          <div class="scroll-data">
-          </div>
-        </div>
-        <div class="badges">
-            <p>Badges</p>
-          <div>
-            <div id="container_questions">
-                <div class="badge-item">
-                </div>
-            </div>
-          <div id="container_answers">
-                <div class="badge-item">
-                </div>
-          </div>
-        </div>
-        </div>
-        </div>
 
 
 

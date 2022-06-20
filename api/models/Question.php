@@ -71,14 +71,21 @@
         }
 
         public function  deletequestion(){
-            $stmt = $this->conn->prepare("CALL delete_question(:id)");
+
+            $stmt = $this->conn->prepare("CALL get_question(:id)");
             $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt = $this->conn->prepare("CALL delete_question(:id)");
+            $stmt->bindParam(':id', $this->id);
 
             $stmt->execute();
           
             if($stmt->execute()){
                 echo json_encode(array('message'=> 'Question deleted'));
-                return true;
+                return $result;
             } else {
                 printf("ERROR: %s. \n", $stmt->error);
                 echo json_encode(array('message'=> 'Question not deleted'));

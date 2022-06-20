@@ -7,11 +7,13 @@
     include_once '../../api/config/Database.php';
     include_once '../../api/models/Answer.php';
     include_once '../../api/models/Session.php';
+    include_once '../../api/models/User.php';
 
     $database = new Database();
     $db = $database->connect();
 
     $answer = new Answer($db);
+    $user = new User($db);
 
     $data = json_decode(file_get_contents("php://input"));
 
@@ -25,6 +27,8 @@
         return true;
     }
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && $data->op == "delete") {
-        $answer->deleteanswer();
+        $rez = $answer->deleteanswer();
+        $user->id = $rez["user"];
+        $user->verifyadmin();
         return true;
     }

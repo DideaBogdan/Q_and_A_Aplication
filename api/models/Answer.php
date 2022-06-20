@@ -64,18 +64,12 @@
 
         public function  deleteanswer(){
             $stmt = $this->conn->prepare("CALL delete_answer(:id)");
-            $stmt->bindParam(':id', $this->id, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $this->id);
 
             $stmt->execute();
-          
-            if($stmt->execute()){
-                echo json_encode(array('message'=> 'Answer deleted'));
-                return true;
-            } else {
-                printf("ERROR: %s. \n", $stmt->error);
-                echo json_encode(array('message'=> 'Answer not deleted'));
-                return false;
-            }
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            echo json_encode(array("message"=>"Answer deleted"));
+            return $result;
 
         }
     }

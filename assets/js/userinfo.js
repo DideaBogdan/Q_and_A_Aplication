@@ -4,9 +4,6 @@ let match = 0;
 if(username === profileUser){
     match = 1;
 }
-console.log(username);
-console.log(profileUser);
-console.log(match);
 
 let header = new Headers();
 header.append('Content-type', 'application/json');
@@ -36,7 +33,7 @@ function createpage(data){
     const keys = Object.keys(info);
     for(let key of keys){
        newP = document.createElement('p');
-       console.log(key);
+       console.log(info[key]);
        if(key != "password" && key != "id")
        {
         newP.innerText = info[key];
@@ -573,6 +570,7 @@ function showPopup(text){
         if(e.target === container) {
             popUp.style.display = "none";
             container.style.display = "none";
+            window.location.reload();
         }
     })
 
@@ -580,6 +578,7 @@ function showPopup(text){
     closeBtn.addEventListener('click', function(e){
         popUp.style.display = "none";
         container.style.display = "none";
+        window.location.reload();
     })
 }
 
