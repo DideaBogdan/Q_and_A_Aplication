@@ -20,7 +20,7 @@ let request14 = new Request( url14, {
     })
 .catch(console.warn);
  
-//right first statistic
+//left first statistic
 let index=1;
 scores[0].sort((a,b) =>  b.score - a.score);
 scores[0].slice(0,10).forEach(element => {
@@ -29,13 +29,15 @@ scores[0].slice(0,10).forEach(element => {
    spanElem.setAttribute('class', 'ladeboard-row');
 
    pIndex= document.createElement('p');
-   pName = document.createElement('p');
+   pName = document.createElement('a');
    pScore = document.createElement('p');
    
    pIndex.innerText= index + '.';
    index++;
    pName.innerText = element.nume;
-   pName.setAttribute('style', 'margin-left: 10px; margin-right: 10px;')
+   pName.setAttribute('style', 'margin-left: 10px; margin-right: 10px; text-decoration: none; color: #f09819;')
+   pName.setAttribute("href", "http://localhost/Q_and_A_Aplication/profile.php?username=" + element.nume);
+   pName.setAttribute('id', 'username');
    
    pScore.innerText = element.score;
 
@@ -50,7 +52,7 @@ scores[0].slice(0,10).forEach(element => {
 
 });
 
- //right second statistic
+ //left second statistic
 index=1;
 scores[1].sort((a,b) => b.score - a.score);
 console.log(scores[1]);
@@ -60,13 +62,16 @@ scores[1].slice(0,10).forEach(element => {
     spanElem.setAttribute('class', 'ladeboard-row');
  
     pIndex= document.createElement('p');
-    pName = document.createElement('p');
+    pName = document.createElement('a');
     pScore = document.createElement('p');
     
     pIndex.innerText= index + '.';
     index++;
     pName.innerText = element.nume;
-    pName.setAttribute('style', 'margin-left: 10px; margin-right: 10px;')
+    pName.setAttribute('style', 'margin-left: 10px; margin-right: 10px; text-decoration: none; color: #f09819;');
+    pName.setAttribute("href", "http://localhost/Q_and_A_Aplication/profile.php?username=" + element.nume);
+    pName.setAttribute('id', 'username');
+
  
     pScore.innerText = element.score;
  
@@ -79,7 +84,7 @@ scores[1].slice(0,10).forEach(element => {
  
  });
 
-    //left statistic
+    //right statistic
 
     //users
     spanNum = document.createElement ('span');
