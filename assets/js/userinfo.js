@@ -1,13 +1,25 @@
+let username = document.getElementById("session_var").value;
+let profileUser = document.getElementById("user_username").value;
+let match = 0;
+if(username === profileUser){
+    match = 1;
+}
+console.log(username);
+console.log(profileUser);
+console.log(match);
+
 let header = new Headers();
 header.append('Content-type', 'application/json');
 getinfo();
 
 async function getinfo(){
-
+    let obj = {username : profileUser};
+    let json_id = JSON.stringify(obj);
     let url = 'http://localhost/Q_and_A_Aplication/api/post/userinfo.php';
     let request = new Request( url, {
         headers: header,
-        method: 'GET',
+        body: json_id,
+        method: 'POST',
     });
     await fetch(request)
             .then((response) => response.json())
@@ -18,6 +30,20 @@ async function getinfo(){
 }
 
 function createpage(data){
+
+    userInfo = document.getElementById('user-info');
+    let info = data["user"];
+    const keys = Object.keys(info);
+    for(let key of keys){
+       newP = document.createElement('p');
+       console.log(key);
+       if(key != "password" && key != "id")
+       {
+        newP.innerText = info[key];
+        userInfo.appendChild(newP);
+       }
+       ///aici mai trebuie preluat jsonul pentru hobbby - si afisat 
+    }
 
     container_questions = document.getElementById("container_questions");
     data["question_badges"].forEach(element => {
@@ -215,7 +241,6 @@ function createpage(data){
         }
         if(element ===  data["answer_badges"][3]){
             if(data["is_top_answerer"] === true){
-                console.log("intra la questioner");
                 img = document.createElement('img');
                 img.setAttribute('title', element["description"]);
                 img.setAttribute('src', element['image_path']);
@@ -259,17 +284,20 @@ function createpage(data){
         inputID.setAttribute('value', element['id']);
         divCont.appendChild(inputID);
 
-        removeBtn = document.createElement('button');
-        removeBtn.classList.add("edit-btn");
-        removeBtn.addEventListener('click', forquestion);
-        removeBtn.innerText = "Delete";
-        divCont.appendChild(removeBtn);
+        if(match === 1){
+            removeBtn = document.createElement('button');
+            removeBtn.classList.add("edit-btn");
+            removeBtn.addEventListener('click', forquestion);
 
-        updateBtn = document.createElement('button');
-        updateBtn.classList.add("edit-btn");
-        updateBtn.addEventListener('click', forquestion);
-        updateBtn.innerText = "Update";
-        divCont.appendChild(updateBtn);
+            removeBtn.innerText = "Delete";
+            divCont.appendChild(removeBtn);
+
+            updateBtn = document.createElement('button');
+            updateBtn.classList.add("edit-btn");
+            updateBtn.addEventListener('click', forquestion);
+            updateBtn.innerText = "Update";
+            divCont.appendChild(updateBtn);
+        }
         
 
         questionsArea.appendChild(divCont);
@@ -292,18 +320,20 @@ function createpage(data){
         inputID.setAttribute('value', element['id']);
         divCont.appendChild(inputID);
        
-        removeBtn = document.createElement('button');
-        removeBtn.classList.add("edit-btn");
-        removeBtn.addEventListener('click', foranswer);
-        removeBtn.innerText = "Delete";
-        divCont.appendChild(removeBtn);
+        if(match == 1){
+            removeBtn = document.createElement('button');
+            removeBtn.classList.add("edit-btn");
+            removeBtn.addEventListener('click', foranswer);
+            removeBtn.innerText = "Delete";
+            divCont.appendChild(removeBtn);
 
 
-        updateBtn = document.createElement('button');
-        updateBtn.classList.add("edit-btn");
-        updateBtn.addEventListener('click', foranswer);
-        updateBtn.innerText = "Update";
-        divCont.appendChild(updateBtn);
+            updateBtn = document.createElement('button');
+            updateBtn.classList.add("edit-btn");
+            updateBtn.addEventListener('click', foranswer);
+            updateBtn.innerText = "Update";
+            divCont.appendChild(updateBtn);
+        }
 
         answersArea.appendChild(divCont);
     });
@@ -559,3 +589,26 @@ function OnInput() {
     this.style.height = "auto";
     this.style.height = (this.scrollHeight) + "px";
   }
+
+
+
+updateForm = document.getElementById('update');
+hobbyForm = document.getElementById('hobby');
+updateForm.setAttribute("style", "display: none;");
+hobbyForm.setAttribute("style", "display: none;");
+
+showUpdateForm = document.getElementById('showUpdateForm');
+if(match === 0 ){
+    showUpdateForm.setAttribute("style", "display: none;");
+}else {
+    showUpdateForm.addEventListener('click',()=>{
+        if(updateForm.style.display === "none"){
+            updateForm.removeAttribute("style", "display: none;");
+            hobbyForm.removeAttribute("style", "display: none;");
+        }else{
+            updateForm.setAttribute("style", "display: none;");
+            hobbyForm.setAttribute("style", "display: none;");
+        }
+    });
+}
+

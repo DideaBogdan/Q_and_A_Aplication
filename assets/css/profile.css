@@ -43,7 +43,7 @@
 
 .profile-body{
     display: grid;
-    grid-template-columns: 40% 40% 20%;
+    grid-template-columns: 20% 30% 30% 20%;
 }
 
 .badges{
@@ -51,6 +51,7 @@
     border: #080710 solid;
     margin-left: 1vw;
     margin-right: 1vw;
+    height: fit-content;
 }
 
 .badges>p{
@@ -251,7 +252,18 @@
 
 .update-info{
     padding: 30px 20px;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
+
+#update {
+    display: block;
+}
+
+#hobby {
+    display: block;
+}
+
 
 form{
     height: fit-content;
@@ -313,12 +325,13 @@ input{
 ::placeholder{
     color: #e5e5e5;
 }
-#button{
+.button{
     margin-top: 1vw;
-    width: 100%;
+    margin-left: 30px;
+    padding: 10px 10px 10px 10px;
+    width: fit-content;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
@@ -406,6 +419,28 @@ input{
     cursor: pointer;
 }
 /* Pop css end*/
+
+/*may have to be deleted*/
+#formbuttons{
+    display: block;
+}
+
+#user-info{
+    overflow-wrap: break-word;
+    height: fit-content;
+    width: 80%;
+    text-decoration: none;
+    margin: 1vw 3vw 1vw 3vw;
+    padding: 0.5vw 0.2vw;
+    background-color: rgba(246, 245, 244, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 10px double black;  
+    display: block;
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
 
 @media only screen and (max-width: 600px) {
 

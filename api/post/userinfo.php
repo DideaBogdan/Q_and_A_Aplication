@@ -14,7 +14,9 @@
 
     $user = new User($db);
 
-    $username = "bogdan3";
+    $data = json_decode(file_get_contents("php://input"));
+
+    $username = $data->username;
     $error = null;
     $is_top_questioner = 0;
     $is_top_answerer = 0;

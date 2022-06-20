@@ -18,12 +18,13 @@
 </head>
 
 <body>  
-<?php
+ <!--Nav bar-->
+ <?php
     
     echo 
     '<div id="topnav">
       <a href="home.php">Home</a>
-      <a class="active" href="contact.php">Contact</a>
+      <a href="contact.php"  class="active" >Contact</a>
       <a href="about.php">About</a>';
       if(!isset($_SESSION['user_id'])){
         echo'
@@ -31,13 +32,20 @@
           <a style="float:right;" href="login.php">Log In</a>
         </div>';
       } else {
-        echo ' 
-          <a style="float:right;" href="profile.php">Profile</a>
+        if(isset($_SESSION['user_id'])){
+          echo ' 
+          <a style="float:right;" href="profile.php?username='.$_SESSION['user_id'] .'">Profile</a>
           <a style="float:right;" href="logout.php">Logout</a>
         </div>';
+        } else{
+          echo ' 
+          <a style="float:right;" href="profile.php">Profile</a>
+          <a style="float:right;" href="logout.php">Logout</a>
+          </div>';
+        }
       }
-  ?>
 
+  ?>
 <div id="containerpopup">
         <div id="popUp">
           <button id="close">&times;</button>
