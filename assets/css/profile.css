@@ -17,7 +17,7 @@
   }
   */
 
-.shouldnt-be-here{
+  .shouldnt-be-here{
     font-size: 50px;
     text-align: center;
     color: azure;
@@ -406,3 +406,10 @@ input{
     cursor: pointer;
 }
 /* Pop css end*/
+
+@media only screen and (max-width: 600px) {
+
+    .profile-body{
+        display: inline;
+    }
+}
