@@ -23,8 +23,8 @@
 
   </head>
 
-  <!--Nav bar-->
-  <?php
+ <!--Nav bar-->
+ <?php
     
     echo 
     '<div id="topnav">
@@ -37,11 +37,19 @@
           <a style="float:right;" href="login.php">Log In</a>
         </div>';
       } else {
-        echo ' 
-          <a style="float:right;" href="profile.php">Profile</a>
+        if(isset($_SESSION['user_id'])){
+          echo ' 
+          <a style="float:right;" href="profile.php?username='.$_SESSION['user_id'] .'">Profile</a>
           <a style="float:right;" href="logout.php">Logout</a>
         </div>';
+        } else{
+          echo ' 
+          <a style="float:right;" href="profile.php">Profile</a>
+          <a style="float:right;" href="logout.php">Logout</a>
+          </div>';
+        }
       }
+
   ?>
 
   <!--this is used to get the @_SESSION variable -->

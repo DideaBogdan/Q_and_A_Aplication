@@ -43,7 +43,11 @@
 
 .profile-body{
     display: grid;
+<<<<<<< Updated upstream
     grid-template-columns: 25% 25% 25% 25%;
+=======
+    grid-template-columns: 20% 30% 30% 20%;
+>>>>>>> Stashed changes
 }
 
 .badges{
@@ -51,6 +55,7 @@
     border: #080710 solid;
     margin-left: 1vw;
     margin-right: 1vw;
+    height: fit-content;
 }
 
 .badges>p{
@@ -126,7 +131,18 @@
 
 .update-info{
     padding: 30px 20px;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
+
+#update {
+    display: block;
+}
+
+#hobby {
+    display: block;
+}
+
 
 form{
     height: fit-content;
@@ -188,12 +204,13 @@ input{
 ::placeholder{
     color: #e5e5e5;
 }
-#button{
+.button{
     margin-top: 1vw;
-    width: 100%;
+    margin-left: 30px;
+    padding: 10px 10px 10px 10px;
+    width: fit-content;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
@@ -221,4 +238,95 @@ input{
         #ff512f,
         #f09819
     );
+<<<<<<< Updated upstream
+=======
+}
+
+
+/* POPUP CSS*/
+#popUp {
+    display: none;
+    position: fixed; 
+    z-index: 9; 
+    left: 50%;
+    top: 50%;
+    width:40%;
+    transform: translate(-50%, -50%); 
+    background-color: rgb(54, 52, 52); 
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 10px double black;  
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    text-align: center;
+}
+#containerpopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+    background-color : rgba(8,7,16,0.6);
+    font-size: x-large;
+}
+
+#content {
+    background-color: inherit;
+    padding: 20px;
+    color: #eeeeee;
+    width: 90%;
+    font-style: oblique;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+    text-align: center;
+
+}
+
+#close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    background-color: grey;
+    border-radius: 50%;
+}
+
+#close:hover,
+#close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Pop css end*/
+
+
+#formbuttons{
+    display: block;
+}
+
+#user-info{
+    overflow-wrap: break-word;
+    height: fit-content;
+    width: 80%;
+    text-decoration: none;
+    margin: 1vw 3vw 1vw 3vw;
+    padding: 0.5vw 0.2vw;
+    background-color: rgba(246, 245, 244, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 10px double black;  
+    display: block;
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .profile-body{
+        display: inline;
+    }
+>>>>>>> Stashed changes
 }

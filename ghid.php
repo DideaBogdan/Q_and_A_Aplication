@@ -14,24 +14,33 @@
     <link rel="stylesheet" href="assets/css/navbar.css">
     <script src="assets/js/about.js"></script>
   </head>
+  <!--Nav bar-->
   <?php
     
     echo 
     '<div id="topnav">
-      <a  href="home.php">Home</a>
+      <a href="home.php">Home</a>
       <a href="contact.php">Contact</a>
-      <a class="active" href="about.php">About</a>';
+      <a href="about.php">About</a>';
       if(!isset($_SESSION['user_id'])){
         echo'
           <a style="float:right;" href="sign-up.php">Sign Up</a>
           <a style="float:right;" href="login.php">Log In</a>
         </div>';
       } else {
-        echo ' 
-          <a style="float:right;" href="profile.php">Profile</a>
+        if(isset($_SESSION['user_id'])){
+          echo ' 
+          <a style="float:right;" href="profile.php?username='.$_SESSION['user_id'] .'">Profile</a>
           <a style="float:right;" href="logout.php">Logout</a>
         </div>';
+        } else{
+          echo ' 
+          <a style="float:right;" href="profile.php">Profile</a>
+          <a style="float:right;" href="logout.php">Logout</a>
+          </div>';
+        }
       }
+
   ?>
 
 <body prefix="schema: http://schema.org">
