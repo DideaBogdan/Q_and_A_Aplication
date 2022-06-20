@@ -74,7 +74,7 @@
       </div>
 
       <div class="more-info">
-        <h3>For more information, dont hesitate to contact us directly through:</h3>
+        <h3>For more information, do not hesitate to contact us directly through:</h3>
         <p><strong>Phone:</strong><i> +40 232 201090</i></p>
         <p><strong>Mail:</strong><i> qa.knowledge.bag@gmail.com</i></p>
         <p><strong>Fax:</strong><i> +40 21 243 0578</i></p>

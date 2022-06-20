@@ -1,8 +1,9 @@
 body{
     background-image: url('../../images/background-dark.jpg');
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     margin: 0;
+    width: auto !important;
 }
 
 /* ---------------------Titlul paginii---------------------- */
@@ -41,7 +42,7 @@ body{
 /* ---------------------Aranjare continut pagina------------- */
 .main-page{
     display: grid;
-    grid-template-columns: 17% 3% 60% 3% 17%;
+    grid-template-columns: 17%  63%  17%;
     margin-top: 1%;
     margin-bottom: 20%;
 }
@@ -170,7 +171,7 @@ body{
     padding: 3%;
     color: #f09819;
     text-align: center;
-    font-size: small;
+    font-size: 25px;
     border-bottom: #ff512f solid;
 }
 #statistics>p{
@@ -216,7 +217,6 @@ body{
 
 /*CSS BASIC FORMULAR CREARE INTREBARE*/
 
-
 .questionText{
     display: inline-block;
     height: fit-content;
@@ -236,7 +236,6 @@ body{
     text-decoration: none;
     cursor: pointer;
 }
-
 
 
 
@@ -306,10 +305,10 @@ body{
 #formbutton{
     margin-top: 5px;
     margin-left: 5%;
-    width:auto;
+    width: fit-content;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
+    padding: 15px 30px;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
@@ -325,10 +324,10 @@ body{
 }
 
 #button{
-    width:15%;
+    width: fit-content;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
+    padding: 15px 30px;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
@@ -479,7 +478,7 @@ body{
 
 
 #buttons{
-    width:auto;
+    width: fit-content;
     background-color: #ffffff;
     color: #080710;
     padding: 15px 30px;
@@ -535,7 +534,25 @@ body{
     );
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
+
+    .main-page{
+        display: block;
+        margin-top: 1%;
+        margin-bottom: 20%;
+    }
+    .left-pannel{
+        display: block;
+    }
+    .right-pannel{
+        display: block;
+    }
+    #buttons-pannel{
+        display: inline-block;
+        margin-left: 4%;
+        width: auto;
+    }
+    
 
     #answerbutton{
         width:50%;
@@ -624,7 +641,112 @@ body{
     0 0 45px rgb(37, 13, 216);
 }
 
-
-/* --------------------------RIGHT PANNEL--------------------------*/
+#formbutton{
+    margin-top: 5px;
+    margin-left: 5%;
+    width: fit-content;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 30px;
+    font-size: 12px;
+    font-weight: 650;
+    border-radius: 5px;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    color: white;
+    display: inline;
     
-    }
+}
+
+#button{
+    width: 30%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    color: white;
+    display: inline;
+    
+}
+/* --------------------------RIGHT PANNEL--------------------------*/
+
+#category {
+    display: block;
+    height: fit-content;
+    width: 65%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 3px 10px 3px 10px;
+    margin-top: 8px;
+    resize: none;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    border: none;
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+#category option {
+     background-color:  rgb(95, 95, 95);
+  }
+  
+  #formquestion{
+    height: fit-content;
+    width: 80%;
+    background-color: rgba(246, 245, 244, 0.3);
+    position: relative;
+    margin-left: 5%;
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 20px 20px;
+    border: 10px double black;  
+    font-style: oblique;
+    display: none;
+    outline: none;
+    font-family: 'Poppins',sans-serif;
+   
+}
+
+#question{
+    display: block;
+    height: fit-content;
+    width: 85%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 3px 10px 3px 10px;
+    margin-top: 8px;
+    resize: none;
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 300;
+    outline: none;
+    border: none;
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+    
+}
+::placeholder{
+    color: #e5e5e5;
+}
+#username{
+    color: white;
+    font-family: 'Poppins',sans-serif;
+    font-size: 85%;
+}
+
+}
