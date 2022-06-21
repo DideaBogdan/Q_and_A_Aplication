@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2022 at 01:36 PM
+-- Generation Time: Jun 22, 2022 at 01:38 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -151,11 +151,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
 
 END$$
 
+CREATE DEFINER=`` PROCEDURE `get_question_search` (IN `p_data` VARCHAR(5000))   BEGIN
+	SELECT * FROM questions WHERE text LIKE CONCAT ('%', p_data, '%') or category LIKE CONCAT ('%', p_data, '%');
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reactions` ()   BEGIN
 	SELECT id_post, `like`, dislike, report,  user, is_question from reactions ;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reaction_count` (IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` BOOLEAN)   BEGIN
+CREATE DEFINER=`` PROCEDURE `get_reaction_count` (IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` BOOLEAN)   BEGIN
 	SELECT count(*) as number from reactions where p_report = report and p_id_post = id_post and p_is_question = is_question;
 END$$
 
@@ -221,6 +225,13 @@ CREATE TABLE `answers` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_at`) VALUES
+(158, 'wsdfcgvhbj', 195, NULL, '2022-06-21 12:17:41', '2022-06-21 12:17:41');
+
 -- --------------------------------------------------------
 
 --
@@ -272,7 +283,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
-(1, 'Natura', 23),
+(1, 'Natura', 24),
 (2, 'Sport', 3),
 (5, 'Diverse', 73);
 
@@ -290,6 +301,15 @@ CREATE TABLE `questions` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `updated_at`) VALUES
+(195, 'asdfghjkl', 116, 'Natura', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
+(196, 'o intrebare de test care contine cuvantul Natura', 116, 'Natura', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
+(197, 'o intrebare de test care contine cuvantul ', 116, 'Sport', '2022-06-21 12:16:16', '2022-06-21 12:16:16');
 
 -- --------------------------------------------------------
 
@@ -440,13 +460,15 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `ema
 (113, 'bogdansadsadasdaas', '$2y$10$hpDmn3EPxZe69p.CSguUyerc5px4Gi9VyJmE3usqXZgjIxEhrvUiC', 'Didea', 'Bogdan', 'bogdan3@sdasadadsasasddas', 0),
 (114, 'bogdan2', '$2y$10$XSCiua1BmqnCUTRgbIJav.sV7/cOHcWfK.hOsdAJNc3FOrqBdXQP.', 'Didea', 'Bogdan', 'bogdan2@gmail.com', 1),
 (115, 'bogdan4', '$2y$10$2Wc7QKU6gOPSI.8D2CNc8OooPIDvVJtm86LooF.2MHzJrg1CcQh1C', 'Didea', 'Bogdan', 'bogdan4@gmail.com', 0),
-(116, 'bogdan5', '$2y$10$I1v50.7qJDpMy7xEPXTTC.NHbw0FDLKfiV/jk.d8pZEpVzVkwXpRe', 'Didea', 'Bogdan', 'bogdan5@gmail.com', 1),
+(116, 'bogdan5', '$2y$10$I1v50.7qJDpMy7xEPXTTC.NHbw0FDLKfiV/jk.d8pZEpVzVkwXpRe', 'Didea', 'Bogdan', 'bogdan5@gmail.com', 0),
 (117, 'sdassad', '$2y$10$b33Q80qTVuNq9DmsTfCR9e36dXOZ8Cfg1cu.2rCQwSpjlNb3.gbRC', 'asdassda', 'dasdasd', 'sadsadas@fgmadasda', 0),
 (118, 'sadas', '$2y$10$ct34o4IqqVfvQGJ9FWzdFOwEPPV5xZr5v199ZYrvAJPG75apChQZe', 'sdaasd', 'dasdasd', 'bdasdsa@ogdan34', 0),
 (119, 'asdsadda', '$2y$10$dB0y2oj57K/e0h7rQl9VLuKVmjRn6rzoagkx2WAXEyFk5U3JTZDnK', 'dasd', 'dasda', 'basdaada@ogdan34', 0),
 (120, 'sddddsfsd', '$2y$10$AORfBknY.5BZyxMB9E/AreUnRXKD5KvJdvlvMptVy52eGCRjdUiOK', 'fdsfsdfsd', 'fsdfsdfsd', 'bofsdfsdfsd@gdan34', 0),
 (121, 'dasdasd', '$2y$10$t.sVfl0Ja1WQXd2Yu1AoRel6gt7m/j3/woAUbo3J6.KbdQ45/NjP2', 'dasdsadsa', 'dadasd', 'bdasdasd@ogdan34', 0),
-(122, 'sdsdffsdfsf', '$2y$10$w5pFoSwKGW3io7mwS.Fa2.Yb4mJHRxwNtlwdi9BR7gfCS6xbU7Ck.', 'fsdfsdfsd', 'fsdfsdfs', 'bodasdasdas@gdan34', 0);
+(122, 'sdsdffsdfsf', '$2y$10$w5pFoSwKGW3io7mwS.Fa2.Yb4mJHRxwNtlwdi9BR7gfCS6xbU7Ck.', 'fsdfsdfsd', 'fsdfsdfs', 'bodasdasdas@gdan34', 0),
+(123, 'bogdan', '$2y$10$HXXQdh94/tWlHgmraEjngOyMuhwm2Fl1u0F4AC6/YF1qTab7OZwhi', 'dadas', 'dasdas', 'bogdan5@sdsadasad', 0),
+(124, 'bogdan3aaaaa', '$2y$10$f9oESJsid4h56qbcK2G8i.KR2L8XNDFyYVXTFyb6JNfQpe36z/Asa', 'sdaasdas', 'dasdasdsa', 'bogdan@qeasfascaaa', 0);
 
 --
 -- Indexes for dumped tables
@@ -484,7 +506,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -496,13 +518,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
