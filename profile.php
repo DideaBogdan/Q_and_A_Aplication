@@ -66,16 +66,11 @@
         <p id = "content"></p>
       </div>
     </div>
-
-    <?php
-      if(isset($_SESSION['user_id']))
-      {
-        echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>'; }?>
-       
+      
         <div class="profile-body">
           
         <div id="user-info">
-          <h3>Hello user</h3>
+          Welcome
         </div>
         <div class="questions">
           <h3>Your questions</h3>

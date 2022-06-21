@@ -16,6 +16,10 @@
     background-color: #555;
   }
   */
+  .welcome{
+    color: #f09819;
+    font-size: 17px;
+}
 
   .shouldnt-be-here{
     font-size: 50px;
@@ -440,6 +444,8 @@ input{
     font-family: 'Poppins',sans-serif;
     color: #ffffff;
     letter-spacing: 0.5px;
+    text-align: center;
+    color: #f09819;
 }
 
 @media only screen and (max-width: 900px) {

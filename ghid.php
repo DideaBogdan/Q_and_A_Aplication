@@ -99,10 +99,6 @@
     </div>
     <section id="user-authentication">
         <h2>Inregistrarea</h2>
-        <!--<figure typeof="sa:image">
-          <img src="">
-          <figcaption>Pagina de inregistrare</figcaption>
-        </figure>-->
         <p>
           Pentru a accesa anumite functionalitati, este necesara inregistrarea, aceasta facandu-se apasand pe butonul <i>Sign Up</i>
           care va redirecta utilizatorul catre pagina de inregistrare, unde va trebui sa completeze un formular. Dupa completarea datelor, 
@@ -112,20 +108,12 @@
 
     <section id="connecting">
       <h2>Conectarea</h2>
-      <!--<figure typeof="sa:image">
-        <img src="">
-        <figcaption>Pagina de conectare</figcaption>
-      </figure> -->
       <section id="user-connection">
         <h3>Conectarea pentru utilizatori ce nu sunt inregistrarti</h3>
         <p>
           Utilizatorii ce nu au un cont creat, nu trebuie sa se conecteze; ei doar vor utiliza aplicatia pentru a pune si/sau raspunde 
           la intrebari in mod anonim. Acestia vor avea acces la pagina principala cu intrebari si la celelalte pagini (exclusa fiind pagina de profil).
         </p>
-        <!--<figure typeof="sa:image">
-          <img src="">
-          <figcaption>View utilizator anonim</figcaption>
-        </figure> -->
       </section>
       <section id="user-connection-aut">
         <h3>Conectarea pentru utilizatori ce sunt inregistrarti</h3>
@@ -135,22 +123,14 @@
           la pagina principala, unde ii vor aparea intrebarile la care poate raspunde, optiunea de a pune intrebari, numele de utilizator si un buton pentru accesarea 
           profilului.
         </p>
-        <!--<figure typeof="sa:image">
-          <img src="">
-          <figcaption>Utilizator conectat</figcaption>
-        </figure> -->
       </section>
     </section>
 
     <section id="profile">
       <h2>Pagina de profil</h2>
-      <!--<figure typeof="sa:image">
-          <img src="">
-          <figcaption>Pagina de profiul </figcaption>
-        </figure> -->
         <p>
           Aceasta pagina poate fi accesata prin apasarea butonului <i>Profile</i> sau prin apasarea pe numele unui utilizator. Va contine informatii cu privire 
-          la utilizator; de asemenea tot din aceasta pagina se vor putea modifica anumite date ce tin de profilul utilizatorului.
+          la utilizator; de asemenea tot din aceasta pagina se vor putea modifica anumite date ce tin de profilul acestuia.
         </p>
     </section>
 
@@ -162,17 +142,6 @@
         va fi evidențiat cu un fundal albastru (pentru butoanele din dreapta) sau portocaliu (pentru butoanele din stanga). 
         De asemenea vor aparea statisticile, lucru comun celor doua tipuri de utilizatori. 
       </p>
-      <!--<figure typeof="sa:image">
-        <img src="">
-        <figcaption>Meniul principal pe ecrane mari</figcaption>
-      </figure>
-      <p>
-        Pe ecranele mici, aceste butoane sunt afișate în meniul de tip hamburger, la click pe butonul negru.
-      </p>
-      <figure typeof="sa:image">
-        <img src="">
-        <figcaption>Meniul principal pe ecrane mici</figcaption>
-      </figure> -->
       <p>
         Butoanele din meniul principal vor insoti utilizatorul pe tot parcursul utilizarii aplicatiei si funcționează astfel: 
       </p>
@@ -188,6 +157,9 @@
         <li>
           <i>About</i> - redirectioneaza catre pagina Documentatie; de asemenea tot aici, la sectiunea <i>Ghide de utilizare</i> se gaseste o scurta descriere a modului de 
           utilizare al site-ului.
+        </li>
+        <li>
+          <i>Report</i> - redirectioneaza catre pagina Report, unde se regaseste o modalitate de a genera rapoarte dupa anumite criterii.
         </li>
         <li>
           <i>Log In</i> - redirectioneaza catre pagina de login, unde, dupa completarea username-ului si a parolei, utilizatorul se va autentifica pe site.
@@ -208,51 +180,47 @@
       <p>
         Pentru a vă deconecta de pe site, se va apasa pe butonul <i>Log Out</i> aflat in dreapta sus, in meniul de navigare (topnav-ul) al site-ului. 
       </p>
-      <!--<figure typeof="sa:image">
-        <img src="">
-        <figcaption>Logout</figcaption>
-      </figure> -->
     </section>
     <section id="practicing">
       <h2>Postarea unei intrebari</h2>
       <p>
-        <b>DE COMPLETAT DUPA CE SE STABILESC ULTIMELE DETALII</b>
+        Postarea unei intrebari nu depinde de statutul utilizatorului (conectat sau anonim). Aceasta se face astfel: se apasa butonul <i>Ask question</i> care va deschide un 
+        un formular unde se regasesc doua campuri de completat si anume: categoria si intrebarea propriu-zisa. Dupa completarea acestui formular, se apasa pe butonul <i>Submit</i>. 
+        Intrebarea va aparea prima in lista de intrebari afisata pe pagina principala.
       </p>
-      <!--<figure typeof="sa:image">
-        <img src="">
-        <figcaption>Structura unei pagini pentru o intrebare</figcaption>
-      </figure> -->
     </section>
     <section id="answer">
       <h2>Raspsunurile pentru intrebari</h2>
-      <!--<figure typeof="sa:image">
-        <img src="">
-        <figcaption>Structura unei pagini cu raspsunsuri</figcaption>
-      </figure> -->
       <p>
-      <b>DE COMPLETAT DUPA CE SE STABILESC ULTIMELE DETALII</b>
+      Pentru a raspunde la o intrebare trebuie apasat pe aceasta, iar utilizatorul va fi redirectionat catre pagina intrebarii. Aici vor aparea toate raspunsurile pe care acea intrebare 
+      le-a primit. De asemenea, va aparea si un formular in care se va introduce raspunsul. Dupa introducerea raspunsului, se va apasa butonul <i>Submit</i>, iar raspunsul va aparea 
+      primul in lista de raspunsuri.
       </p>
 
     </section>
       <section id="score">
-        <h2>Like-uri si  Dislike-uri</h2>
-        <!--<figure typeof="sa:image">
-        <img src="">
-        <figcaption>Like-uri si dislike-uri pentru o intrebare</figcaption>
-      </figure> -->
+        <h2>Like-uri, Dislike-uri, Report-uri</h2>
         <p>
-        <b>DE COMPLETAT DUPA CE SE STABILESC ULTIMELE DETALII</b>
+        Atat intrebarile cat si raspunsurile pot primi 3 reactii: like, dislike si report, cea din urma fiind specifica doar utilizatorilor cu drept de "admin". Like-urile si dislike-urile 
+        pot fi date cu conditia de a fi logat pe site, in caz contrar va aparea un pop-up. 
+        </p>
+        <p>
+          De mentionat faptul ca la un anumit numar de raportari, intrebarea/raspunsul vor fi sterse automat, considerandu-se nepotrivite de catre utilizatorii cu drept de "admin".
         </p>
       </section>
 
       <section id="badges">
         <h2>Badge-urile utilizatorilor</h2>
-        <!--<figure typeof="sa:image">
-        <img src="">
-        <figcaption>Badge-urile utilizatorului</figcaption>
-      </figure> -->
       <p>
-      <b>DE COMPLETAT DUPA CE SE STABILESC ULTIMELE DETALII</b>
+      Aceste badge-uri sunt folosite pentru motivarea utilizatorilor. Sunt oferite in mod automat la indeplinirea anumitor criterii, ce sunt specificate daca se pozitioneaza cursorul 
+      mouse-ului deasupra badge-ului respectiv.
+      </p>
+      </section>
+
+      <section id="search">
+        <h2>Cautarea unei intrebari</h2>
+      <p>
+      Aceasta se face cu ajutorul search bar-ului din pagina principala.
       </p>
       </section>
 
