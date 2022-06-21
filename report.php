@@ -229,7 +229,7 @@
 </table>
 
 
-<table class="table">
+<table class="table" id="answers-table">
   <thead>
     <tr>
       <caption>Answers</caption>

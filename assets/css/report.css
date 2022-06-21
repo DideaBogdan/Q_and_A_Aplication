@@ -8,7 +8,6 @@ h3{
     font-size: 4vw;
     margin-top: 2vw;
     margin-bottom: 5vw;
-    color: #ffffff;
 }
 
 .criteria{
@@ -22,7 +21,6 @@ h3{
     font-size: 1.5vw;
     background: -webkit-linear-gradient(#ff512f, #f09819);
     border-bottom: 2px black solid;
-    color: white;
     display: block;
     margin: auto;
     text-align: center;
@@ -48,8 +46,6 @@ form select{
 
 form button{
     width: 20%
-    /* padding-right: 3vw;
-    padding-left: 3vw; */
 }
 
 .table{
@@ -61,12 +57,36 @@ form button{
 }
 
 caption{
+    background: -webkit-linear-gradient(#ff512f, #f09819);
+    font-family: sans-serif;
+    font-style: italic;
     border: 4px black solid;
     border-bottom: transparent;
-    background-color: white;
     font-weight: bolder;
     font-size: 1.5vw;
 
+}
+
+tr:nth-child(odd){
+    background-color: rgb(243, 199, 117);
+}
+
+th{
+    background-color: rgb(236, 174, 60);
+}
+
+#answers-table tbody tr:nth-child(odd){
+    background-color: rgb(148, 190, 232);
+
+}
+
+#answers-table th{
+    background-color: rgb(87, 165, 242);
+
+}
+
+#answers-table caption{
+    background: -webkit-linear-gradient(#1845ad, #23a2f6);
 }
 
 th[scope="col"]{
@@ -92,6 +112,12 @@ td{
         margin-bottom: 8vw;
     }
 
+    .criteria{
+        display: block;
+        border: 2px black solid;
+        margin: 2vw 20vw;
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    }
 
     .criteria h4{
         font-size: 2.5vw;
@@ -100,17 +126,16 @@ td{
 
     form label{
         font-size: 2.5vw;
-        width: 15%;
     }
 
-    form select{
-        width: 15%;
-        
-
+    form select:nth-child(3){
+        margin-left: 8vw;
     }
 
     form button{
-        width: 15%;
+        display: block;
+        margin: auto;
+        width: 100%;
     }
 
     .table{
@@ -121,6 +146,113 @@ td{
     caption{
         font-size: 3.5vw;
     }
+}
+
+@media only screen and (max-width: 650px){
+    .criteria h4{
+        font-size: 3vw;
+    }
+
+    form label{
+        font-size: 3vw;
+    }
+
+    form select{
+        width: 20%;
+    }
+
+    table, thead, tbody,caption, th, td, tr { 
+		display: block; 
+	}
+
+    caption{
+        border: none;
+    }
+
+	th[scope="col"] { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+    tr:nth-child(even){
+        background-color: rgb(243, 199, 117);
+    }
+
+    #answers-table tbody tr:nth-child(even){
+        background-color: rgb(148, 190, 232);
     
-   
+    }
+	
+	td { 
+		position: relative;
+		padding-left: 50%; 
+        overflow-wrap: break-word;
+	}
+	
+	td:before { 
+		position: absolute;
+		top: 6px;
+		left: 10px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+
+    td:nth-of-type(1):before { content: "Question"; }
+    td:nth-of-type(2):before { content: "Category"; }
+	td:nth-of-type(3):before { content: "Answers"; }
+	td:nth-of-type(4):before { content: "Post Date"; }
+	td:nth-of-type(5):before { content: "Likes"; }
+	td:nth-of-type(6):before { content: "Dislikes"; }
+
+    #answers-table tbody tr td:nth-of-type(1):before { content: "Answer"; }
+    #answers-table tbody tr td:nth-of-type(2):before { content: "Question"; }
+    #answers-table tbody tr td:nth-of-type(3):before { content: "Category"; }
+    
+}
+
+@media only screen and (max-width: 420px){
+    h3{
+        font-size: 10vw;
+        margin-top: 10vw;
+        margin-bottom: 12vw;
+    }
+
+
+    .criteria h4{
+        font-size: 5vw;
+        padding: 0.5vw 0vw;
+    }
+
+    form label{
+        font-size: 4.3vw;
+    }
+
+    form select:nth-child(4){
+        margin-left: 8vw;
+    }
+
+    form select{
+        width: 30%;
+        margin-right: 5vw;
+
+    }
+
+    form button{
+        display: block;
+        margin: auto;
+        width: 100%;
+    }
+
+    .table{
+        margin-top: 15vw;
+        border-collapse: collapse;
+        width: 50%;
+    }
+    
+    caption{
+        font-size: 6vw;
+    }
+	
 }
