@@ -23,6 +23,5 @@
         $resultquestion = $question->displayquestion();
         
         $resultanswers = $answer->displayanswers($question->id);
-
         echo json_encode(array_merge($resultquestion, $resultanswers));
     }

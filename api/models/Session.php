@@ -3,6 +3,7 @@ class Session{
       private $logged_in=false;
       public $user_id;
       public $user_username;
+      public $admin;
 
       function __construct() {
           session_start();
@@ -21,8 +22,9 @@ class Session{
       public function login($user) {
       // database should find user based on username/password
       if($user){
-        $this->user_id = $_SESSION['user_id'] = $user->username;
-        $this->user_username = $_SESSION['user_username'] = $user->id;
+        $this->user_id = $_SESSION['user_id'] = $user["username"];
+        $this->user_username = $_SESSION['user_username'] = $user["id"];
+        $this->admin = $_SESSION['admin'] = $user["admin"];
         $this->logged_in = true;
         }
       }

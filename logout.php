@@ -5,6 +5,7 @@
 
   unset($_SESSION['user_id']);
   unset($_SESSION['user_username']);
+  unset($_SESSION['admin']);
   
   header("Location: http://localhost/Q_and_A_Aplication/home.php");
   exit();

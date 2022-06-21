@@ -56,12 +56,13 @@
   <body>  
     <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/>
     <input type="hidden" id="session_var_id" value="<?php echo isset($_SESSION['user_username']) ? $_SESSION['user_username'] : '' ?>"/>
+    <input type="hidden" id="session_admin" value="<?php echo isset($_SESSION['admin']) ? $_SESSION['admin'] : '' ?>"/>
     <div id="containerpopup">
         <div id="popUp">
           <button id="close">&times;</button>
           <p id = "content">You must have an account to react to posts!</p>
-          <button id="buttons" onclick="window.location.href='login.php'">Log in</button>
-          <button id="buttons" onclick="window.location.href='sign-up.php'">Sign in</button>
+          <button id="buttons" onclick="window.location.href='login.php'" class ="buttons">Log in</button>
+          <button id="buttons" onclick="window.location.href='sign-up.php'" class = "buttons">Sign in</button>
         </div>
       </div>
 

@@ -20,10 +20,12 @@
     $user->firstname = $data->firstname;
     $user->lastname = $data->lastname;
     $user->email = $data->email;
+    $user->admin = 0;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user->username = $user->create();
+        $arruser = json_decode(json_encode($user), true);
         $session = new Session();
-        $session->login($user);
+        $session->login($arruser);
         
     }

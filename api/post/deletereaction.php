@@ -19,7 +19,10 @@
    
     $reaction->user = $data->user;
     $reaction->id_post = $data->id_post;
-
+    $reaction->is_question = $data->is_question;
+    $reaction->report = $data->report;
+    $reaction->like = $data->like;
+    $reaction->dislike = $data->dislike;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $reaction->deletereaction();

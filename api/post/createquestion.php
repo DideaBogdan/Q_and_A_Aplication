@@ -27,8 +27,5 @@
         $user2 = new User($db);
 
         $user2->id = $user["id"];
-        print_r($user2);
         $user2->verifyadmin();
-
-        
     }

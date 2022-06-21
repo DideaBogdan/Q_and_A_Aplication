@@ -58,14 +58,14 @@
             
             $stmt->bindParam(':username', $this->username, PDO::PARAM_STR);
             //$stmt->bindParam(':password', $this->password, PDO::PARAM_STR);
-          
+            /// aici aveam treaba -- sa setez $_Session["admin"];
             $stmt->execute();
-            $result = $stmt-> fetchAll();
+            $result = $stmt-> fetchAll(PDO::FETCH_ASSOC);
             $vf_pass=$result[0]["password"];
             
             if(password_verify($this->password, $vf_pass)){
                 echo json_encode(array('message'=> 'Logged into the account!'));
-                return $result[0]["id"];
+                return $result[0];
             } else {
                 echo json_encode(array('message'=> 'Username or password are incorect!'));
                 return false;

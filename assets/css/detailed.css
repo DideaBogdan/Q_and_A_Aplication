@@ -394,6 +394,19 @@ body{
     );
     font-size: 18px;
 }
+.reportButton{
+    font-style: oblique;
+    outline: none;
+    float: right;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    font-size: 18px;
+}
 
 .reacted{
     background: linear-gradient(

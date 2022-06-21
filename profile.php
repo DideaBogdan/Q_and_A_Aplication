@@ -56,6 +56,7 @@
 <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/> 
 <input type="hidden" id="session_var_id" value="<?php echo isset($_SESSION['user_username']) ? $_SESSION['user_username'] : '' ?>"/>
 <input type="hidden" id="user_username" value="<?php echo isset($_GET['username']) ? $_GET['username'] : '' ?>"/>
+<input type="hidden" id="session_admin" value="<?php echo isset($_SESSION['admin']) ? $_SESSION['admin'] : '' ?>"/>
 
 <script defer src="../Q_and_A_Aplication/assets/js/userinfo.js"></script>
     <div id="containerpopup">

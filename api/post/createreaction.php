@@ -6,6 +6,8 @@
 
     include_once '../../api/config/Database.php';
     include_once '../../api/models/Reaction.php';
+    include_once '../../api/models/Question.php';
+    include_once '../../api/models/Answer.php';
     include_once '../../api/models/Session.php';
 
     $database = new Database();
@@ -19,10 +21,33 @@
     $reaction->like = $data->like;
     $reaction->dislike = $data->dislike;
     $reaction->user = $data->user;
+    $reaction->report = $data->report;
     $reaction->id_post = $data->id_post;
     $reaction->is_question = $data->is_question;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $reaction->createreaction();
+        $resp = $reaction->createreaction();
+        if($reaction->report == "1"){
+            $result = $reaction->getreaction();
+            if($result[0]["number"] == "2"){
+                if($reaction->is_question == "1"){
+                    $question = new Question($db);
+                    $question->id = $reaction->id_post;
+                    $question->deletequestionnojson();
+                    echo json_encode(array('message'=> 'Question deleted'));
+                }
+                else if($reaction->is_question == "0"){
+                    $answer = new Answer($db);
+                    $answer->id = $reaction->id_post;
+                    $answer->deleteanswernojson();
+                    echo json_encode(array('message'=> 'Answer deleted'));
+                }
+
+            }else{
+                echo $resp;
+            }
+        }else {
+            echo $resp;
+        }
         
     }

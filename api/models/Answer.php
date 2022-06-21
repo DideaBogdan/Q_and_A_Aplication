@@ -72,4 +72,14 @@
             return $result;
 
         }
+
+        public function  deleteanswernojson(){
+            $stmt = $this->conn->prepare("CALL delete_answer(:id)");
+            $stmt->bindParam(':id', $this->id);
+
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+
+        }
     }

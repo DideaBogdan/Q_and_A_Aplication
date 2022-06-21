@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2022 at 05:16 PM
+-- Generation Time: Jun 21, 2022 at 01:36 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -51,12 +51,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_question` (IN `p_text` VARCH
     UPDATE categories SET questions_count = questions_count+1 where p_category = name ;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_reaction` (IN `p_is_question` BOOLEAN, IN `p_like` BOOLEAN, IN `p_dislike` BOOLEAN, IN `p_user` VARCHAR(50), IN `p_id_post` INT(38))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_reaction` (IN `p_is_question` BOOLEAN, IN `p_like` BOOLEAN, IN `p_dislike` BOOLEAN, IN `p_report` BOOLEAN, IN `p_user` VARCHAR(50), IN `p_id_post` INT(38))   BEGIN
 	DECLARE 
     	user_id INT;
     SELECT id INTO user_id FROM users WHERE trim(username) = trim(p_user);
     
-    INSERT INTO reactions (is_question, `like`, dislike, user, id_post) VALUES (p_is_question, p_like, p_dislike, user_id, p_id_post); 
+    INSERT INTO reactions (is_question, `like`, dislike, report, user, id_post) VALUES (p_is_question, p_like, p_dislike,p_report, user_id, p_id_post); 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user` (IN `p_username` VARCHAR(20), IN `p_password` VARCHAR(300), IN `p_firstname` VARCHAR(50), IN `p_lastname` VARCHAR(50), IN `p_email` VARCHAR(50))   BEGIN
@@ -73,12 +73,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_question` (IN `p_id` INT(38)
     DELETE FROM answers WHERE question = p_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_reaction` (IN `p_user` VARCHAR(38), IN `p_id_post` INT(38))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_reaction` (IN `p_user` VARCHAR(38), IN `p_like` BOOLEAN, IN `p_dislike` BOOLEAN, IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` INT)   BEGIN
 	DECLARE 
     	user_id INT;
     SELECT id INTO user_id FROM users WHERE trim(username) = trim(p_user);
     
-    DELETE FROM reactions WHERE user = user_id AND id_post = p_id_post;
+    DELETE FROM reactions WHERE user = user_id AND id_post = p_id_post and p_is_question = is_question and p_like = `like` and p_dislike = dislike and p_report = report;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_answers` (IN `p_id` INT(50))   BEGIN
@@ -142,7 +142,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ledearboard_q` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question` (IN `p_id` INT(20))   BEGIN
-    SELECT q.id, q.text, u.username, q.category, q.updated_at, q.created_at from questions q LEFT OUTER JOIN users u ON u.id = q.user  WHERE q.id = p_id;
+    SELECT q.id, q.text, u.username, q.category, q.updated_at, q.created_at from questions q LEFT OUTER JOIN users u ON u.id = q.user WHERE q.id = p_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
@@ -152,7 +152,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reactions` ()   BEGIN
-	SELECT id_post, `like`, dislike, user, is_question from reactions ;
+	SELECT id_post, `like`, dislike, report,  user, is_question from reactions ;
+END$$
+
+CREATE DEFINER=`` PROCEDURE `get_reaction_count` (IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` BOOLEAN)   BEGIN
+	SELECT count(*) as number from reactions where p_report = report and p_id_post = id_post and p_is_question = is_question;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_statistics` ()   BEGIN
@@ -172,7 +176,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_id` (IN `p_username` VARCH
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login_by_username` (IN `p_username` VARCHAR(20))   BEGIN
-	SELECT id, username, password FROM users WHERE username = p_username ;
+	SELECT * FROM users WHERE username = p_username ;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_answer` (IN `p_id` INT(38), IN `p_text` VARCHAR(5000))   BEGIN
@@ -268,9 +272,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
-(1, 'Natura', 7),
-(2, 'Sport', 1),
-(5, 'Diverse', 47);
+(1, 'Natura', 23),
+(2, 'Sport', 3),
+(5, 'Diverse', 73);
 
 -- --------------------------------------------------------
 
@@ -287,13 +291,6 @@ CREATE TABLE `questions` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `questions`
---
-
-INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `updated_at`) VALUES
-(148, 'saddasdasdsadasasdaseqweqw', 111, 'Diverse', '2022-06-20 15:06:28', '2022-06-20 15:06:28');
-
 -- --------------------------------------------------------
 
 --
@@ -304,6 +301,7 @@ CREATE TABLE `reactions` (
   `is_question` tinyint(1) NOT NULL,
   `like` tinyint(1) NOT NULL,
   `dislike` tinyint(1) NOT NULL,
+  `report` tinyint(1) NOT NULL DEFAULT 0,
   `user` int(38) NOT NULL,
   `id_post` int(38) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -312,20 +310,109 @@ CREATE TABLE `reactions` (
 -- Dumping data for table `reactions`
 --
 
-INSERT INTO `reactions` (`is_question`, `like`, `dislike`, `user`, `id_post`) VALUES
-(1, 0, 1, 111, 80),
-(0, 0, 1, 111, 39),
-(1, 1, 0, 111, 83),
-(1, 1, 0, 111, 84),
-(1, 0, 1, 111, 85),
-(0, 1, 0, 111, 41),
-(1, 1, 0, 111, 86),
-(1, 0, 1, 111, 88),
-(1, 1, 0, 111, 89),
-(1, 0, 1, 111, 87),
-(1, 0, 1, 111, 49),
-(1, 1, 0, 111, 90),
-(1, 0, 1, 111, 91);
+INSERT INTO `reactions` (`is_question`, `like`, `dislike`, `report`, `user`, `id_post`) VALUES
+(0, 0, 0, 1, 111, 135),
+(0, 0, 1, 0, 111, 135),
+(1, 1, 0, 0, 111, 152),
+(1, 0, 0, 1, 111, 152),
+(1, 1, 0, 0, 111, 151),
+(1, 0, 0, 1, 111, 151),
+(1, 0, 0, 1, 112, 152),
+(1, 0, 0, 1, 114, 152),
+(1, 0, 0, 1, 114, 151),
+(1, 0, 0, 1, 114, 148),
+(1, 0, 0, 1, 115, 151),
+(1, 0, 0, 1, 115, 148),
+(1, 0, 0, 1, 112, 148),
+(1, 0, 0, 1, 112, 153),
+(1, 0, 0, 1, 112, 153),
+(1, 0, 0, 1, 116, 153),
+(1, 0, 0, 1, 116, 154),
+(1, 0, 0, 1, 116, 155),
+(1, 0, 0, 1, 116, 156),
+(1, 0, 1, 0, 116, 156),
+(1, 0, 0, 1, 116, 157),
+(1, 0, 0, 1, 116, 158),
+(1, 0, 0, 1, 116, 159),
+(1, 0, 0, 1, 116, 160),
+(1, 0, 0, 1, 116, 161),
+(1, 0, 0, 1, 116, 162),
+(1, 0, 0, 1, 116, 162),
+(1, 0, 0, 1, 116, 162),
+(1, 0, 0, 1, 116, 162),
+(1, 0, 0, 1, 116, 162),
+(1, 0, 0, 1, 116, 162),
+(1, 0, 0, 1, 116, 162),
+(1, 0, 0, 1, 116, 163),
+(1, 0, 0, 1, 116, 164),
+(1, 0, 0, 1, 116, 165),
+(1, 0, 0, 1, 116, 166),
+(1, 0, 0, 1, 116, 167),
+(1, 0, 0, 1, 116, 167),
+(1, 0, 0, 1, 116, 167),
+(1, 0, 0, 1, 116, 168),
+(1, 0, 0, 1, 116, 169),
+(1, 0, 0, 1, 116, 170),
+(1, 0, 0, 1, 116, 171),
+(1, 0, 1, 0, 116, 172),
+(1, 0, 0, 1, 116, 172),
+(1, 0, 1, 0, 116, 173),
+(1, 0, 0, 1, 116, 173),
+(0, 0, 0, 1, 116, 136),
+(1, 0, 0, 1, 116, 174),
+(1, 0, 0, 1, 116, 175),
+(1, 0, 0, 1, 116, 176),
+(1, 0, 0, 1, 116, 177),
+(1, 0, 0, 1, 116, 178),
+(1, 0, 0, 1, 116, 179),
+(1, 0, 0, 1, 116, 180),
+(1, 0, 0, 1, 116, 181),
+(1, 0, 0, 1, 116, 182),
+(1, 0, 0, 1, 116, 183),
+(0, 0, 0, 1, 116, 137),
+(1, 0, 0, 1, 116, 184),
+(1, 0, 0, 1, 116, 185),
+(0, 0, 0, 1, 116, 138),
+(0, 0, 0, 1, 116, 139),
+(1, 0, 0, 1, 116, 186),
+(1, 0, 0, 1, 116, 187),
+(1, 0, 0, 1, 116, 187),
+(1, 0, 0, 1, 116, 188),
+(1, 0, 0, 1, 116, 189),
+(0, 0, 0, 1, 116, 141),
+(0, 0, 0, 1, 116, 142),
+(1, 0, 0, 1, 116, 190),
+(0, 0, 0, 1, 116, 144),
+(0, 0, 0, 1, 116, 145),
+(0, 0, 0, 1, 116, 146),
+(0, 0, 0, 1, 116, 147),
+(0, 0, 0, 1, 116, 148),
+(0, 0, 0, 1, 116, 149),
+(0, 0, 0, 1, 116, 150),
+(0, 0, 0, 1, 116, 151),
+(0, 0, 0, 1, 116, 152),
+(0, 0, 0, 1, 116, 153),
+(0, 0, 0, 1, 116, 154),
+(1, 0, 1, 0, 116, 191),
+(1, 0, 0, 1, 116, 191),
+(1, 0, 1, 0, 116, 192),
+(1, 0, 0, 1, 116, 192),
+(1, 0, 0, 1, 116, 192),
+(1, 0, 1, 0, 116, 193),
+(1, 0, 0, 1, 116, 193),
+(0, 1, 0, 0, 116, 156),
+(0, 0, 1, 0, 116, 156),
+(0, 0, 0, 1, 116, 156),
+(1, 1, 0, 0, 111, 193),
+(1, 0, 0, 1, 111, 193),
+(1, 0, 0, 1, 111, 194),
+(1, 1, 0, 0, 111, 194),
+(1, 0, 1, 0, 115, 194),
+(0, 1, 0, 0, 115, 157),
+(0, 0, 0, 1, 115, 157),
+(1, 1, 0, 0, 116, 194),
+(0, 0, 0, 1, 116, 157),
+(1, 0, 0, 1, 116, 194);
 
 -- --------------------------------------------------------
 
@@ -350,7 +437,16 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `admin`) VALUES
 (111, 'bogdan3', '$2y$10$LIJGuw8M/jUbpR.6s1FJLOkqOAUw.l.TrYUbZATeQgvg56xXQG7uS', 'Didea', 'Bogdan', 'bogdan@qeasfasca', 0),
 (112, 'bogdan34', '$2y$10$RFf7gSY3AlhaMJFCj0VrvO4AGY3/mRWi6mwq67okylh0UMYaGkH8C', 'Didea', 'Bogdan', 'bogdan34@dasdasd.com', 0),
-(113, 'bogdansadsadasdaas', '$2y$10$hpDmn3EPxZe69p.CSguUyerc5px4Gi9VyJmE3usqXZgjIxEhrvUiC', 'Didea', 'Bogdan', 'bogdan3@sdasadadsasasddas', 0);
+(113, 'bogdansadsadasdaas', '$2y$10$hpDmn3EPxZe69p.CSguUyerc5px4Gi9VyJmE3usqXZgjIxEhrvUiC', 'Didea', 'Bogdan', 'bogdan3@sdasadadsasasddas', 0),
+(114, 'bogdan2', '$2y$10$XSCiua1BmqnCUTRgbIJav.sV7/cOHcWfK.hOsdAJNc3FOrqBdXQP.', 'Didea', 'Bogdan', 'bogdan2@gmail.com', 1),
+(115, 'bogdan4', '$2y$10$2Wc7QKU6gOPSI.8D2CNc8OooPIDvVJtm86LooF.2MHzJrg1CcQh1C', 'Didea', 'Bogdan', 'bogdan4@gmail.com', 0),
+(116, 'bogdan5', '$2y$10$I1v50.7qJDpMy7xEPXTTC.NHbw0FDLKfiV/jk.d8pZEpVzVkwXpRe', 'Didea', 'Bogdan', 'bogdan5@gmail.com', 1),
+(117, 'sdassad', '$2y$10$b33Q80qTVuNq9DmsTfCR9e36dXOZ8Cfg1cu.2rCQwSpjlNb3.gbRC', 'asdassda', 'dasdasd', 'sadsadas@fgmadasda', 0),
+(118, 'sadas', '$2y$10$ct34o4IqqVfvQGJ9FWzdFOwEPPV5xZr5v199ZYrvAJPG75apChQZe', 'sdaasd', 'dasdasd', 'bdasdsa@ogdan34', 0),
+(119, 'asdsadda', '$2y$10$dB0y2oj57K/e0h7rQl9VLuKVmjRn6rzoagkx2WAXEyFk5U3JTZDnK', 'dasd', 'dasda', 'basdaada@ogdan34', 0),
+(120, 'sddddsfsd', '$2y$10$AORfBknY.5BZyxMB9E/AreUnRXKD5KvJdvlvMptVy52eGCRjdUiOK', 'fdsfsdfsd', 'fsdfsdfsd', 'bofsdfsdfsd@gdan34', 0),
+(121, 'dasdasd', '$2y$10$t.sVfl0Ja1WQXd2Yu1AoRel6gt7m/j3/woAUbo3J6.KbdQ45/NjP2', 'dasdsadsa', 'dadasd', 'bdasdasd@ogdan34', 0),
+(122, 'sdsdffsdfsf', '$2y$10$w5pFoSwKGW3io7mwS.Fa2.Yb4mJHRxwNtlwdi9BR7gfCS6xbU7Ck.', 'fsdfsdfsd', 'fsdfsdfs', 'bodasdasdas@gdan34', 0);
 
 --
 -- Indexes for dumped tables
@@ -388,7 +484,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -400,13 +496,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
