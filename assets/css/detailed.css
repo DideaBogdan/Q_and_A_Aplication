@@ -444,5 +444,49 @@ body{
         display: inline;
         
     }
+    .likeButton{
+        font-style: oblique;
+        outline: none;
+        font-family: 'Poppins',sans-serif;
+        margin-top: 5px;
+        margin-right: 5px;
+        background: linear-gradient(
+            #1845ad,
+            #23a2f6
+        );
+        font-size: 16px;
+    }
     
+    .dislikeButton{
+        font-style: oblique;
+        outline: none;
+        font-family: 'Poppins',sans-serif;
+        margin-top: 5px;
+        margin-right: 5px;
+        background: linear-gradient(
+            #1845ad,
+            #23a2f6
+        );
+        font-size: 16px;
+    }
+    .reportButton{
+        font-style: oblique;
+        outline: none;
+        float: right;
+        font-family: 'Poppins',sans-serif;
+        margin-top: 5px;
+        margin-right: 5px;
+        background: linear-gradient(
+            #1845ad,
+            #23a2f6
+        );
+        font-size: 16px;
+    }
+    .reacted{
+        background: linear-gradient(
+            to right,
+            #ff512f,
+            #f09819
+        );
+    }
     }

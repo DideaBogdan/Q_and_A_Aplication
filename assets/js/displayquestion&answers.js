@@ -203,19 +203,19 @@ async function displayquestion_answers(json){
             divBtns.appendChild(likeButton);  
             divBtns.appendChild(dislikeButton);
 
-            if(isAdmin === "1"){
-          
+            if(isAdmin === "0"){
+                reportButton.setAttribute('style', 'display: none;');
+               
+            }
                 reportButton.innerText = "Report";
-              
+                
     
                 spanReport = document.createElement('span');
                 spanReport.innerText = reportint;
     
                 reportButton.appendChild(spanReport);
-    
-    
-                divBtns.appendChild(reportButton);  
-            }
+                
+                divBtns.appendChild(reportButton);
         
             questionForm.appendChild(get_time(element));
             questionForm.appendChild(questionTitle);
@@ -337,8 +337,10 @@ async function displayquestion_answers(json){
         divBtns.appendChild(likeButton);  
         divBtns.appendChild(dislikeButton);
 
-        if(isAdmin === "1"){
-          
+        if(isAdmin === "0"){
+            reportButton.setAttribute('style', 'display: none;');
+           
+        }
             reportButton.innerText = "Report";
             
 
@@ -346,10 +348,8 @@ async function displayquestion_answers(json){
             spanReport.innerText = reportint;
 
             reportButton.appendChild(spanReport);
-
-
-            divBtns.appendChild(reportButton);  
-        }
+            
+            divBtns.appendChild(reportButton);
         
         questionForm.appendChild(get_time(element));
         questionForm.appendChild(questionTitle);

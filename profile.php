@@ -127,23 +127,17 @@
               <button class="button">Save</button>
           </form>
           <form id="hobby" name="hobby">
-              <h3>Update your info</h3>
+              <h3>Your description</h3>
               <span id="msg"></span>
 
-              <label for="username">Username</label>
-              <input type="text"  id="username" name="username"  required >
+              <label for="hobbys">Hobbys</label>
+              <input type="text"  id="hobby" name="hobby">
 
-              <label for="username">First Name</label>
-              <input type="text"  id="first" name="firstname" required>
+              <label for="description">Description</label>
+              <input type="text"  id="description" name="description">
 
-              <label for="username">Last Name</label>
-              <input type="text"  id="last" name="lastname" required>
-
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email"  required>
-
-              <label for="password">Password</label>
-              <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
+              <label for="contact">Other ways of contact</label>
+              <input type="text"  id="contact" name="contact">
 
               <button class="button">Save</button>
 

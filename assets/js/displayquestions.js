@@ -189,8 +189,10 @@ async function displayquestions(json){
         divBtns.appendChild(likeButton);  
         divBtns.appendChild(dislikeButton);
 
-        if(isAdmin === "1"){
-          
+        if(isAdmin === "0"){
+            reportButton.setAttribute('style', 'display: none;');
+           
+        }
             reportButton.innerText = "Report";
             
 
@@ -198,11 +200,8 @@ async function displayquestions(json){
             spanReport.innerText = reportint;
 
             reportButton.appendChild(spanReport);
-
-
-            divBtns.appendChild(reportButton);  
-        }
-       
+            
+            divBtns.appendChild(reportButton);
 
         questionForm.appendChild(divBtns);
         questionForm.setAttribute('id', 'question-form');

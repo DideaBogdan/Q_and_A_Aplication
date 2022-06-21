@@ -96,58 +96,58 @@
     <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
       <h2>Cerință</h2>
       <p>
-      Sa se imagineze un sistem Web capabil sa gestioneze o serie de intrebari puse de utilizatori (anonimi ori autentificati prin nume de cont + parola) si raspunsurile aferente oferite de diverse persoane (la randul lor, anonime sau autentificate). 
-       Fiecarui utilizator i se va asocia un profil continand date personale, interese, posibilitati de contact etc., plus o serie de calificative (badges) obtinute pe baza activitatii in cadrul aplicatiei, acordate in mod automat
-       -- e.g., persoana cea mai curioasa (a pus un numar mare de intrebari), utilizatorul altruist (raspunde la orice intrebare aparuta), cel mai informat (ofera cele mai bune raspunsuri) etc.
-       Utilizatorii autentificati care au oferit deja minim R raspunsuri vor putea accepta ori considera ca fiind nepotrivite intrebarile/raspunsurile introduse.
-       Apoi, prin vot, atat intrebarile, cat si raspunsurile vor putea fi apreciate/depreciate.
-       Unei intrebari i se vor putea asocia o categorie, plus maxim T termeni de continut (tag-uri) ce pot fi folositi ulterior pentru cautare.
-       Aplicatia va genera -- in formatele HTML, Atom si JSON -- rapoarte vizand activitatile desfasurate intr-un anumit interval de timp (e.g., ultima ora, zi, saptamana),
-       privind o categorie de intrebari sau raspunsuri date de utilizatorii dintr-o arie geografica.
+      Să se imagineze un sistem Web capabil sa gestioneze o serie de întrebări puse de utilizatori (anonimi ori autentificați prin nume de cont + parolă) și răspunsurile aferente oferite de diverse persoane (la rândul lor, anonime sau autentificate). 
+       Fiecărui utilizator i se va asocia un profil conținând date personale, interese, posibilități de contact etc., plus o serie de calificative (badges) obținute pe baza activității în cadrul aplicației, acordate în mod automat
+       -- e.g., persoana cea mai curioasă (a pus un număr mare de întrebări), utilizatorul altruist (răspunde la orice întrebare apărută), cel mai informat (oferă cele mai bune răspunsuri) etc.
+       Utilizatorii autentificați care au oferit deja minim R răspunsuri vor putea accepta ori considera ca fiind nepotrivite intrebările/răspunsurile introduse.
+       Apoi, prin vot, atât întrebările, cât și răspunsurile vor putea fi apreciate/depreciate.
+       Unei întrebari i se vor putea asocia o categorie, plus maxim T termeni de conținut (tag-uri) ce pot fi folosiți ulterior pentru căutare.
+       Aplicația va genera -- în formatele HTML, Atom si JSON -- rapoarte vizând activitățile desfăsurate într-un anumit interval de timp (e.g., ultima oră, zi, săptămână),
+       privind o categorie de întrebări sau răspunsuri date de utilizatorii dintr-o arie geografică.
     </p>
     </section>
     <section id="introduction" role="doc-introduction">
       <h2>Introducere</h2>
       <p>
-      Aplicatiile de tipul "forum online" sunt foarte des intalnite, in prezent, mai ales in contextul
-        trecerii in mediul online a majoritatii activitatilor. Oamenii au trecut
-        tot mai mult la interactiunea/informarea prin intermediul aplicatiilor/site-urilor in defavoarea mijloacelor clasice de interactiune/informare (chiar si ajutare reciproca).
-        QAW preia majoritatea functiilor unui site tip "forum online" clasic, adaugand posibilitatea generarii de rapoarte referitoare la o arie geografica 
-        sau la o anumita categorie de intrebari, functionalitate ce permite imbunatatirea prin studiul acestor rapoarte. De asemenea, in pagina de pornire a
-        aplicatiei, orice utilizator poate vedea o lista a celor mai recente intrebari, lucru care poate sa il ajute in obtinerea de badge-uri sau obtinerea 
-        dreptului de a modifica intreabri/raspunsuri. De asemenea, aceasta functionalitate il poate ajuta pe utilizator in gasirea mai rapida a unui raspuns.
+      Aplicațiile de tipul "forum online" sunt foarte des întâlnite, în prezent, mai ales în contextul
+        trecerii în mediul online a majorității activităților. Oamenii au trecut
+        tot mai mult la interacțiunea/informarea prin intermediul aplicațiilor/site-urilor, în defavoarea mijloacelor clasice de interacțiune/informare (chiar și ajutare reciprocă).
+        <b>"Knowledge Bag"</b> (QAW) preia majoritatea funcțiilor unui site tip "forum online" clasic, adăugând posibilitatea generării de rapoarte referitoare la 
+        activitatea de pe site, funcționalitate ce permite îmbunătățirea, prin studiul acestor rapoarte. De asemenea, în pagina de pornire a
+        aplicației, orice utilizator poate vedea o listă a celor mai recente intrebări, lucru care ajută în obținerea de badge-uri sau obținerea 
+        dreptului de a modifica întrebări/răspunsuri. De asemenea, această funcționalitate îl poate ajuta pe utilizator în găsirea mai rapidă a unui răspuns.
       </p>
       <p>
-      QAW este o aplicatie de tip "forum online", ce permite utilizatorului sa isi creeze cont, sa adreseze intrebari
-        din diverse categorii si sa raspunda la alte intrebari deja existente pe site. De asemenea utilizatorii pot adresa intrebari sau raspunde la intrebari
-        in mod anonim. 
+      <b>"Knowledge Bag"</b> (QAW) este o aplicație prin care utilizatorii sunt ajutați sa se informeze, permițând utilizatorului să își creeze cont, să adreseze întrebări
+        din diverse categorii și să ajute la rândul său, prin a răspunde la alte întrebări deja existente pe site. De asemenea, utilizatorii pot adresa întrebări sau răspunde la întrebări
+        în mod anonim. 
       </p>
       <p>
-      Acesta poate vedea intrebare si raspunsurile in pagina intreabrii. Pentru fiecare utilizator logat va fi disponibila o pagina de profil, in care 
-        se vor regasi toate bagde-urile sale (calificative acordate in functie de activitatea sa), cat si informatii despre acesta. Un utilizator care a raspuns la mai multe
-        intrebari, poate valida intreabri/raspunsuri.
+      Acesta poate vedea întrebarea și răspunsurile la aceasta în pagina întrebării. Pentru fiecare utilizator logat va fi disponibilă o pagină de profil, în care 
+        se vor regăsi toate bagde-urile sale (calificative acordate în funcție de activitatea sa), cât și informații despre acesta. Un utilizator care a raspuns la mai multe
+        întrebări și a pus mai multe întrebări, poate valida intrebări/răspunsuri.
       </p>
     </section>
     <section id="user-guide">
       <h2>Ghid de utilizare</h2>
       <p>
-        Ghidul de utilizare al aplicatiei este disponibil <a href="ghid.php">aici</a>.
+        Ghidul de utilizare al aplicației este disponibil <a href="ghid.php">aici</a>.
       </p>
     </section>
     <section id="architecture">
       <h2>Arhitectura aplicației</h2>
       <p>
-      Din punct de vedere arhitectural, aplicatia este bazata pe modelul bine cunoscut MVC (Model-View-Controller), adaptat la utilizarea unui API.
-        Succesul modelului se datoreaza izolarii logicii de bussines fata de considerentele interfetei cu utilizatorul,
-        rezultand o aplicatie unde aspectul vizual sau/si nivelele inferioare ale regulilor de bussines sunt mai usor
-        de modificat, fara a afecta alte nivele.
+      Din punct de vedere arhitectural, aplicația este bazată pe modelul bine cunoscut <i>MVC (Model-View-Controller)</i>, adaptat la utilizarea unui API. 
+      Succesul modelului se datorează izolării logicii de bussines față de considerentele interfeței cu utilizatorul, 
+      rezultând o aplicație unde aspectul vizual sau/și nivelele inferioare ale regulilor de bussines sunt mai ușor de modificat, fară a afecta alte nivele.
       </p>
       <p>  
-      Astfel, o parte din conținutul din View este adăugat dinamic din JavaScript, 
-        care folosește Ajax pentru a cere datele necesare de la API; Modelele oferă o serie de funcții pentru acces direct la baza de date, 
-        fiind folosite de către API pentru executarea operațiilor; Controllerele sunt folosite conform modelului MVC tradițional, 
-        pentru randarea view-urilor.
-        O structurare in profunzime a aplicatiei sunt prezentate in sectiunile urmatoare.
+      Astfel, o parte din conținutul din <i>View</i> este adăugată dinamic din JavaScript, care folosește AJAX pentru a cere datele necesare de la API; 
+      <i>Modelele</i> oferă o serie de funcții pentru acces direct la baza de date, fiind folosite de către API pentru executarea operațiilor; 
+      <i>Controllerele</i> sunt folosite conform modelului MVC tradițional, pentru randarea view-urilor. 
+      </p>
+      <p>
+        O structurare în profunzime a aplicației este prezentată în secțiunile următoare.
       </p>
     </section>
     <section id="configuration">
@@ -157,41 +157,38 @@
         cum ar fi credențialele pentru baza de date.
       </p>
       <p>
-        Pentru lucrul local, variabilele de mediu sunt setate în fișierul api/config. <b>(!!!!!!!!!În mediul de deploy, aceste variabile 
-        de mediu sunt setate din setările proiectului pe Heroku.) </b>
+        Pentru lucrul local, variabilele de mediu sunt setate în fișierul api/config.
       </p>
     </section>
     <section id="appcomponents">
-        <h3>Componentele Aplicatiei</h3>
+        <h3>Componentele aplicației</h3>
         <p>
-        Principalele componente ale aplicatie sunt: Fornt-End, Back-End si Baza de Date. Acestea vor fi detaliate dupa cum urmeaza.
+        Principalele componente ale aplicație sunt: Fornt-End, Back-End și Baza de Date. Acestea vor fi detaliate după cum urmează.
       </p>
       <section id="frontend">
       <h2>Front-End</h2>
       <p>
-      Aici ne referim la toata partea de client, <span typeof="ComputerLanguage"><span property="schema:name">JavaScript</span>/
+      Aici ne referim la toată partea de client, <span typeof="ComputerLanguage"><span property="schema:name">JavaScript</span>/
        <span typeof="ComputerLanguage"><span property="schema:name">HTML</span>/ 
-       <span typeof="ComputerLanguage"><span property="schema:name">CSS</span>. In aceasta componenta se regasesc toate cele ce 
-       tin de aspectul si structura paginilor, dar si o parte de logica pentru diverse evenimente. Aducem si trimitem date catre server
-       constant deoarece in final site-ul are
-       scopul de prezenta raspunsurile la  intreabrile puse de utilizatori.
+       <span typeof="ComputerLanguage"><span property="schema:name">CSS</span>. În această componentă se regăsesc toate cele ce 
+       țin de aspectul și structura paginilor, dar și o parte de logică pentru diverse evenimente. Aducem și trimitem date către server
+       constant deoarece în final site-ul are scopul de a prezenta răspunsurile la  întrebările puse de utilizatori.
       </p>
       </section>
       <section id="backend">
       <h2>Back-End</h2>
       <p>
-        Toata logica aplicatiei. Partea de server este scrisa in <span typeof="ComputerLanguage"><span property="schema:name">PHP</span>. 
-        Avem un server REST simplu, care expune o serie de rute. Avem o functii utilitare care construiesc un raspuns dat, bazat pe datele 
-        primite si pe datele extrase din baza de date.<b> DE COMPLETAT!!</b>
+        Toată logica aplicației. Partea de server este scrisă în <span typeof="ComputerLanguage"><span property="schema:name">PHP</span>. 
+        Avem un server REST simplu, care expune o serie de rute. Avem o serie funcții utilitare care construiesc un răspuns dat, bazat pe datele 
+        primite și pe datele extrase din baza de date. Back-End-ul procesează datele primite de la Front-End, oferinâd acestuia informații din baza de date.
       </p>
       </section>
 
       <section id="database">
       <h2>Baza de date</h2>
       <p>
-        Pentru stocarea de date am folosit o bază de date MySQL <b>(găzduită pe Heroku, același mediu în care am făcut
-        deploy)</b>. Acest lucru a simplificat mult și lucrul local la proiect, nefiind nevoie ca membrii echipei să
-        introducă manual datele. În continuare vom prezenta structura tabelelor din această bază de date.
+        Pentru stocarea de date am folosit o bază de date MySQL. In aceasta sunt, de asemenea, stocate și procedurile ce sunt apelate de către Back-End. 
+        În continuare vom prezenta structura tabelelor din această bază de date.
       </p>
       <section id="users-table">
         <h3>Tabela "Users"</h3>
@@ -200,48 +197,48 @@
           <figcaption>Fig. 1 - Structura tabelei Users</figcaption>
         </figure> -->
         <p>
-          Aceasta tabela conține datele despre utilizatorii aplicației. La click pe butonul Log in de pe pagina 
-          principala, utilizatorul va fi redirectionat spre pagina de Log In unde isi va introduce andresa de username-ul si parola pentru a se 
-          conecta. Dacă username-ul respectiv nu a fost introdus deja în tabelul Users, se va afisa un mesaj de eroare, iar utilizatorul v-a trebui sa 
-          se inregistreze folosind butonul Sign up. Câmpul "id" va fi incrementat automant, campul "username" va retine numele utilizatorului 
-          campul "password" va fi cripatata cu un hash, iar restul informatiilor ("firstname", "lastname", "email" ) vor fi 
-          introduse in baza de date la campurile corespunzatoarea.
+          Această tabelă conține datele despre utilizatorii aplicației. La click pe butonul <i>Log in</i> de pe pagina 
+          principală, utilizatorul va fi redirecționat spre pagina de <i>Log In</i> unde își va introduce username-ul și parola pentru a se 
+          conecta. Dacă username-ul respectiv nu a fost introdus deja în tabelul "Users", se va afișa un mesaj de eroare, iar utilizatorul v-a trebui să 
+          se înregistreze folosind butonul <i>Sign up</i>. Câmpul "id" va fi incrementat automant, câmpul "username" va reține numele utilizatorului, 
+          câmpul "password" va fi cripatata cu un hash, iar restul informațiilor ("firstname", "lastname", "email","description") vor fi 
+          introduse în baza de date la câmpurile corespunzătoare.
         </p>
         <p>
-          Cheia primara este campul "id", ce va juca si rol de cheie straina in celelalte tabele.
+          Cheia primară este campul "id", ce va juca și rol de cheie străină în celelalte tabele.
         </p>
       </section>
       <section id="questions-table">
         <h3>Tabela "Questions"</h3>
-        <!--<figure typeof="sa:image">
-          <img src="">
+        <figure typeof="sa:image">
+          <img src="images\doc\questions.jpg">
           <figcaption>Fig. 2 - Structura tabelei Questions</figcaption>
-        </figure> -->
+        </figure> 
         <p>
-          Aceastaa tabela conține date despre intrebarile ce au fost puse. Câmpul "id" este folosit la gestionarea intrebarilor, campul 
-          "user" este folost pentru a memora posesorul intrebarii, campul "text" va fi folosit pentru memorarea propriu-zisa a intrebarii, 
-          campurile "created_at" si "updated_at" vor fi folosite pentru gestiunea 
-          temporala a evenimentelor, iar campul "category" va fi folosit pentru memorarea categoriei intrebarii.  
+          Această tabelă conține date despre întrebările ce au fost puse. Câmpul "id" este folosit la gestionarea întrebărilor, câmpul 
+          "user" este folosit pentru a memora posesorul întrebării, câmpul "text" va fi folosit pentru memorarea propriu-zisă a întrebării, 
+          câmpurile "created_at" și "updated_at" vor fi folosite pentru gestiunea 
+          temporală a evenimentelor, iar câmpul "category" va fi folosit pentru memorarea categoriei întrebării.  
         </p>
         <p>
-          Cheia primara este "id", ce va fi folosita ca si cheie straina pentru tabela "answers".
+          Cheia primară este "id", ce va fi folosită ca și cheie străină pentru tabela "answers".
         </p>
       </section>
       <section id="answers-table">
         <h3>Tabela "Answers"</h3>
-        <!--<figure typeof="sa:image">
-          <img src="">
+        <figure typeof="sa:image">
+          <img src="images\doc\answers.jpg">
           <figcaption>Fig. 3 - Structura tabelei Answers</figcaption>
-        </figure> -->
+        </figure> 
         <p>
-          Aceasta tabela conține date despre raspunsurile fiecărui utilizator la intrebarile din baza de date.  
-          Este inserată o intrare nouă atunci când utilizatorul adauga un raspuns. Când un utilizator dă submit la 
-          raspuns, este incrementat câmpul "id" si sunt completate celelalte campuri: "user" pentru a retine autorul raspunsului, 
-          "question" pentru a retine intrebarea corespunzatoare, iar "created_at" si "updated_at" pentru informatiile legate de 
-          data cand au fost create sau actualizate intrebarile.
+          Această tabelă conține date despre răspunsurile fiecărui utilizator la întrebările din baza de date.  
+          Este inserată o intrare nouă atunci când utilizatorul adaugă un răspuns. Când un utilizator dă submit la 
+          răspuns, este incrementat câmpul "id" și sunt completate celelalte câmpuri: "user" pentru a reține autorul răspunsului, 
+          "question" pentru a reține întrebarea corespunzătoare, iar "created_at" si "updated_at" pentru informațiile legate de 
+          data când au fost create sau actualizate întrebările.
         </p>
         <p>
-          Cheia primara este "id".
+          Cheia primară este "id".
         </p>
       </section>
       <section id="categories-table">
