@@ -16,6 +16,10 @@
     background-color: #555;
   }
   */
+  .welcome{
+    color: #f09819;
+    font-size: 17px;
+}
 
   .shouldnt-be-here{
     font-size: 50px;
@@ -91,7 +95,6 @@
     font-family: 'Prata', serif;
     color: white;
     font-size: 0.65vw;
-
 }
 
 #badge-locked{
@@ -102,6 +105,7 @@
     height: 32vw;
     display: block;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .scroll-data::-webkit-scrollbar-track {
@@ -430,7 +434,7 @@ input{
     height: fit-content;
     width: 80%;
     text-decoration: none;
-    margin: 1vw 3vw 1vw 3vw;
+    margin: 4vw 3vw;
     padding: 0.5vw 0.2vw;
     background-color: rgba(246, 245, 244, 0.3);
     border-radius: 10px;
@@ -440,11 +444,164 @@ input{
     font-family: 'Poppins',sans-serif;
     color: #ffffff;
     letter-spacing: 0.5px;
+    text-align: center;
+    color: #f09819;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
 
     .profile-body{
-        display: inline;
+        grid-template-columns: 50% 50%;
+        gap: 10vw 2.5vw;
+    }
+
+    .badges{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        margin-top: 3vw;
+        margin-right: 6vw;
+        margin-left: 6vw;
+    }
+
+    .questions>h3,.answers>h3{
+        font-size: 3vw;
+    }
+    
+    .questions>p,.answers>p{
+        font-size: 1.8vw;
+    }
+
+    .button{
+        display: block;
+        margin: auto;
+        margin-top: 6vw;
+    }
+    
+}
+
+@media only screen and (max-width: 650px) {
+
+    .profile-body{
+        grid-template-columns: 10% 90% 10%;
+        row-gap: 15vw;
+    }
+
+    #user-info{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        height: 60vw;
+
+    }
+
+    .badges{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        margin-right: 18vw;
+        height: 120vw;
+    }
+
+    .badges>p{
+        margin: 4vw 10vw;
+        margin-bottom: 10vw;
+        font-size: 7vw;
+        border-bottom: 0.5vw black solid;
+    }
+    
+    .badge-item{
+        margin-bottom: 9vw;
+    }
+    
+    .badge-image{
+        width: 12vw;
+    }
+    
+    .badge-title{
+        font-size: 2.2vw;
+    }
+
+    .questions{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        height: 100vw;
+
+    }
+
+    .answers{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 5;
+        height: 100vw;
+    }
+
+    .scroll-data{
+        height: 80vw;
+    }
+
+    .questions>h3,.answers>h3{
+        margin-right: 10vw;
+        font-size: 5vw;
+    }
+    
+    .questions>p,.answers>p{
+        margin-right: 10vw;
+        font-size: 3.5vw;
+    }
+
+    .scroll-data>div>a{
+        font-size: 4vw;
+    }
+    
+    #inputA{
+        font-size: 3vw;
+    }
+
+    #inputQ{
+        font-size: 3vw;
+    }
+
+    .edit-btn{
+        font-size: 2.2vw;
+    }
+
+    .button{
+        margin-top: 12vw;
+    }
+
+    input{
+        height: 4vw;
+        font-size: 3vw;
+    }
+    
+}
+
+@media only screen and (max-width: 420px) {
+    #user-info{
+        height: 75vw;
+    }
+
+    #inputA{
+        font-size: 3.5vw;
+    }
+
+    #inputQ{
+        font-size: 3.5vw;
+    }
+
+    .edit-btn{
+        font-size: 2.5vw;
+    }
+
+    input{
+        height: 6vw;
+        font-size: 5vw;
     }
 }

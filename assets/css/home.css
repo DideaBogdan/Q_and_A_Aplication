@@ -83,10 +83,11 @@ body{
 }
 .ladeboard-row>p{
     display: flex;
-    margin: auto;
     border: none;
+    margin-top: 0;
     color: #f09819;
-    font-size:17px;
+    font-size: 17px;
+    margin-bottom: 0;
 }
 .ladeboard-row>p:nth-child(2):hover{
     cursor: pointer;
@@ -203,11 +204,7 @@ body{
     padding: 15px;
     border-radius: 4px;
   }
-.welcome{
-    color: #f09819;
-    font-size: 17px;
-    border-bottom: 1px #ff512f solid;
-}
+
 
 
 /*CSS BASIC FORMULAR CREARE INTREBARE*/

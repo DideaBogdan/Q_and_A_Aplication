@@ -31,7 +31,8 @@
     '<div id="topnav">
       <a href="home.php">Home</a>
       <a href="contact.php">Contact</a>
-      <a href="about.php">About</a>';
+      <a href="about.php">About</a>
+      <a href="report.php">Report</a>';
       if(!isset($_SESSION['user_id'])){
         echo'
           <a style="float:right;" href="sign-up.php">Sign Up</a>
@@ -65,16 +66,11 @@
         <p id = "content"></p>
       </div>
     </div>
-
-    <?php
-      if(isset($_SESSION['user_id']))
-      {
-        echo ' <p class="welcome"> Hello '. $_SESSION['user_id'].' <p>'; ?>
-       
+      
         <div class="profile-body">
           
         <div id="user-info">
-          <h3>Hello user</h3>
+          Welcome
         </div>
         <div class="questions">
           <h3>Your questions</h3>
@@ -143,13 +139,5 @@
 
           </form>
           </div>  
-
-
-
-<?php
-      } else {
-        echo '<div class="shouldnt-be-here"><p>HOOPS!</p> You shouldnt be here, go back to the <a href="home.php"> mainpage</a> or <a href="login.php">login</a> first.</div>';
-      }
-    ?>
 </body>
 </html>

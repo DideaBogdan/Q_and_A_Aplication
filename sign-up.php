@@ -25,7 +25,8 @@
     '<div id="topnav">
       <a href="home.php">Home</a>
       <a href="contact.php">Contact</a>
-      <a href="about.php">About</a>';
+      <a href="about.php">About</a>
+      <a href="report.php">Report</a>';
       if(!isset($_SESSION['user_id'])){
         echo'
           <a style="float:right;" href="sign-up.php" class="active1">Sign Up</a>
