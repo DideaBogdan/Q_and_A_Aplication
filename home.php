@@ -81,7 +81,7 @@
       </div>
   
       <div id="main-pannel">
-        <div>
+        <div id="mid-buttons">
           <button type="button" id="formbutton">Ask a question</button>
           <form id="search-question" name="search-question">
             <input type="search" placeholder="Search questions" id="src-question" name="src-question" role="textbox" maxlength="5000">
