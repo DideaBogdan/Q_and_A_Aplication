@@ -1,0 +1,126 @@
+h3{
+    background: -webkit-linear-gradient(#ff512f, #f09819);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: sans-serif;
+    font-style: italic;
+    text-align: center;
+    font-size: 4vw;
+    margin-top: 2vw;
+    margin-bottom: 5vw;
+    color: #ffffff;
+}
+
+.criteria{
+    display: block;
+    border: 2px black solid;
+    margin: 2vw 20vw;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+}
+
+.criteria h4{
+    font-size: 1.5vw;
+    background: -webkit-linear-gradient(#ff512f, #f09819);
+    border-bottom: 2px black solid;
+    color: white;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.criteria form{
+    display: block;
+    margin: auto;
+    width: 100%
+}
+
+
+form label{
+    font-size: 1.3vw;
+    width: 25%;
+    color: #f09819;
+
+}
+
+form select{
+    width: 25%;
+}
+
+form button{
+    width: 20%
+    /* padding-right: 3vw;
+    padding-left: 3vw; */
+}
+
+.table{
+    width: 80%;
+    margin: auto;
+    margin-top: 5vw;
+    border: 4px black solid;
+    background-color: white;
+}
+
+caption{
+    border: 4px black solid;
+    border-bottom: transparent;
+    background-color: white;
+    font-weight: bolder;
+    font-size: 1.5vw;
+
+}
+
+th[scope="col"]{
+    border: 3px black solid;
+    padding-top: -2vw;
+    border-top: transparent;
+    border-left: transparent;
+}
+
+th[scope="row"]{
+    border-bottom: 2px black solid;
+}
+
+td{
+    border-left: 2px black solid;
+    border-bottom: 2px black solid;
+}
+
+@media only screen and (max-width: 770px){
+    h3{
+        font-size: 7vw;
+        margin-top: 4vw;
+        margin-bottom: 8vw;
+    }
+
+
+    .criteria h4{
+        font-size: 2.5vw;
+        padding: 0.5vw 0vw;
+    }
+
+    form label{
+        font-size: 2.5vw;
+        width: 15%;
+    }
+
+    form select{
+        width: 15%;
+        
+
+    }
+
+    form button{
+        width: 15%;
+    }
+
+    .table{
+        margin-top: 8vw;
+        border-collapse: collapse;
+    }
+    
+    caption{
+        font-size: 3.5vw;
+    }
+    
+   
+}
