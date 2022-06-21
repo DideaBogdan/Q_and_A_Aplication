@@ -321,6 +321,8 @@ body{
 /*--------------------------------SHEARCH BAR--------------------------*/
  #mid-buttons{
      width: 100%;
+     margin:0 auto;
+
  }
 #search-question{
     align-items: center;
@@ -569,6 +571,10 @@ body{
         #ff512f,
         #f09819
     );
+}
+
+.hide{
+    display: none;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -57,20 +57,23 @@
             $stmt = $this->conn->prepare("CALL login_by_username(:username)");
             
             $stmt->bindParam(':username', $this->username, PDO::PARAM_STR);
-            //$stmt->bindParam(':password', $this->password, PDO::PARAM_STR);
-            /// aici aveam treaba -- sa setez $_Session["admin"];
+
             $stmt->execute();
             $result = $stmt-> fetchAll(PDO::FETCH_ASSOC);
-            $vf_pass=$result[0]["password"];
-            
-            if(password_verify($this->password, $vf_pass)){
-                echo json_encode(array('message'=> 'Logged into the account!'));
-                return $result[0];
-            } else {
-                echo json_encode(array('message'=> 'Username or password are incorect!'));
-                return false;
-            }    
-         }
+            if($result != null){
+                $vf_pass=$result[0]["password"];
+                if(password_verify($this->password, $vf_pass)){
+                    echo json_encode(array('message'=> 'Logged into the account!'));
+                    return $result;
+                } else {
+                    echo json_encode(array('message'=> 'Username or password are incorect!'));
+                    return false;
+                }    
+             }else {
+                    echo json_encode(array('message'=> 'Username or password are incorect!'));
+                    return false;
+                }
+        }
 
          public function getid($username){
             $stmt = $this->conn->prepare("CALL get_user_id(:username)");

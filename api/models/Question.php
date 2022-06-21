@@ -115,4 +115,15 @@
                 return false;
             }
         }
+
+
+        public function  getsearch($data){
+            $stmt = $this->conn->prepare("CALL get_question_search(:data)");
+            $stmt->bindParam(':data', $data, PDO::PARAM_STR);
+
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($result);
+            
+        }
     }

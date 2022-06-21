@@ -24,8 +24,11 @@
     $user->password = $data->password;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $user = $user->loginuser();
-        $session = new Session();
-        $session->login($user);
+        if($user = $user->loginuser()){
+            $arruser = json_decode(json_encode($user), true);
+            $session = new Session();
+            $session->login($arruser[0]);
+        }
+      
     }
     

@@ -97,9 +97,44 @@ function OnInput() {
   this.style.height = (this.scrollHeight) + "px";
 }
 
-searchBar = document.getElementById("search-question").addEventListener('keydown' , searchMatch);
 
-function searchMatch(e){
-    // e.preventDefault();
-    console.log(e.key);
-}
+
+searchBar = document.getElementById("search-question").addEventListener("input", showmatches);
+
+const resultTemplate = document.querySelector("[result-template]");
+const container = document.querySelector("[response-container]");
+
+let questions = [];
+
+async function showmatches(e){
+    console.log(e.target.value );
+    const value = e.target.value.toLowerCase();
+    questions.forEach(question => {
+        question.element.classList.toggle("hide", true);
+      });
+    const obj = {value : value};
+    let json = JSON.stringify(obj); 
+    let url = 'http://localhost/Q_and_A_Aplication/api/post/getsearch.php';
+    let header = new Headers();
+    header.append('Content-type', 'application/json');
+    let request = new Request( url, {
+        headers: header,
+        body: json,
+        method: 'POST',
+    });
+    await fetch(request)
+        .then((response) => response.json())
+        .then((data)=>{
+            questions = data.map(question => {
+                const card = resultTemplate.content.cloneNode(true).children[0];
+                const text = card.querySelector("[question-text]");
+                const category = card.querySelector("[question-category]");
+                text.textContent = question.text;
+                category.textContent = question.category;
+                container.append(card);
+                return { text: question.text, category: question.category, element: card };
+              });
+        })
+    .catch(console.warn);
+    }
+

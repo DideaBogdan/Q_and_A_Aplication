@@ -86,6 +86,14 @@
           <button type="button" id="formbutton">Ask a question</button>
           <form id="search-question" name="search-question">
             <input type="search" placeholder="Search questions" id="src-question" name="src-question" role="textbox" maxlength="5000">
+            <div id="responses" response-container></div>
+              <template result-template>
+                <div id="searchResults">
+                  <div question-text></div>
+                  <div question-category></div>
+                </div>
+              </template> 
+            
           </form>
         </div>
           <form id="formquestion" name="formquestion">
