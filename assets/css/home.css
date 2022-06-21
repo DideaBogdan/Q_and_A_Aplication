@@ -88,8 +88,12 @@ body{
     color: #f09819;
     font-size:17px;
 }
+.ladeboard-row>p:first-child{
+    margin-left: 1px;
+}
 .ladeboard-row>p:nth-child(2):hover{
     cursor: pointer;
+    overflow-wrap: break-word;
 }
 .ladeboard-row>p:last-child{
     color: rgb(30,132,242);
@@ -98,7 +102,7 @@ body{
     0 0 15px rgb(20, 20, 193),
     0 0 30px rgb(7, 0, 57), 
     0 0 45px rgb(37, 13, 216);
-    float: right;
+    margin-right: 1px;
 }
 /* spatiul intre pozitie(10) si numele utilizatorului sa fie la fel ca mai sus */
 
