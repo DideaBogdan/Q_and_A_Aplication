@@ -58,7 +58,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
@@ -85,7 +85,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
@@ -110,7 +110,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
@@ -135,7 +135,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
@@ -168,7 +168,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
@@ -196,7 +196,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
@@ -222,7 +222,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
@@ -248,7 +248,7 @@ function createpage(data){
                 badgeTitle.innerText = element['title'];
             } else{
                 img = document.createElement('img');
-                img.setAttribute('title',  element["desk_locked"]);
+                img.setAttribute('title',  element["desc_locked"]);
                 img.setAttribute('src',  data['locked_badge']['image_path']);
                 img.setAttribute('class', 'badge-image');
 
