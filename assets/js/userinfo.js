@@ -1,5 +1,6 @@
 let username = document.getElementById("session_var").value;
 let profileUser = document.getElementById("user_username").value;
+let isAdmin = document.getElementById("session_admin").value;
 let match = 0;
 if(username === profileUser){
     match = 1;
@@ -570,7 +571,34 @@ function showPopup(text){
         if(e.target === container) {
             popUp.style.display = "none";
             container.style.display = "none";
-            window.location.reload();
+         //  window.location.reload();
+        }
+    })
+
+    closeBtn = document.getElementById('close');
+    closeBtn.addEventListener('click', function(e){
+        popUp.style.display = "none";
+        container.style.display = "none";
+      // window.location.reload();
+    })
+}
+
+
+function showPopup2(text){
+    popUp = document.getElementById('popUp');
+    popUp.style.display = "block";
+
+    container = document.getElementById('containerpopup');
+    container.style.display = "block";
+
+    contentText = document.getElementById('content');
+    contentText.innerText = text;
+
+    container.addEventListener('click', function(e){
+        if(e.target === container) {
+            popUp.style.display = "none";
+            container.style.display = "none";
+          
         }
     })
 
@@ -583,7 +611,6 @@ function showPopup(text){
 }
 
 
-
 function OnInput() {
     this.style.height = "auto";
     this.style.height = (this.scrollHeight) + "px";
@@ -592,9 +619,8 @@ function OnInput() {
 
 
 updateForm = document.getElementById('update');
-hobbyForm = document.getElementById('hobby');
+
 updateForm.setAttribute("style", "display: none;");
-hobbyForm.setAttribute("style", "display: none;");
 
 showUpdateForm = document.getElementById('showUpdateForm');
 if(match === 0 ){
@@ -603,11 +629,53 @@ if(match === 0 ){
     showUpdateForm.addEventListener('click',()=>{
         if(updateForm.style.display === "none"){
             updateForm.removeAttribute("style", "display: none;");
-            hobbyForm.removeAttribute("style", "display: none;");
         }else{
             updateForm.setAttribute("style", "display: none;");
-            hobbyForm.setAttribute("style", "display: none;");
         }
     });
 }
 
+
+
+updateForm.addEventListener('submit', updateinfo);
+
+async function updateinfo(e){
+    e.preventDefault();
+    
+    let myForm = e.target;
+    let formData = new FormData(myForm);
+
+    let obj={oldusername : username, admin : isAdmin};
+    for(let key of formData.keys()){
+        let noExtraSpaces = formData.get(key).replace(/\s+/g, ' ').trim();
+        obj[key]= noExtraSpaces;
+    }
+    let json =  JSON.stringify(obj);
+    console.log(json);
+
+    let url = 'http://localhost/Q_and_A_Aplication/api/post/updateinfo.php';
+    let header = new Headers();
+    header.append('Content-type', 'application/json');
+
+    let request = new Request( url, {
+        headers: header,
+        body: json,
+        method: 'POST',
+    });
+
+    await fetch(request)
+        .then((response) => response.json())
+        .then((data)=>{
+            console.log(data);
+            if(data.message === "Account updated"){
+              showPopup("Log in again to update your info!");
+              setTimeout(() => {
+                window.location.href = "http://localhost/Q_and_A_Aplication/logout.php";
+              }, "3000");
+            }else {
+                showPopup2("Username/email already in use!");
+            }
+        })
+        .catch(console.warn);
+
+    }

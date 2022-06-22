@@ -54,6 +54,7 @@
 
   ?>
 <body> 
+  <div id="help"></div>
 <input type="hidden" id="session_var" value="<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '' ?>"/> 
 <input type="hidden" id="session_var_id" value="<?php echo isset($_SESSION['user_username']) ? $_SESSION['user_username'] : '' ?>"/>
 <input type="hidden" id="user_username" value="<?php echo isset($_GET['username']) ? $_GET['username'] : '' ?>"/>
@@ -121,22 +122,6 @@
               <input type="password"  id="password" name="password" placeholder="You can provide a new password" minlength="8">
 
               <button class="button">Save</button>
-          </form>
-          <form id="hobby" name="hobby">
-              <h3>Your description</h3>
-              <span id="msg"></span>
-
-              <label for="hobbys">Hobbys</label>
-              <input type="text"  id="hobby" name="hobby">
-
-              <label for="description">Description</label>
-              <input type="text"  id="description" name="description">
-
-              <label for="contact">Other ways of contact</label>
-              <input type="text"  id="contact" name="contact">
-
-              <button class="button">Save</button>
-
           </form>
           </div>  
 </body>

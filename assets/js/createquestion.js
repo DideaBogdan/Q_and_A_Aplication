@@ -102,7 +102,7 @@ function OnInput() {
 searchBar = document.getElementById("search-question").addEventListener("input", showmatches);
 
 const resultTemplate = document.querySelector("[result-template]");
-const container = document.querySelector("[response-container]");
+const containerr = document.querySelector("[response-container]");
 
 let questions = [];
 
@@ -128,10 +128,12 @@ async function showmatches(e){
             questions = data.map(question => {
                 const card = resultTemplate.content.cloneNode(true).children[0];
                 const text = card.querySelector("[question-text]");
+                text.setAttribute("href", "http://localhost/Q_and_A_Aplication/detailed.php?id=" + question.id);
+                
                 const category = card.querySelector("[question-category]");
                 text.textContent = question.text;
                 category.textContent = question.category;
-                container.append(card);
+                containerr.append(card);
                 return { text: question.text, category: question.category, element: card };
               });
         })

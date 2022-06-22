@@ -89,7 +89,7 @@
             <div id="responses" response-container></div>
               <template result-template>
                 <div id="searchResults">
-                  <div question-text></div>
+                  <a question-text></a>
                   <div question-category></div>
                   <hr></hr>
                 </div>

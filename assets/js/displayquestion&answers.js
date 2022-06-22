@@ -203,7 +203,7 @@ async function displayquestion_answers(json){
             divBtns.appendChild(likeButton);  
             divBtns.appendChild(dislikeButton);
 
-            if(isAdmin === "0"){
+            if(isAdmin === "0" || isAdmin === ""){
                 reportButton.setAttribute('style', 'display: none;');
                
             }
@@ -337,7 +337,7 @@ async function displayquestion_answers(json){
         divBtns.appendChild(likeButton);  
         divBtns.appendChild(dislikeButton);
 
-        if(isAdmin === "0"){
+        if(isAdmin === "0" || isAdmin === ""){
             reportButton.setAttribute('style', 'display: none;');
            
         }
