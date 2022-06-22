@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.3.0-dev+20220618.41c48b423e
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 22, 2022 at 01:38 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Gazdă: 127.0.0.1
+-- Timp de generare: iun. 22, 2022 la 06:27 AM
+-- Versiune server: 10.4.24-MariaDB
+-- Versiune PHP: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `q&a_app`
+-- Bază de date: `q&a_app`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Proceduri
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_anonymous_answer` (IN `p_text` VARCHAR(5000), IN `p_question` INT(20))   BEGIN
 	INSERT INTO answers (text, question) VALUES (p_text, p_question);
@@ -213,7 +213,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers`
+-- Structură tabel pentru tabel `answers`
 --
 
 CREATE TABLE `answers` (
@@ -226,16 +226,52 @@ CREATE TABLE `answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `answers`
+-- Eliminarea datelor din tabel `answers`
 --
 
 INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_at`) VALUES
-(158, 'wsdfcgvhbj', 195, NULL, '2022-06-21 12:17:41', '2022-06-21 12:17:41');
+(158, 'wsdfcgvhbj', 195, NULL, '2022-06-21 12:17:41', '2022-06-21 12:17:41'),
+(159, 'Cel mai popular sport este fotbalul.', 198, 125, '2022-06-22 03:25:08', '2022-06-22 03:25:08'),
+(160, 'Consider ca este o intrebare care nu isi are rostul.', 196, 125, '2022-06-22 03:37:04', '2022-06-22 03:37:04'),
+(161, 'Cum probabil toata lumea stie, Ronaldo.', 202, 125, '2022-06-22 03:37:48', '2022-06-22 03:37:48'),
+(162, 'Platon a creat scoala filosofica.', 209, 125, '2022-06-22 03:38:19', '2022-06-22 03:38:19'),
+(163, 'Aristotel, deoarece el a dezvoltat sistemul filosofic.', 209, 126, '2022-06-22 03:41:46', '2022-06-22 03:41:46'),
+(164, 'Santiago Bernabeu - Madrid, Spania - capacitate : 90000 locuri.', 208, 126, '2022-06-22 03:43:02', '2022-06-22 03:43:02'),
+(165, 'Nu', 207, 126, '2022-06-22 03:45:32', '2022-06-22 03:45:32'),
+(166, 'In Marea Corarilor, nord-estul Australiei.', 203, 126, '2022-06-22 03:46:48', '2022-06-22 03:46:48'),
+(167, 'Real Madrid.', 214, 127, '2022-06-22 03:49:06', '2022-06-22 03:49:06'),
+(168, ' Cauză pentru care frunzele cad nu este legată de frig sau iarnă, ci de…secetă!', 200, 127, '2022-06-22 03:50:06', '2022-06-22 03:50:06'),
+(169, 'Cu ajutorul extraterestrilor :)).', 205, 127, '2022-06-22 03:51:04', '2022-06-22 03:51:04'),
+(170, 'Depinde de cat timp investesti in acel ceva.', 210, 128, '2022-06-22 03:53:11', '2022-06-22 03:53:11'),
+(171, 'Incepe din ce in ce mai mult sa fie, si sunt organizate si turnee, oricum ar bate mult inspre sah, nu sport de contact.', 206, 128, '2022-06-22 03:54:34', '2022-06-22 03:54:34'),
+(172, 'Din totdeauna.', 204, 129, '2022-06-22 03:56:09', '2022-06-22 03:56:09'),
+(173, 'Cel mai probabil nimic, dar cred ca ar fi mai indicat sa consulti un doctor decat sa pierzi timpul pe aici.', 201, 129, '2022-06-22 03:56:51', '2022-06-22 03:56:51'),
+(174, 'Muntele este demonstrat ca fiind cel mai bun loc pentru o vacanta pentru persoanele care cauta eliminarea stresului.', 218, 125, '2022-06-22 04:02:36', '2022-06-22 04:02:36'),
+(175, '77 de ani', 217, 125, '2022-06-22 04:02:48', '2022-06-22 04:02:48'),
+(176, 'Seria de filme Harry Potter, probabil si datorita cartilor aparute precend si a publicitatii masive de care a avut partei inainte de lansare.', 215, 125, '2022-06-22 04:03:34', '2022-06-22 04:03:34'),
+(177, 'Nu toate albinele mor', 220, 125, '2022-06-22 04:03:50', '2022-06-22 04:03:50'),
+(178, '55 de grade celsius, inregistrata in Valea Mortii, California.', 216, 125, '2022-06-22 04:04:48', '2022-06-22 04:04:48'),
+(179, 'Cel mai popula sport din lume este fotbalul, dar este o intrebare specifica pentru fiecare tara.', 213, 125, '2022-06-22 04:05:13', '2022-06-22 04:05:13'),
+(180, 'Regula celor 10000 de ora se aplica foarte bine aici, dupa 10000 de ore petrecute in ceva nou, poti spune ca te apropii in a deveni maestru.', 210, 125, '2022-06-22 04:05:58', '2022-06-22 04:05:58'),
+(181, 'Este o intrebare care da batai de cap si astazi cercetatorilor.', 205, 125, '2022-06-22 04:06:17', '2022-06-22 04:06:17'),
+(182, 'Pentru ca cultura lor se bazeaza pe alte sportutri care de ex nu sunt populare la noi.', 219, 125, '2022-06-22 04:06:41', '2022-06-22 04:06:41'),
+(183, 'Real Madrid cu 14 trofee castigate.', 214, 125, '2022-06-22 04:07:42', '2022-06-22 04:07:42'),
+(184, 'Acel sport este unul extrem si nu este recomandat nimanui.', 225, 130, '2022-06-22 04:11:02', '2022-06-22 04:11:02'),
+(185, 'Piramida lui Keops – Marea Piramidă din Giza/Gizeh Grădinile Suspendate din Babilon – Grădinile Semiramidei Templul Zeiței Artemis din Efes – Templul Dianei Statuia lui Zeus din Olympia Mausoleul din Halicarnas Colosul din Rodos Farul din Alexandria\n', 224, 130, '2022-06-22 04:11:41', '2022-06-22 04:11:41'),
+(186, 'Cel recomandat este de 2l, cel mediu de lichide este mai mare, cel de apa mai mic :))', 223, 130, '2022-06-22 04:12:05', '2022-06-22 04:12:05'),
+(187, 'El nu este albastru, doar ca noi il vedem asa.', 199, 130, '2022-06-22 04:12:30', '2022-06-22 04:12:30'),
+(188, 'Depinde daca este munca fizica sau nu, depinde daca muncesti incontinuu sau nu.', 226, 131, '2022-06-22 04:13:47', '2022-06-22 04:13:47'),
+(189, '30 min pe zi odata la 2 zile', 222, 131, '2022-06-22 04:16:33', '2022-06-22 04:16:33'),
+(190, 'Deoarece pentru majoritatea animalelor saliva functioneaza drept tratament pentru acele rani.', 221, 132, '2022-06-22 04:18:27', '2022-06-22 04:18:27'),
+(191, 'Prin exersare poti oricand sa mareste acel cat.', 226, 132, '2022-06-22 04:19:09', '2022-06-22 04:19:09'),
+(192, '?', 195, 132, '2022-06-22 04:19:19', '2022-06-22 04:19:19'),
+(193, 'Cea vizuala, desenul.', 228, 133, '2022-06-22 04:21:22', '2022-06-22 04:21:22'),
+(194, 'Generalul Sherman, acestia pot fi gasiti in SUA - Carolina de nord si ajung la o inaltime de 75 de m.', 227, 133, '2022-06-22 04:22:50', '2022-06-22 04:22:50');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `badges`
+-- Structură tabel pentru tabel `badges`
 --
 
 CREATE TABLE `badges` (
@@ -248,7 +284,7 @@ CREATE TABLE `badges` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `badges`
+-- Eliminarea datelor din tabel `badges`
 --
 
 INSERT INTO `badges` (`id`, `title`, `description`, `image_path`, `category`, `desc_locked`) VALUES
@@ -269,7 +305,7 @@ INSERT INTO `badges` (`id`, `title`, `description`, `image_path`, `category`, `d
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Structură tabel pentru tabel `categories`
 --
 
 CREATE TABLE `categories` (
@@ -279,18 +315,18 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categories`
+-- Eliminarea datelor din tabel `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
-(1, 'Natura', 24),
-(2, 'Sport', 3),
-(5, 'Diverse', 73);
+(1, 'Natura', 32),
+(2, 'Sport', 12),
+(5, 'Diverse', 88);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questions`
+-- Structură tabel pentru tabel `questions`
 --
 
 CREATE TABLE `questions` (
@@ -303,18 +339,50 @@ CREATE TABLE `questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `questions`
+-- Eliminarea datelor din tabel `questions`
 --
 
 INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `updated_at`) VALUES
 (195, 'asdfghjkl', 116, 'Natura', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
 (196, 'o intrebare de test care contine cuvantul Natura', 116, 'Natura', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
-(197, 'o intrebare de test care contine cuvantul ', 116, 'Sport', '2022-06-21 12:16:16', '2022-06-21 12:16:16');
+(197, 'o intrebare de test care contine cuvantul ', 116, 'Sport', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
+(198, 'Care este cel mai popular sport?', NULL, 'Sport', '2022-06-22 03:23:20', '2022-06-22 03:23:20'),
+(199, 'De ce este cerul albastru?', 125, 'Diverse', '2022-06-22 03:25:34', '2022-06-22 03:25:34'),
+(200, 'De ce, toamna, cad frunzele?', 125, 'Natura', '2022-06-22 03:26:10', '2022-06-22 03:26:10'),
+(201, 'Ce se intampla daca cainele meu a inghitit o bila de golf?', 125, 'Diverse', '2022-06-22 03:27:24', '2022-06-22 03:27:24'),
+(202, 'Cine este cel mai bun jucator de fotbal?', 125, 'Sport', '2022-06-22 03:28:46', '2022-06-22 03:28:46'),
+(203, 'Unde se gaseste cea mai mare bariera de corali?', 125, 'Natura', '2022-06-22 03:29:28', '2022-06-22 03:29:28'),
+(204, 'De cand au inceput oamenii sa aiba notiunea timpului?', 125, 'Diverse', '2022-06-22 03:29:46', '2022-06-22 03:29:46'),
+(205, 'Cum au fost construite piramidele?', 125, 'Diverse', '2022-06-22 03:29:59', '2022-06-22 03:29:59'),
+(206, 'Ar trebui ca gamingul sa fie considerat un sport?', 125, 'Sport', '2022-06-22 03:30:30', '2022-06-22 03:30:30'),
+(207, 'Este ciclul anotimpurilor valabil pentru toate continentele?', 125, 'Natura', '2022-06-22 03:32:28', '2022-06-22 03:32:28'),
+(208, 'Care este cel mai cunoscut stadion din lume?', 125, 'Sport', '2022-06-22 03:34:22', '2022-06-22 03:34:22'),
+(209, 'Cine este considerat ca fiind parintele filosofiei?', 125, 'Diverse', '2022-06-22 03:35:04', '2022-06-22 03:35:04'),
+(210, 'Cat de mult dureaza pana cand poti invata ceva nou?', NULL, 'Diverse', '2022-06-22 03:39:55', '2022-06-22 03:39:55'),
+(211, 'Cine a inventat centura de siguranta.', 126, 'Diverse', '2022-06-22 03:43:21', '2022-06-22 03:43:21'),
+(212, 'Cat de mult timp ne va lua, daca se va intampla vreodata, sa ajungem sa traim pe alte planete?', 126, 'Diverse', '2022-06-22 03:43:46', '2022-06-22 03:43:46'),
+(213, 'Cel mai popual sport din lume?', 126, 'Sport', '2022-06-22 03:44:04', '2022-06-22 03:44:04'),
+(214, 'Care este clubul cu cele mai multe Champions League castigate?', 126, 'Sport', '2022-06-22 03:44:30', '2022-06-22 03:44:30'),
+(215, 'Care este filmul care a avut cel mai mare succes la lansare?', 127, 'Diverse', '2022-06-22 03:48:31', '2022-06-22 03:48:31'),
+(216, 'Care este temperatura maxima atinsa vreodata la suprafata pamantului?', 127, 'Natura', '2022-06-22 03:48:55', '2022-06-22 03:48:55'),
+(217, 'Care este speranta de viata medie a unui om?', 128, 'Diverse', '2022-06-22 03:52:01', '2022-06-22 03:52:01'),
+(218, 'Ce peisaj natural este demonstrat ca fiind relaxant?', 128, 'Natura', '2022-06-22 03:52:48', '2022-06-22 03:52:48'),
+(219, 'De ce nu este fotbalul popular in SUA?', 129, 'Sport', '2022-06-22 03:55:51', '2022-06-22 03:55:51'),
+(220, 'De ce mor albinele atunci cand ne inteapa?', 125, 'Diverse', '2022-06-22 03:57:54', '2022-06-22 03:57:54'),
+(221, 'De ce isi ling animalele ranile?', 125, 'Natura', '2022-06-22 03:58:24', '2022-06-22 03:58:24'),
+(222, 'Cat timp este recomandat sa exersam saptamanal?', 125, 'Sport', '2022-06-22 03:59:19', '2022-06-22 03:59:19'),
+(223, 'Care este consumul mediu de apa pentru un adult?', 125, 'Diverse', '2022-06-22 03:59:42', '2022-06-22 03:59:42'),
+(224, 'Care sunt cele 7 minuni ale lumii?', 125, 'Natura', '2022-06-22 04:01:57', '2022-06-22 04:01:57'),
+(225, 'Este recomandat cave-divingul incepatorilor?', NULL, 'Sport', '2022-06-22 04:09:02', '2022-06-22 04:09:02'),
+(226, 'Cat ai putea muncii zilnic pana sa ajungi la epuizare?', 130, 'Diverse', '2022-06-22 04:10:40', '2022-06-22 04:10:40'),
+(227, 'Care este cel mai mare copac din lume?', 131, 'Natura', '2022-06-22 04:16:56', '2022-06-22 04:16:56'),
+(228, 'Care este cea mai cunoscuta forma de arta?', 132, 'Diverse', '2022-06-22 04:20:03', '2022-06-22 04:20:03'),
+(229, 'De ce avem nevoie de 8 ore de somn?', 133, 'Diverse', '2022-06-22 04:21:05', '2022-06-22 04:21:05');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reactions`
+-- Structură tabel pentru tabel `reactions`
 --
 
 CREATE TABLE `reactions` (
@@ -327,7 +395,7 @@ CREATE TABLE `reactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `reactions`
+-- Eliminarea datelor din tabel `reactions`
 --
 
 INSERT INTO `reactions` (`is_question`, `like`, `dislike`, `report`, `user`, `id_post`) VALUES
@@ -432,12 +500,88 @@ INSERT INTO `reactions` (`is_question`, `like`, `dislike`, `report`, `user`, `id
 (0, 0, 0, 1, 115, 157),
 (1, 1, 0, 0, 116, 194),
 (0, 0, 0, 1, 116, 157),
-(1, 0, 0, 1, 116, 194);
+(1, 0, 0, 1, 116, 194),
+(1, 1, 0, 0, 125, 209),
+(1, 0, 1, 0, 125, 208),
+(1, 1, 0, 0, 125, 207),
+(1, 1, 0, 0, 125, 205),
+(1, 1, 0, 0, 125, 206),
+(1, 0, 1, 0, 125, 204),
+(1, 1, 0, 0, 125, 203),
+(1, 0, 1, 0, 125, 202),
+(1, 1, 0, 0, 125, 201),
+(1, 1, 0, 0, 125, 200),
+(1, 1, 0, 0, 125, 199),
+(1, 0, 1, 0, 125, 195),
+(1, 1, 0, 0, 125, 198),
+(1, 0, 1, 0, 125, 196),
+(1, 0, 1, 0, 125, 197),
+(0, 1, 0, 0, 125, 160),
+(0, 1, 0, 0, 126, 162),
+(0, 1, 0, 0, 126, 163),
+(1, 1, 0, 0, 126, 213),
+(1, 1, 0, 0, 126, 212),
+(1, 0, 1, 0, 126, 211),
+(0, 0, 1, 0, 126, 165),
+(1, 1, 0, 0, 126, 207),
+(1, 0, 1, 0, 126, 209),
+(1, 1, 0, 0, 126, 208),
+(1, 0, 1, 0, 126, 207),
+(1, 1, 0, 0, 126, 206),
+(1, 1, 0, 0, 126, 203),
+(1, 1, 0, 0, 127, 214),
+(0, 1, 0, 0, 127, 167),
+(1, 1, 0, 0, 127, 215),
+(1, 1, 0, 0, 127, 213),
+(1, 1, 0, 0, 127, 212),
+(1, 1, 0, 0, 127, 210),
+(1, 1, 0, 0, 127, 211),
+(1, 1, 0, 0, 127, 208),
+(1, 1, 0, 0, 127, 207),
+(1, 1, 0, 0, 127, 205),
+(1, 1, 0, 0, 127, 204),
+(1, 1, 0, 0, 127, 201),
+(1, 1, 0, 0, 127, 200),
+(1, 1, 0, 0, 127, 200),
+(0, 1, 0, 0, 127, 168),
+(1, 1, 0, 0, 127, 200),
+(1, 1, 0, 0, 128, 217),
+(1, 0, 1, 0, 128, 206),
+(0, 1, 0, 0, 128, 171),
+(0, 1, 0, 0, 125, 167),
+(0, 1, 0, 0, 125, 183),
+(1, 1, 0, 0, 130, 225),
+(1, 1, 0, 0, 130, 199),
+(0, 0, 1, 0, 130, 187),
+(1, 1, 0, 0, 132, 227),
+(1, 1, 0, 0, 132, 226),
+(1, 0, 1, 0, 132, 225),
+(1, 1, 0, 0, 132, 224),
+(1, 1, 0, 0, 133, 229),
+(1, 1, 0, 0, 133, 228),
+(1, 1, 0, 0, 133, 226),
+(1, 1, 0, 0, 133, 227),
+(1, 0, 1, 0, 133, 225),
+(1, 1, 0, 0, 133, 223),
+(1, 1, 0, 0, 133, 224),
+(1, 1, 0, 0, 133, 221),
+(1, 1, 0, 0, 133, 222),
+(1, 1, 0, 0, 133, 220),
+(1, 1, 0, 0, 133, 219),
+(1, 1, 0, 0, 133, 218),
+(1, 1, 0, 0, 133, 217),
+(1, 1, 0, 0, 133, 216),
+(1, 1, 0, 0, 133, 215),
+(1, 1, 0, 0, 133, 214),
+(1, 0, 1, 0, 133, 212),
+(1, 0, 1, 0, 133, 211),
+(1, 1, 0, 0, 133, 209),
+(1, 1, 0, 0, 133, 208);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structură tabel pentru tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -451,7 +595,7 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Eliminarea datelor din tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `admin`) VALUES
@@ -468,65 +612,77 @@ INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `ema
 (121, 'dasdasd', '$2y$10$t.sVfl0Ja1WQXd2Yu1AoRel6gt7m/j3/woAUbo3J6.KbdQ45/NjP2', 'dasdsadsa', 'dadasd', 'bdasdasd@ogdan34', 0),
 (122, 'sdsdffsdfsf', '$2y$10$w5pFoSwKGW3io7mwS.Fa2.Yb4mJHRxwNtlwdi9BR7gfCS6xbU7Ck.', 'fsdfsdfsd', 'fsdfsdfs', 'bodasdasdas@gdan34', 0),
 (123, 'bogdan', '$2y$10$HXXQdh94/tWlHgmraEjngOyMuhwm2Fl1u0F4AC6/YF1qTab7OZwhi', 'dadas', 'dasdas', 'bogdan5@sdsadasad', 0),
-(124, 'bogdan3aaaaa', '$2y$10$f9oESJsid4h56qbcK2G8i.KR2L8XNDFyYVXTFyb6JNfQpe36z/Asa', 'sdaasdas', 'dasdasdsa', 'bogdan@qeasfascaaa', 0);
+(124, 'bogdan3aaaaa', '$2y$10$f9oESJsid4h56qbcK2G8i.KR2L8XNDFyYVXTFyb6JNfQpe36z/Asa', 'sdaasdas', 'dasdasdsa', 'bogdan@qeasfascaaa', 0),
+(125, 'contadmin', '$2y$10$5FiLOf2OTE4SoDHWLWQIgOT4Lfo6tDIxR.5548uD8qvJUMBZRxP9G', 'Admin', 'Super', 'admin@gmail.com', 1),
+(126, 'sebi', '$2y$10$gWEviWqEKeKa/RJxFubMieWDlweZlJzBsHpaVgSoWDrsPVujzkUfu', 'Drumia', 'Sebastian', 'sebastiandrumia@gmail.com', 0),
+(127, 'serverus001', '$2y$10$xdfEM.L5N9xgxgFmejkJCeqo8CnDA/IBwz1jDms3Kl2AKeYmqmI7K', 'Serverus', 'Snape', 'snape@gmail.com', 0),
+(128, 'srq00', '$2y$10$iEZUrOwUS8Ray21DRVui..uyjSzcMDBK8gzbgB.6hflILnkVDY/7.', 'Alex', 'Arnold', 'arnld@gmail.com', 0),
+(129, 'Criss', '$2y$10$KxX3fLpLI3l0oZx5kbldXu14jojLFfjm4pAk4kE2YgZM83A71QYbW', 'Cristian', 'David', 'CRSD@yahoo.com', 0),
+(130, 'Raul', '$2y$10$0O8tbRJXwvYKGsiSjioSzul3ERzbjCnfMglAyyfH9TEFnzzdK2X9O', 'Raul', 'Mihai', 'mihai@gmail.com', 0),
+(131, 'Leonardd', '$2y$10$Vk9QztyeI0yi/Hnu8hH0POPigGx5TBbqOLws.i1vMMmLNJp1ppMay', 'Leonard', 'Nucsa', 'Lard21@gmail.com', 0),
+(132, 'Mircea', '$2y$10$KTUAb8815w0gGW2INK0Hh.npzlSHh8VUaFakHy3bViW.yAzb9LqlW', 'Mircea', 'Ionica', 'Mircea@yahoo.com', 0),
+(133, 'Markus', '$2y$10$qn2MNsbNEZFnMOPXwTxW.OKHpFeNsmmbKX.DchmIa7/e5/sjJOQpa', 'Markus', 'Zenn', 'Mrkz@gmail.com', 0);
 
 --
--- Indexes for dumped tables
+-- Indexuri pentru tabele eliminate
 --
 
 --
--- Indexes for table `answers`
+-- Indexuri pentru tabele `answers`
 --
 ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `categories`
+-- Indexuri pentru tabele `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `questions`
+-- Indexuri pentru tabele `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexuri pentru tabele `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pentru tabele eliminate
 --
 
 --
--- AUTO_INCREMENT for table `answers`
+-- AUTO_INCREMENT pentru tabele `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT pentru tabele `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `questions`
+-- AUTO_INCREMENT pentru tabele `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `id` int(38) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
