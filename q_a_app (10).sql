@@ -151,7 +151,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_questions` ()   BEGIN
 
 END$$
 
-CREATE DEFINER=`` PROCEDURE `get_question_search` (IN `p_data` VARCHAR(5000))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_question_search` (IN `p_data` VARCHAR(5000))   BEGIN
 	SELECT * FROM questions WHERE text LIKE CONCAT ('%', p_data, '%') or category LIKE CONCAT ('%', p_data, '%');
 END$$
 
@@ -159,7 +159,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reactions` ()   BEGIN
 	SELECT id_post, `like`, dislike, report,  user, is_question from reactions ;
 END$$
 
-CREATE DEFINER=`` PROCEDURE `get_reaction_count` (IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` BOOLEAN)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reaction_count` (IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` BOOLEAN)   BEGIN
 	SELECT count(*) as number from reactions where p_report = report and p_id_post = id_post and p_is_question = is_question;
 END$$
 

@@ -91,6 +91,7 @@
                 <div id="searchResults">
                   <div question-text></div>
                   <div question-category></div>
+                  <hr></hr>
                 </div>
               </template> 
             
