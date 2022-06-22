@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2022 at 01:38 AM
+-- Generation Time: Jun 22, 2022 at 06:05 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -159,7 +159,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reactions` ()   BEGIN
 	SELECT id_post, `like`, dislike, report,  user, is_question from reactions ;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_reaction_count` (IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` BOOLEAN)   BEGIN
+CREATE DEFINER=`` PROCEDURE `get_reaction_count` (IN `p_report` BOOLEAN, IN `p_id_post` INT(38), IN `p_is_question` BOOLEAN)   BEGIN
 	SELECT count(*) as number from reactions where p_report = report and p_id_post = id_post and p_is_question = is_question;
 END$$
 
@@ -189,6 +189,11 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_question` (IN `p_id` INT(38), IN `p_text` VARCHAR(5000))   BEGIN
 UPDATE questions SET text = p_text WHERE id = p_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user` (IN `p_old_username` VARCHAR(300), IN `p_username` VARCHAR(300), IN `p_password` VARCHAR(300), IN `p_firstname` VARCHAR(300), IN `p_lastname` VARCHAR(300), IN `p_email` VARCHAR(300))   BEGIN
+	
+	UPDATE users SET username = p_username, password = p_password, firstname = p_firstname, lastname = p_lastname, email = p_email where username = p_old_username;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `used_username` (IN `p_username` VARCHAR(20), IN `p_email` VARCHAR(50))   BEGIN 
@@ -230,7 +235,14 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `text`, `question`, `user`, `created_at`, `updated_at`) VALUES
-(158, 'wsdfcgvhbj', 195, NULL, '2022-06-21 12:17:41', '2022-06-21 12:17:41');
+(158, 'wsdfcgvhbj', 195, NULL, '2022-06-21 12:17:41', '2022-06-21 12:17:41'),
+(159, 'zzzzxx    zxdasdasads', 195, 116, '2022-06-22 00:09:22', '2022-06-22 00:09:22'),
+(160, 'asdfgh', 198, NULL, '2022-06-22 02:23:33', '2022-06-22 02:23:33'),
+(161, 'vbn', 198, NULL, '2022-06-22 02:23:35', '2022-06-22 02:23:35'),
+(162, 'cfvgbhjkl', 198, NULL, '2022-06-22 02:23:36', '2022-06-22 02:23:36'),
+(163, 'cffgfghfd', 198, NULL, '2022-06-22 02:23:39', '2022-06-22 02:23:39'),
+(165, 'dgfhjgk.', 199, 114, '2022-06-22 02:24:21', '2022-06-22 02:24:21'),
+(166, 'gfhvjk', 199, 114, '2022-06-22 02:24:23', '2022-06-22 02:24:23');
 
 -- --------------------------------------------------------
 
@@ -283,9 +295,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `questions_count`) VALUES
-(1, 'Natura', 24),
+(1, 'Natura', 25),
 (2, 'Sport', 3),
-(5, 'Diverse', 73);
+(5, 'Diverse', 74);
 
 -- --------------------------------------------------------
 
@@ -309,7 +321,9 @@ CREATE TABLE `questions` (
 INSERT INTO `questions` (`id`, `text`, `user`, `category`, `created_at`, `updated_at`) VALUES
 (195, 'asdfghjkl', 116, 'Natura', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
 (196, 'o intrebare de test care contine cuvantul Natura', 116, 'Natura', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
-(197, 'o intrebare de test care contine cuvantul ', 116, 'Sport', '2022-06-21 12:16:16', '2022-06-21 12:16:16');
+(197, 'o intrebare de test care contine cuvantul ', 116, 'Sport', '2022-06-21 12:16:16', '2022-06-21 12:16:16'),
+(198, 'sdfghjk', NULL, 'Diverse', '2022-06-22 02:23:30', '2022-06-22 02:23:30'),
+(199, 'sadfghjeeeeeeee', 114, 'Natura', '2022-06-22 02:24:17', '2022-06-22 02:24:17');
 
 -- --------------------------------------------------------
 
@@ -432,7 +446,15 @@ INSERT INTO `reactions` (`is_question`, `like`, `dislike`, `report`, `user`, `id
 (0, 0, 0, 1, 115, 157),
 (1, 1, 0, 0, 116, 194),
 (0, 0, 0, 1, 116, 157),
-(1, 0, 0, 1, 116, 194);
+(1, 0, 0, 1, 116, 194),
+(1, 1, 0, 0, 114, 195),
+(1, 1, 0, 0, 114, 196),
+(1, 1, 0, 0, 114, 199),
+(0, 0, 1, 0, 114, 164),
+(0, 1, 0, 0, 114, 165),
+(0, 0, 1, 0, 114, 166),
+(0, 1, 0, 0, 114, 167),
+(0, 0, 0, 1, 114, 165);
 
 -- --------------------------------------------------------
 
@@ -455,19 +477,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `firstname`, `lastname`, `email`, `admin`) VALUES
-(111, 'bogdan3', '$2y$10$LIJGuw8M/jUbpR.6s1FJLOkqOAUw.l.TrYUbZATeQgvg56xXQG7uS', 'Didea', 'Bogdan', 'bogdan@qeasfasca', 0),
+(111, 'nuuuuuu', '$2y$10$q31PkNRcwD75crAixefkPuRazH6jX/59NzMlxdW5mGx8c3DqqP2Bq', 'Didea', 'Bogdan', 'arrs@aaaaa', 0),
 (112, 'bogdan34', '$2y$10$RFf7gSY3AlhaMJFCj0VrvO4AGY3/mRWi6mwq67okylh0UMYaGkH8C', 'Didea', 'Bogdan', 'bogdan34@dasdasd.com', 0),
 (113, 'bogdansadsadasdaas', '$2y$10$hpDmn3EPxZe69p.CSguUyerc5px4Gi9VyJmE3usqXZgjIxEhrvUiC', 'Didea', 'Bogdan', 'bogdan3@sdasadadsasasddas', 0),
-(114, 'bogdan2', '$2y$10$XSCiua1BmqnCUTRgbIJav.sV7/cOHcWfK.hOsdAJNc3FOrqBdXQP.', 'Didea', 'Bogdan', 'bogdan2@gmail.com', 1),
+(114, 'bogdan3.0', '$2y$10$tM250RbgcWveDnKhIbkSzuUcVN/0ZooSX0/379t1.Mg7uji2Xz1QS', 'Didea', 'Bogdan', 'bogdan2@gmail.com', 0),
 (115, 'bogdan4', '$2y$10$2Wc7QKU6gOPSI.8D2CNc8OooPIDvVJtm86LooF.2MHzJrg1CcQh1C', 'Didea', 'Bogdan', 'bogdan4@gmail.com', 0),
-(116, 'bogdan5', '$2y$10$I1v50.7qJDpMy7xEPXTTC.NHbw0FDLKfiV/jk.d8pZEpVzVkwXpRe', 'Didea', 'Bogdan', 'bogdan5@gmail.com', 0),
+(116, 'bodan', '$2y$10$CXWUqKcLTUO9xXN1zXCBZOtREEViKtVin94BBCSm.J9xs9F0OtJEq', 'Didea', 'Bogdan', 'bodan@me', 0),
 (117, 'sdassad', '$2y$10$b33Q80qTVuNq9DmsTfCR9e36dXOZ8Cfg1cu.2rCQwSpjlNb3.gbRC', 'asdassda', 'dasdasd', 'sadsadas@fgmadasda', 0),
 (118, 'sadas', '$2y$10$ct34o4IqqVfvQGJ9FWzdFOwEPPV5xZr5v199ZYrvAJPG75apChQZe', 'sdaasd', 'dasdasd', 'bdasdsa@ogdan34', 0),
 (119, 'asdsadda', '$2y$10$dB0y2oj57K/e0h7rQl9VLuKVmjRn6rzoagkx2WAXEyFk5U3JTZDnK', 'dasd', 'dasda', 'basdaada@ogdan34', 0),
 (120, 'sddddsfsd', '$2y$10$AORfBknY.5BZyxMB9E/AreUnRXKD5KvJdvlvMptVy52eGCRjdUiOK', 'fdsfsdfsd', 'fsdfsdfsd', 'bofsdfsdfsd@gdan34', 0),
 (121, 'dasdasd', '$2y$10$t.sVfl0Ja1WQXd2Yu1AoRel6gt7m/j3/woAUbo3J6.KbdQ45/NjP2', 'dasdsadsa', 'dadasd', 'bdasdasd@ogdan34', 0),
 (122, 'sdsdffsdfsf', '$2y$10$w5pFoSwKGW3io7mwS.Fa2.Yb4mJHRxwNtlwdi9BR7gfCS6xbU7Ck.', 'fsdfsdfsd', 'fsdfsdfs', 'bodasdasdas@gdan34', 0),
-(123, 'bogdan', '$2y$10$HXXQdh94/tWlHgmraEjngOyMuhwm2Fl1u0F4AC6/YF1qTab7OZwhi', 'dadas', 'dasdas', 'bogdan5@sdsadasad', 0),
+(123, 'arrrrrr', '$2y$10$BdnquRQBnULNqtVNjGrmF.NOYL1JzPufCNYtW06pz.Aa2KHpHG0Oe', 'Didea', 'Bogdan', 'arr@aaaaaaaaaaa', 0),
 (124, 'bogdan3aaaaa', '$2y$10$f9oESJsid4h56qbcK2G8i.KR2L8XNDFyYVXTFyb6JNfQpe36z/Asa', 'sdaasdas', 'dasdasdsa', 'bogdan@qeasfascaaa', 0);
 
 --
@@ -506,7 +528,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -518,7 +540,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT for table `users`
